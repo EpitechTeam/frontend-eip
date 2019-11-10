@@ -12,87 +12,90 @@ import { StaticRouter } from 'react-router'
 import { matchRoutes } from "react-router-config"
 import { Routes } from './src/App/routes/routes'
 import App from './src/App/App'
+import fetch from 'node-fetch'
 
 const bodyParser  = require("body-parser")
 const compression = require('compression');
 const cors = require('cors')
 const MobileDetect = require('mobile-detect')
-const request = require("request");
 const cluster = require('cluster');
-const https = require("https")
 const http = require("http")
 const helmet = require('helmet');
-const tls = require('tls');
 require('dotenv').config();
 
-// Code to run if we're in the master process
+//Code sur le processus mere
 if (cluster.isMaster) {
-    // Count the machine's CPUs
+    //Nombre de cpu (cluster)
     var cpuCount = require('os').cpus().length;
   
-    // Create a worker for each CPU
+    //Crée autant de cluster que de cpu
     for (var i = 0; i < cpuCount; i += 1) {
         cluster.fork();
     }
-    // Listen for dying workers
+    // Listen si un cluster meurt
     cluster.on('exit', function (worker) {
   
-        // Replace the dead worker,
-        // we're not sentimental
+        //Si un cluster meurt on le recrée
         console.log('Worker %d died :(', worker.id);
         cluster.fork();
   
     });
 }
+//Code processus fille (cluster)
 else {
+
+    //En SSR Window n'existe pas alors on créer un objet vide pour ne pas avoir de undefined
     global.Headers = fetch.Headers
-  if (typeof window === 'undefined') {
-    global.window = {}
-  }
+    if (typeof window === 'undefined') {
+      global.window = {}
+    }
 
-  const PORT = process.env.PRODUCTION_PORT
-  const app = express()
+    const PORT = process.env.PRODUCTION_PORT
+    const app = express()
 
-  // tell the app to use the above rules
-  app.use(compression())
-  app.use(helmet())
-  app.use(express.static('./build'));
-  app.use(express.static('./run'));
-  app.use(cors())
-  app.use(bodyParser.json({limit: '50mb'}))
-  app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
+    // tell the app to use the above rules
 
-    //Force https
-    //   app.use (function (req, res, next) {
-    //     if (req.secure) {
-    //       next()
-    //     }
-    //     else {
-    //       res.redirect(301, 'https://' + req.headers.host + req.url);
-    //     }
-    //   })
+    //Compresser les fichiers static pour de meilleurs performance
+    app.use(compression())
 
+    //Utiliser helmet pour ce protéger de certaines failles
+    app.use(helmet())
+
+    //Servir les fichier static build avec npm build
+    app.use(express.static('./run'));
+
+    //Autoriser cors pour les requetes
+    app.use(cors())
+
+    //Etablir la limite d'une requetes POST
+    app.use(bodyParser.json({limit: '50mb'}))
+    app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
+
+    //Bloquer les robots pour ne pas ce faire indexer tout de suite
     app.get('/robots.txt', function (req, res) {
         res.type('text/plain');
         res.send("User-agent: *\nDisallow: /");
     })
 
+    //Methode principale pour render en SSR
     const renderPage = async (reducer, store, context, promises, location, req, res, next) => {
         const indexFile = path.resolve('./base/index.html');
+
+        //Render avec la methode SSR proposé par React
         const html = ReactDOMServer.renderToString(<Provider store={store}><StaticRouter context={context} location={location}><App location={location}/></StaticRouter></Provider>)
+        
+        //Mettre le state redux en string
         const serializedState = JSON.stringify(store.getState())
+
+        //Lire le fichier index.html et remplacé les infos généré par renderToString
         fs.readFile(indexFile, 'utf8', (err, indexData) => {
+            //Trouve pas le fichier
             if (err) {
               console.error('Something went wrong:', err);
               return res.status(500).send('Oops, better luck next time!');
             }
-            if (context.status === 404) {
-              res.status(404);
-            }
-            if (context.url) {
-              return res.redirect(301, context.url);
-            }
-      
+
+            //Envoi le fichier html modifié au client
             return res.send(
               indexData
               .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
@@ -106,18 +109,28 @@ else {
 
     const serverRendererAsync = async (location, req, res, next) => {
         const host = req.get('host')
+
+        //Si on est sur .com mettre en anglais et sur .fr load en francais
         var langue = host.substring(host.length - 4) === ".com" ? "en" : "fr"
     
         const context = {}
+
+        //Créer le store redux
         const reducer = combineReducers({language : languageReducer, myCookies : myCookies})
         const store = createStore(reducer, applyMiddleware(thunk))
     
+        //Trouver quel route a display
         const promises = await matchRoutes(Routes, req.path)
+
+        //SET la langue dans le store redux
         await store.dispatch({type : "SET_LANGUAGE_SSR", langue})
+
+        //Fetch la data grace a la methode loadData
         if (promises["0"].route.loadData) {
           await store.dispatch(promises["0"].route.loadData(promises["0"].match))
         }
     
+        //SET si c'est un mobile pour render la bonne version
         const isMobile = new MobileDetect(req.headers['user-agent']);
         isMobile.mobile() !== null ? await store.dispatch({type : "SET_MOBILE", value : true}) : await store.dispatch({type : "SET_MOBILE", value : false})    
     
@@ -125,14 +138,18 @@ else {
         /*======================================*/
         return renderPage(reducer, store, context, promises, location, req, res, next)
         /*======================================*/
-      }
+    }
+
+    //Toutes les autres routes
     app.get('/*', (req, res) => {
         //SSR
+        console.log("rentre dans cette route")
         serverRendererAsync(req.url, req, res)
     })
 
-    const httpServer = http.createServer(app)
 
+    //Crée le serveur ecoutant sur le port defini dans le .env
+    const httpServer = http.createServer(app)
     httpServer.listen(PORT, () => {
       console.log(`SSR running on port ${PORT}`)
     })
