@@ -1,0 +1,20 @@
+.positionCookies {
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    font-size: 10px;
+  }
+  
+  #cookiesModal .modal {
+    width: 420px !important;
+    height: 300px !important;
+    right: 0 !important;
+    bottom : 0 !important;
+    top : unset !important;
+    left: unset !important;
+  }
+  
+  #cookiesModal .modal-title {
+    font-size: 20px !important;
+  }
