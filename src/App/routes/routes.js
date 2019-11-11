@@ -18,7 +18,7 @@ export const Routes = [
       loadData: () => loadHomeData()
     },
     {
-      path: '/partenaire',
+      path: '/partenaire/:name?/:id?',
       exact : true,
       component: Partenaire,
     },
