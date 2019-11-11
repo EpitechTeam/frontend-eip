@@ -52,7 +52,7 @@ class HomeContent extends React.Component {
         });
 
         return (
-            <MDBContainer className="mt-4">
+            <MDBContainer className="mt-5">
                 <MDBRow>
                     {data}
                 </MDBRow>
@@ -79,7 +79,7 @@ class HomeContent extends React.Component {
         });
 
         return (
-            <MDBContainer className="mt-4">
+            <MDBContainer className="mt-5">
                 <MDBRow>
                     {data}
                 </MDBRow>
@@ -87,18 +87,45 @@ class HomeContent extends React.Component {
         )
     };
 
+    renderAvantages = () => {
+        return (
+            <div>
+                <h2 className="font-weight-bold">Vos biens en sécurité</h2>
+                <MDBRow className="mt-5">
+                    <MDBCol>
+                        <h5 className="font-weight-bold">Partenaires vérifiés</h5>
+                        <span>Tous les partenaires de la plateforme sont vérifiés.</span>
+                    </MDBCol>
+                    <MDBCol>
+                        <h5 className="font-weight-bold">Paiments sécurisés</h5>
+                        <span>Vous ne payez votre partenaire uniquement lorsque sa mission est terminée.</span>
+                    </MDBCol>
+                    <MDBCol>
+                        <h5 className="font-weight-bold">Support client</h5>
+                        <span>Le support répond à vos moindres questions en moins de 48h. Afin que vous soyez sereins.</span>
+                    </MDBCol>
+                </MDBRow>
+            </div>
+        )
+    };
+
     render() {
         return (
             <div className="mt-5">
-                <div>
+                <div className="avantages">
                     <MDBContainer>
-                        <h2>Partenaires à la une dans votre ville</h2>
+                        {this.renderAvantages()}
+                    </MDBContainer>
+                </div>
+                <div className="mt-5">
+                    <MDBContainer>
+                        <h2 className="font-weight-bold">Partenaires à la une dans votre ville</h2>
                         {this.renderPartenaires()}
                     </MDBContainer>
                 </div>
                 <div className="mt-5">
                     <MDBContainer>
-                        <h2>Nous sommes chez vous</h2>
+                        <h2 className="font-weight-bold">Nous sommes chez vous</h2>
                         {this.renderVilles()}
                     </MDBContainer>
                 </div>
