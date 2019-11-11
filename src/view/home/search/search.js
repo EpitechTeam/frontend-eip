@@ -25,7 +25,7 @@ class SearchHome extends React.Component {
                             appId: 'plIOZH1K5KVK',
                             apiKey: 'd3dabd9d74c1378eec2667aac653e04a',
                             language: 'fr',
-                            countries: ['fr'],
+                            countries: ['fr', 'de'],
                             type: 'city',
                             }}
                             
