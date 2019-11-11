@@ -5,11 +5,11 @@ import './header.css'
 class Header extends React.Component {
     state = {
         isOpen: false
-      };
+    };
       
-      toggleCollapse = () => {
+    toggleCollapse = () => {
         this.setState({ isOpen: !this.state.isOpen });
-      }
+    }
       
     render () {
         return (
@@ -27,7 +27,7 @@ class Header extends React.Component {
                         <MDBNavLink className="linkNavbar" to="/partenaire">Je suis freelance</MDBNavLink>
                     </MDBNavItem>
                     <MDBNavItem className="borderNavItem">
-                        <MDBNavLink className="linkNavbar" to="/proprietaire">Chercher un partenaire</MDBNavLink>
+                        <MDBNavLink className="linkNavbar" to="/recherche">Chercher un partenaire</MDBNavLink>
                     </MDBNavItem>
                 </MDBNavbarNav>
                 </MDBCollapse>

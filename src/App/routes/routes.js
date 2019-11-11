@@ -28,7 +28,7 @@ export const Routes = [
       component: Proprietaire,
     },
     {
-      path : '/recherche',
+      path : '/recherche/:ville?',
       exact : true,
       component : Recherche
     },
@@ -43,8 +43,6 @@ export const Routes = [
       component : LaisserVousGuider
     },
     {
-      path: '/404',
-      exact : true,
       component: PageNotFound,
     }
   ]

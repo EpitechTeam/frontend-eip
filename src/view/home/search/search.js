@@ -4,6 +4,13 @@ import AlgoliaPlaces from 'algolia-places-react';
 import { MDBContainer, MDBRow, MDBBtn, MDBCol } from 'mdbreact'
 
 class SearchHome extends React.Component {
+    constructor(props) {
+        super (props)
+        this.state = {
+            ville : ""
+        }
+    }
+
     render() {
         return (
         <div>
@@ -21,18 +28,9 @@ class SearchHome extends React.Component {
                             countries: ['fr'],
                             type: 'city',
                             }}
-                
+                            
                             onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
-                            console.log('Fired when suggestion selected in the dropdown or hint was validated.')}
-                    
-                            onSuggestions={({ rawAnswer, query, suggestions }) => 
-                            console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
-                    
-                            onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) => 
-                            console.log('Fired when arrows keys are used to navigate suggestions.')}
-                    
-                            onClear={() => 
-                            console.log('Fired when the input is cleared.')}
+                            this.setState({ville : suggestion.name})}
                     
                             onLimit={({ message }) => 
                             console.log('Fired when you reached your current rate limit.')}
@@ -42,8 +40,8 @@ class SearchHome extends React.Component {
                         />
                     </MDBCol>
                     <MDBCol xl="3">
-                        <MDBBtn className="w-100 buttonSearch" color="pink">Rechercher</MDBBtn>
-                    </MDBCol>                    
+                        <MDBBtn href={this.state.ville !== "" ? "recherche/" + this.state.ville : "recherche"} className="w-100 buttonSearch" color="pink">Rechercher</MDBBtn>
+                    </MDBCol>
                 </MDBRow>
             </MDBContainer>
         </div>

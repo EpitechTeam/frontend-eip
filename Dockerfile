@@ -31,6 +31,8 @@ ENV NODE_ENV production
 
 ENV PUBLIC_PATH "/"
 
+RUN rm -rf run
+
 RUN npm run build
 RUN mv --force build run
 RUN mv --force run/index.html base/index.html

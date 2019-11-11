@@ -13,6 +13,8 @@ import { matchRoutes } from "react-router-config"
 import { Routes } from './src/App/routes/routes'
 import App from './src/App/App'
 import fetch from 'node-fetch'
+import DocumentMeta, {render} from 'react-document-meta';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 const bodyParser  = require("body-parser")
 const compression = require('compression');
@@ -77,6 +79,15 @@ else {
         res.send("User-agent: *\nDisallow: /");
     })
 
+    function rewindAsStaticMarkup() {
+      const tags = render(DocumentMeta.rewind());
+  
+      return renderToStaticMarkup(<div>{tags}</div>)
+      .replace(/(^<div>|<\/div>$)/g, '')
+      .replace(/data-rdm="true"/g, 'data-rdm');
+    }
+
+
     //Methode principale pour render en SSR
     const renderPage = async (reducer, store, context, promises, location, req, res, next) => {
         const indexFile = path.resolve('./base/index.html');
@@ -86,6 +97,9 @@ else {
         
         //Mettre le state redux en string
         const serializedState = JSON.stringify(store.getState())
+
+        //Get la meta
+        const meta = rewindAsStaticMarkup()
 
         //Lire le fichier index.html et remplacé les infos généré par renderToString
         fs.readFile(indexFile, 'utf8', (err, indexData) => {
@@ -98,6 +112,7 @@ else {
             //Envoi le fichier html modifié au client
             return res.send(
               indexData
+              .replace('<title>React App</title>', `${meta}`)
               .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
               .replace(
                 '</body>',
@@ -143,7 +158,6 @@ else {
     //Toutes les autres routes
     app.get('/*', (req, res) => {
         //SSR
-        console.log("rentre dans cette route")
         serverRendererAsync(req.url, req, res)
     })
 
