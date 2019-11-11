@@ -6,6 +6,9 @@ import PageNotFound from '../../view/404/404.js'
 import Proprietaire from '../../view/proprietaire/proprietaire'
 import Partenaire from '../../view/partenaire/partenaire'
 import { loadHomeData } from '../../reducer/home'
+import ConfierVosBiens from '../../view/page/confier-vos-biens/confier-vos-biens'
+import LaisserVousGuider from '../../view/page/laisser-vous-guider/laisser-vous-guider'
+import Recherche from '../../view/recherche/recherche'
 
 export const Routes = [
     {
@@ -23,6 +26,21 @@ export const Routes = [
       path: '/proprietaire',
       exact : true,
       component: Proprietaire,
+    },
+    {
+      path : '/recherche',
+      exact : true,
+      component : Recherche
+    },
+    {
+      path : '/confier-vos-biens',
+      exact : true,
+      component : ConfierVosBiens
+    },
+    {
+      path : '/laisser-vous-guider',
+      exact : true,
+      component : LaisserVousGuider
     },
     {
       path: '/404',
