@@ -9,6 +9,11 @@ import { loadHomeData } from '../../reducer/home'
 import ConfierVosBiens from '../../view/page/confier-vos-biens/confier-vos-biens'
 import LaisserVousGuider from '../../view/page/laisser-vous-guider/laisser-vous-guider'
 import Recherche from '../../view/recherche/recherche'
+import FreelanceMission from '../../view/partenaire/mission/mission'
+import DashboardFreelance from '../../view/partenaire/dashboard/dashboard'
+import Messages from '../../view/messages/messages'
+import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-freelance'
+import StatistiquesFreelance from "../../view/partenaire/statistiques/statistiques";
 
 export const Routes = [
     {
@@ -38,9 +43,34 @@ export const Routes = [
       component : ConfierVosBiens
     },
     {
+      path : '/create-profile',
+      exact : true,
+      component : DevenirFreelance
+    },
+    {
       path : '/laisser-vous-guider',
       exact : true,
       component : LaisserVousGuider
+    },
+    {
+      path : '/missions',
+      exact : true,
+      component : FreelanceMission
+    },
+    {
+      path : '/dashboard/freelancer',
+      exact : true,
+      component : DashboardFreelance
+    },
+    {
+      path : '/analytics/views',
+      exact : true,
+      component : StatistiquesFreelance
+    },
+    {
+      path : '/messages',
+      exact : true,
+      component : Messages
     },
     {
       component: PageNotFound,

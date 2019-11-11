@@ -13,6 +13,7 @@ import './recherche.css'
 
 import algoliasearch from 'algoliasearch';
 import PropTypes from 'prop-types';
+import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 
 const DEBOUNCE_TIME = 700;
 const searchClient = algoliasearch(
@@ -84,11 +85,11 @@ const urlToSearchState = location => {
 };
 
 const Hit = ({ hit }) => (
-  <div>
-    <img src={hit.img} alt={hit.name} width="200" height="200"></img>
+  <MDBCol xl="4">
+    <img src={hit.img} alt={hit.name} width="340" height="270"></img>
     <p>{hit.name}</p>
     <p>{hit.ville}</p>
-  </div>
+  </MDBCol>
 );
 
 Hit.propTypes = {
@@ -112,29 +113,30 @@ const Recherche = ({ location, history }) => {
   };
 
   return (
-    <div className="container">
+    <div className="specialContainerRecherche">
       <InstantSearch searchClient={searchClient} indexName="dev_places" searchState={searchState} onSearchStateChange={onSearchStateChange} createURL={createURL}>
-        <div className="search-panel">
-          <div className="left-panel">
+        <MDBRow className="mt-5">
+          <MDBCol xl="2">
             <ClearRefinements />
 
             <Panel className="mt-5" header="Ville">
               <Menu attribute="ville" />
             </Panel>
+          </MDBCol>
 
-          </div>
-
-          <div className="right-panel">
-            <SearchBox placeholder="Ville, Pays, Région..." />
+          <MDBCol xl="10">
+            <SearchBox translations={{ placeholder: 'Ville, Pays, Région...' }} />
             <CurrentRefinements />
 
-            <Hits className="mt-5" hitComponent={Hit} />
+            <MDBRow>
+              <Hits className="mt-5" hitComponent={Hit} />
+            </MDBRow>
 
             <div className="pagination">
               <Pagination />
             </div>
-          </div>
-        </div>
+          </MDBCol>
+        </MDBRow>
       </InstantSearch>
     </div>
   );
