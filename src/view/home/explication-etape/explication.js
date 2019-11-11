@@ -6,7 +6,7 @@ class ExplicationEtape extends React.Component {
         return (
             <div className="mt-5">
                 <MDBContainer>
-                    <h2>Votre annonce Airbnb entre de bonnes mains</h2>
+                    <h2 className="font-weight-bold">Votre annonce Airbnb entre de bonnes mains</h2>
                     <ul className="stepper stepper-horizontal pl-0">
 
                         <li className="completed">
