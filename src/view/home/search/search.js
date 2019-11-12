@@ -17,7 +17,7 @@ class SearchHome extends React.Component {
             <h1 className="TitleHome">Votre partenaire Airbnb de confiance<br/>proche de chez vous</h1>
             <MDBContainer style={{paddingTop : "20px"}}>
                 <MDBRow>
-                    <MDBCol xl="9">
+                    <MDBCol xs="9" sm="9" md="9" lg="9" xl="9">
                         <AlgoliaPlaces
                             placeholder='Pays, Région, Ville...'
                     
@@ -39,7 +39,7 @@ class SearchHome extends React.Component {
                             console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
                         />
                     </MDBCol>
-                    <MDBCol xl="3">
+                    <MDBCol xs="3" sm="3" md="3" lg="3" xl="3" className="speacialStyleForMobile">
                         <MDBBtn href={this.state.ville !== "" ? "recherche/" + this.state.ville : "recherche"} className="w-100 buttonSearch" color="pink">Rechercher</MDBBtn>
                     </MDBCol>
                 </MDBRow>

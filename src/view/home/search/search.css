@@ -1,9 +1,28 @@
-.TitleHome {
-    color : white;
-    font-weight: 800;
-    text-align: center;
-    font-size: 70px;
-    padding-top : 20vh;
+@media (min-width : 0px) and (max-width : 900px) {
+    .TitleHome {
+        color : white;
+        font-weight: 800;
+        text-align: center;
+        font-size: 40px;
+        padding-top : 10%;
+    }
+}
+
+@media (min-width : 0px) and (max-width : 600px) {
+    .speacialStyleForMobile {
+        padding-top: 20px;
+        padding-left: 5px !important;
+    }
+}
+
+@media (min-width : 900px) {
+    .TitleHome {
+        color : white;
+        font-weight: 800;
+        text-align: center;
+        font-size: 70px;
+        padding-top : 20vh;
+    }
 }
 
 .ap-input {
