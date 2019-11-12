@@ -5,7 +5,7 @@ import './footer.css'
 class Footer extends React.Component {
     render() {
         return (
-            <MDBFooter color="blue" className="font-small pt-4 mt-4">
+            <MDBFooter className="specialColor font-small pt-4 mt-4">
                 <MDBContainer fluid className="text-center text-md-left">
                     <MDBRow>
                     <MDBCol className="text-center" md="12">
