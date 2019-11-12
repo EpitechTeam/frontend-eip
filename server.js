@@ -6,6 +6,7 @@ import ReactDOMServer from 'react-dom/server'
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import languageReducer from './src/reducer/language'
 import myCookies from './src/reducer/cookies'
+import authenticate from './src/reducer/authenticate'
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router'
@@ -142,7 +143,7 @@ else {
         const context = {}
 
         //Créer le store redux
-        const reducer = combineReducers({language : languageReducer, myCookies : myCookies})
+        const reducer = combineReducers({language : languageReducer, myCookies : myCookies, authenticate : authenticate})
         const store = createStore(reducer, applyMiddleware(thunk))
     
         //Trouver quel route a display

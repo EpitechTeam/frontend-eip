@@ -42,7 +42,7 @@ class Header extends React.Component {
     render () {
         return (
             <header id="headerNavbar">
-                <MDBModal isOpen={this.state.modal && !this.props.authenticate.authenticate} toggle={this.toggle}>
+                <MDBModal isOpen={this.state.modal && this.props.authenticate.authenticate === "false"} toggle={this.toggle}>
                     <MDBModalHeader toggle={this.toggle}>Connection</MDBModalHeader>
                     <MDBModalBody>
                         <Login/>
@@ -60,7 +60,7 @@ class Header extends React.Component {
                 <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
                 <MDBNavbarNav right>
                     {
-                        !this.props.authenticate.authenticate ?
+                        this.props.authenticate.authenticate === "false" ?
                         <React.Fragment>
                             <MDBNavItem>
                                 <a className="border border-light rounded mr-1 nav-link Ripple-parent" rel="noopener noreferrer" href="/create-profile">Je suis freelance</a>

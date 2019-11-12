@@ -1,5 +1,5 @@
 import React from 'react';
-import {MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import { MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBRow } from "mdbreact";
 import "./home-content.css";
 
 let partenaires = [
