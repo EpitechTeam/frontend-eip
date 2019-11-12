@@ -12,6 +12,17 @@ class API {
             }
         )
     }
+
+    wait = async (ms) => {
+        return new Promise(resolve => {
+          setTimeout(resolve, ms)
+        })
+    }
+
+    login = async (email, password) => {
+        await this.wait(1000)
+        return { role : 'freelance', token : '123' }
+    }
 }
 
 export default API

@@ -13,7 +13,7 @@ import './recherche.css'
 
 import algoliasearch from 'algoliasearch';
 import PropTypes from 'prop-types';
-import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
+import { MDBRow, MDBCol } from 'mdbreact';
 
 const DEBOUNCE_TIME = 700;
 const searchClient = algoliasearch(

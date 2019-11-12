@@ -12,12 +12,15 @@ import 'mdbreact/dist/css/mdb.css';
 
 import languageReducer from './reducer/language'
 import myCookies from './reducer/cookies'
+import authenticate from './reducer/authenticate'
 
 const rootElement = document.getElementById('root') || document.createElement('div')
 
 delete window.__PRELOADED_STATE__
 
-const reducer = combineReducers({language : languageReducer, myCookies : myCookies})
+const reducer = combineReducers({language : languageReducer,
+                                 myCookies : myCookies,
+                                authenticate : authenticate})
 
 const store = createStore(reducer, window.__PRELOADED_STATE__, applyMiddleware(thunk))
 

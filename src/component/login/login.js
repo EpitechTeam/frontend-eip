@@ -1,5 +1,22 @@
 import React from 'react'
 import { MDBInput, MDBBtn } from 'mdbreact'
+import { login } from '../../reducer/authenticate'
+import {connect} from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {
+    authenticate : state.authenticate,
+    language : state.language,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (email, password) => {
+      dispatch(login(email, password))
+    }
+  }
+}
 
 class Login extends React.Component {
     render () {
@@ -25,11 +42,11 @@ class Login extends React.Component {
                     />
                   </div>
                   <div className="text-center">
-                    <MDBBtn className="w-100">Connection</MDBBtn>
+                    <MDBBtn onClick={this.props.login} className="w-100">Connection</MDBBtn>
                   </div>
             </form>
         )
     }
 }
 
-export default Login
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
