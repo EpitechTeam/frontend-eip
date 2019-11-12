@@ -23,7 +23,7 @@ export const Routes = [
       loadData: () => loadHomeData()
     },
     {
-      path: '/partenaire/:name?/:id?',
+      path: '/profile/:name',
       exact : true,
       component: Partenaire,
     },

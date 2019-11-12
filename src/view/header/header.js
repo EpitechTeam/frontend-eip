@@ -88,7 +88,19 @@ class Header extends React.Component {
                             </MDBNavItem>
                             <MDBNavItem>
                                 <MDBDropdown>
-                                    <MDBDropdownToggle className="pt-0 dopdown-toggle" nav>
+                                    <MDBDropdownToggle nav caret>
+                                    <span className="mr-2">Mon profil freelance</span>
+                                    </MDBDropdownToggle>
+                                    <MDBDropdownMenu>
+                                    <MDBDropdownItem href="/profile/">Modifier mon profil</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Modifier mes disponibilités</MDBDropdownItem>
+                                    <MDBDropdownItem href="#!">Parametre de mon entreprise</MDBDropdownItem>
+                                    </MDBDropdownMenu>
+                                </MDBDropdown>
+                            </MDBNavItem>
+                            <MDBNavItem>
+                                <MDBDropdown>
+                                    <MDBDropdownToggle className="pt-1 pb-0 dopdown-toggle" nav caret>
                                         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" className="rounded-circle z-depth-0"
                                             style={{ height: "35px", padding: 0 }} alt="" />
                                     </MDBDropdownToggle>
