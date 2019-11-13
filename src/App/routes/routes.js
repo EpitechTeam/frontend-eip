@@ -14,7 +14,6 @@ import DashboardFreelance from '../../view/partenaire/dashboard/dashboard'
 import Messages from '../../view/messages/messages'
 import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-freelance'
 import StatistiquesFreelance from "../../view/partenaire/statistiques/statistiques";
-import {loadMissionsData} from "../../reducer/missions";
 
 export const Routes = [
     {
@@ -57,7 +56,6 @@ export const Routes = [
         path: '/missions',
         exact: true,
         component: FreelanceMission,
-        loadData: () => loadMissionsData()
     },
     {
         path: '/dashboard/freelancer',
