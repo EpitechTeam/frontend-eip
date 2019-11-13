@@ -1,0 +1,16 @@
+.grey-bg {
+    background-color: #ebebeb;}
+
+.mission-box {
+
+}
+
+.mission-item {
+    background-color: white;
+    border-radius: 7px;
+
+}
+
+.mission-item:not(:first-child) {
+    margin-top: 10px;
+}

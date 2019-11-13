@@ -16,6 +16,7 @@ import App from './src/App/App'
 import fetch from 'node-fetch'
 import DocumentMeta, {render} from 'react-document-meta';
 import { renderToStaticMarkup } from 'react-dom/server';
+import missionReducer from "./src/reducer/missions";
 
 const bodyParser  = require("body-parser")
 const compression = require('compression');
@@ -143,7 +144,7 @@ else {
         const context = {}
 
         //Créer le store redux
-        const reducer = combineReducers({language : languageReducer, myCookies : myCookies, authenticate : authenticate})
+        const reducer = combineReducers({language : languageReducer, myCookies : myCookies, authenticate : authenticate, missions: missionReducer})
         const store = createStore(reducer, applyMiddleware(thunk))
     
         //Trouver quel route a display

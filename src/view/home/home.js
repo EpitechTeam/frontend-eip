@@ -5,13 +5,13 @@ import Meta from '../../component/meta/meta'
 import HomeContent from "./home-content/home-content";
 
 class Home extends React.Component {
-    render () {
+    render() {
         return (
             <div>
-            <Meta/>
-            <BackgroundHome/>
-            <ExplicationEtape/>
-            <HomeContent/>
+                <Meta/>
+                <BackgroundHome/>
+                <ExplicationEtape/>
+                <HomeContent/>
             </div>
         )
     }
