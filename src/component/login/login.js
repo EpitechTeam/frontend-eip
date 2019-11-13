@@ -4,7 +4,6 @@ import { login } from '../../reducer/authenticate'
 import {connect} from "react-redux";
 
 const mapStateToProps = (state) => {
-    console.log(state);
   return {
     authenticate : state.authenticate,
     language : state.language,

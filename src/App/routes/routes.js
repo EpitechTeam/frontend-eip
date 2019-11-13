@@ -1,4 +1,4 @@
-import {Switch} from "react-router-dom";
+import {Switch, Redirect} from "react-router-dom";
 import React from 'react';
 import {renderRoutes} from "react-router-config";
 import Home from '../../view/home/home'
@@ -14,6 +14,7 @@ import DashboardFreelance from '../../view/partenaire/dashboard/dashboard'
 import Messages from '../../view/messages/messages'
 import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-freelance'
 import StatistiquesFreelance from "../../view/partenaire/statistiques/statistiques";
+import { freelanceAuthenticate } from "./middleware";
 
 export const Routes = [
     {
@@ -55,17 +56,17 @@ export const Routes = [
     {
         path: '/missions',
         exact: true,
-        component: FreelanceMission,
+        render: () => freelanceAuthenticate() ? <FreelanceMission /> : <Redirect to="/"/>
     },
     {
         path: '/dashboard/freelancer',
         exact: true,
-        component: DashboardFreelance
+        render: () => freelanceAuthenticate() ? <DashboardFreelance /> : <Redirect to="/"/>
     },
     {
         path: '/analytics/views',
         exact: true,
-        component: StatistiquesFreelance
+        render: () => freelanceAuthenticate() ? <StatistiquesFreelance /> : <Redirect to="/"/>
     },
     {
         path: '/messages',

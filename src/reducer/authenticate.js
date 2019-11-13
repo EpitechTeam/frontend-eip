@@ -1,4 +1,5 @@
 import API from "../API/api"
+import history from '../App/routes/history'
 
 const initialState = {
     authenticate : typeof localStorage !== "undefined" ? localStorage.getItem('authenticate') === null ? "false" :  localStorage.getItem('authenticate') : "false",
@@ -57,6 +58,8 @@ const authenticateReducer = ( state = initialState,  action) => {
             localStorage.setItem('role', "")
             localStorage.setItem('token', "")
             localStorage.setItem('authenticate', false)
+            history.push('/')
+            window.location.reload()
             state = {
                 authenticate : "false",
                 role : "",
