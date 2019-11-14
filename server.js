@@ -65,16 +65,6 @@ else {
     //Utiliser helmet pour ce protéger de certaines failles
     app.use(helmet())
 
-    //Force https
-    // app.use (function (req, res, next) {
-    //   if (req.secure) {
-    //     next()
-    //   }
-    //   else {
-    //     res.redirect(301, 'https://' + req.headers.host + req.url);
-    //   }
-    // })
-
     //Servir les fichier static build avec npm build
     app.use(express.static('./run'));
 
@@ -172,16 +162,6 @@ else {
         //SSR
         serverRendererAsync(req.url, req, res)
     })
-
-    const privateKey = fs.readFileSync('./certs/privkey.pem')
-    const certificate = fs.readFileSync('./certs/cert.pem')
-    const ca = fs.readFileSync('./certs/chain.pem')
-  
-    const credentials = {
-      key: privateKey,
-      cert: certificate,
-      ca: ca
-    }
 
     //Crée le serveur ecoutant sur le port defini dans le .env
     const httpServer = http.createServer(app)

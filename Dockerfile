@@ -23,8 +23,7 @@ COPY . /usr/src/app
 # Port to listener
 # Environment variables
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8181
 
 ENV PRODUCTION_PORT 8181
 ENV NODE_ENV production
