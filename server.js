@@ -24,7 +24,6 @@ const cors = require('cors')
 const MobileDetect = require('mobile-detect')
 const cluster = require('cluster');
 const http = require("http")
-const https = require("https")
 const helmet = require('helmet');
 require('dotenv').config();
 
@@ -185,12 +184,8 @@ else {
     }
 
     //Crée le serveur ecoutant sur le port defini dans le .env
-    const httpsServer = https.createServer(credentials, app)
     const httpServer = http.createServer(app)
     httpServer.listen(PORT, () => {
       console.log(`SSR running on port ${PORT}`)
-    })
-    httpsServer.listen(443, () => {
-      console.log(`SSR running on port 443`)
     })
 }

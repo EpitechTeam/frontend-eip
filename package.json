@@ -15,7 +15,6 @@
     "express": "^4.17.1",
     "helmet": "^3.21.2",
     "history": "^4.10.1",
-    "https": "^1.0.0",
     "ignore-styles": "^5.0.1",
     "mdbreact": "^4.22.0",
     "mobile-detect": "^1.4.4",
