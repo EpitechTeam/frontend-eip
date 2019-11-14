@@ -14,3 +14,37 @@
 .mission-item:not(:first-child) {
     margin-top: 10px;
 }
+
+.side-nav-custom {
+    width: 240px;
+    background-color: #f7f7f7;
+    height: calc(100vh - 56px);
+    position: fixed;
+    top: 56px;
+    padding: 25px;
+    z-index: 1;
+}
+
+.mission-body {
+    height: 100vh;
+}
+
+.status {
+    display: flex;
+    flex-direction: column;
+}
+
+.mission-link {
+    padding: 5px 15px;
+    margin-top: 7px;
+    color: hsl(0, 0%, 35%);
+}
+
+.mission-link:hover {
+    background-color: #eeeeee;
+    border-radius: 4px;
+}
+
+.selected {
+    background-color: #ebebeb;
+}

@@ -9,8 +9,8 @@ const mapStateToProps = (state) => {
 class Meta extends React.Component {
   render() {
     const meta = {
-      title: this.props.title === "" ? "Trouver un partenaire pour gérer votre annonce Airbnb" : this.props.title,
-      description: this.props.description === "" ? "Plus besoin de s'occuper soi-meme de son annonce Airbnb, faciliter vos locations courtes-durées en trouvant un partenaire de confiance" : this.props.description,
+      title: this.props.title === "" ? "Trouvez un partenaire pour gérer votre annonce Airbnb" : this.props.title,
+      description: this.props.description === "" ? "Plus besoin de s'occuper soi-meme de son annonce Airbnb, facilitez vos locations courtes-durées en trouvant un partenaire de confiance" : this.props.description,
       meta: {
         charSet: 'utf-8',
         name: {

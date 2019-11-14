@@ -1,3 +1,30 @@
 .meConnecter {
     color : black !important;
 }
+
+.flexible-navbar {
+    color: white;
+    box-shadow: none;
+}
+
+.home-header {
+    z-index: 100;
+    color: white !important;
+    box-shadow: none !important;
+    transition: all 0.1s;
+}
+
+.home-header .nav-link {
+    color: white !important;
+}
+
+.white-header {
+    background-color: white;
+    color: hsl(0,0%,11%);
+    box-shadow: 0 0 8px hsla(0,0%,11%, .5) !important;
+    transition: all 0.1s;
+}
+
+.white-header .nav-link {
+    color: hsl(0,0%,11%) !important;
+}
