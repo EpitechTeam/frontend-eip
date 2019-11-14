@@ -40,6 +40,11 @@
     background-color: #ebebeb;
 }
 
+.mission-list {
+    display: flex;
+    flex-direction: column;
+}
+
 .mission-item {
     background-color: #f7f7f7;
     display: flex;
