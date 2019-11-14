@@ -11,12 +11,21 @@ class App extends React.Component {
         cookies: instanceOf(Cookies).isRequired
     };
 
+    state = {
+        marginTop: false
+    };
+
+    componentWillMount() {
+        if (typeof document !== undefined && window.location.pathname !== "/")
+            this.setState({marginTop: true});
+    }
+
     render() {
         return (
             <CookiesProvider>
                 <div>
                     <Header/>
-                    <div id="main-body">
+                    <div id="main-body" style={{marginTop: this.state.marginTop ? "56px" : ""}}>
                         {getRoutes(this.props.location)}
                     </div>
                     <MyCookies/>

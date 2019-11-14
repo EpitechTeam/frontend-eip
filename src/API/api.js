@@ -28,24 +28,35 @@ class API {
         return [
             {
                 name: "Mission 1",
-                objet: "Texte descriptif de la mission",
+                object: "Texte descriptif de la mission",
                 houseOwner: "M. Dupont",
-                status: "En cours",
+                status: "CURRENT",
+                statusNb: 1,
                 date: "12/11/2019"
             },
             {
                 name: "Mission 2",
-                objet: "Texte descriptif de la mission 2",
+                object: "Texte descriptif de la mission 2",
                 houseOwner: "Mme. Eloat",
-                status: "Terminé",
+                status: "DONE",
+                statusNb: 2,
                 date: "08/11/2019"
             },
             {
                 name: "Mission 3",
-                objet: "Texte descriptif de la mission 3",
+                object: "Texte descriptif de la mission 3",
                 houseOwner: "M. Rochet",
-                status: "En attente",
+                status: "WAITING",
+                statusNb: 0,
                 date: "11/11/2019"
+            },
+            {
+                name: "Mission 4",
+                object: "Texte descriptif de la mission 4",
+                houseOwner: "Mme. Frediche",
+                status: "CANCELED",
+                statusNb: -1,
+                date: "14/11/2019"
             },
         ];
     };

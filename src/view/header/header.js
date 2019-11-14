@@ -46,22 +46,26 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
 
-        window.onscroll = () => {
-            if (this.isHomePage() && window.pageYOffset === 0) {
-                this.setState({
-                    whiteHeader: false
-                });
-            }
-            if (window.pageYOffset >= 10) {
-                this.setState({
-                    whiteHeader: true
-                });
-            }
-        };
+        if (typeof document !== undefined) {
+            window.onscroll = () => {
+                if (this.isHomePage() && window.pageYOffset === 0) {
+                    this.setState({
+                        whiteHeader: false
+                    });
+                }
+                if (window.pageYOffset >= 10) {
+                    this.setState({
+                        whiteHeader: true
+                    });
+                }
+            };
+        }
     }
 
     isHomePage = () => {
-        return (window.location.pathname === "/")
+        if (typeof document !== undefined)
+            return (window.location.pathname === "/");
+        return false;
     };
 
     componentWillMount() {
@@ -73,11 +77,13 @@ class Header extends React.Component {
     }
 
     setWhiteHeader = () => {
-        document.getElementById("main-body").style.marginTop = "56px";
-        this.setState({
-            whiteHeader: true
-        });
-    }
+        if (typeof document !== undefined) {
+            document.getElementById("main-body").style.marginTop = "56px";
+            this.setState({
+                whiteHeader: true
+            });
+        }
+    };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps === this.props)
