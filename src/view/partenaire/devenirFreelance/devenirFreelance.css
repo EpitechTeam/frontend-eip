@@ -1,0 +1,9 @@
+.setHeightDevenirFreelance {
+    height: calc(100vh - 100px);
+}
+
+.specialContainerDevenirFreelance {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
