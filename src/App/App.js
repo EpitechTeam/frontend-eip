@@ -11,13 +11,13 @@ class App extends React.Component {
         cookies: instanceOf(Cookies).isRequired
     };
 
-    state = {
-        marginTop: false
-    };
-
-    componentWillMount() {
-        if (typeof document !== undefined && window.location.pathname !== "/")
-            this.setState({marginTop: true});
+    constructor(props) {
+        super (props)
+        this.state = { marginTop: false }
+        if (typeof document !== "undefined")
+            if (window.location.pathname !== "/") {
+                this.state = { marginTop: true };
+        }
     }
 
     render() {

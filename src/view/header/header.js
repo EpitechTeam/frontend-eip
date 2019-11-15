@@ -46,7 +46,7 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
 
-        if (typeof document !== undefined) {
+        if (typeof document !== "undefined") {
             window.onscroll = () => {
                 if (this.isHomePage() && window.pageYOffset === 0) {
                     this.setState({
@@ -63,12 +63,12 @@ class Header extends React.Component {
     }
 
     isHomePage = () => {
-        if (typeof document !== undefined)
+        if (typeof document !== "undefined")
             return (window.location.pathname === "/");
         return false;
     };
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.isHomePage()) {
             this.setState({
                 whiteHeader: false
@@ -77,7 +77,7 @@ class Header extends React.Component {
     }
 
     setWhiteHeader = () => {
-        if (typeof document !== undefined) {
+        if (typeof document !== "undefined") {
             document.getElementById("main-body").style.marginTop = "56px";
             this.setState({
                 whiteHeader: true
