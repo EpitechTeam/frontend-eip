@@ -30,17 +30,17 @@ class DevenirFreelance extends React.Component {
                     <div className="row mx-3">
                       <div className="col-md-4 px-4 mb-4">
                         <div className="view">
-                          <img src="https://mdbootstrap.com/img/illustrations/drawkit-drawing-man-colour.svg" className="img-fluid" alt="smaple image" />
+                          <img  src="https://mdbootstrap.com/img/illustrations/drawkit-drawing-man-colour.svg" className="img-fluid" alt="smaple" />
                         </div>
                       </div>
                       <div className="col-md-4 px-4 mb-4">
                         <div className="view">
-                          <img src="https://mdbootstrap.com/img/illustrations/drawkit-phone-conversation-colour.svg" className="img-fluid" alt="smaple image" />
+                          <img src="https://mdbootstrap.com/img/illustrations/drawkit-phone-conversation-colour.svg" className="img-fluid" alt="smaple" />
                         </div>
                       </div>
                       <div className="col-md-4 px-4 mb-4">
                         <div className="view">
-                          <img src="https://mdbootstrap.com/img/illustrations/app-user-colour.svg" className="img-fluid" alt="smaple image" />
+                          <img src="https://mdbootstrap.com/img/illustrations/app-user-colour.svg" className="img-fluid" alt="smaple" />
                         </div>
                       </div>
                     </div>
@@ -50,7 +50,7 @@ class DevenirFreelance extends React.Component {
                     <div className="row mb-5">
                         <div className="col-md-4 mx-auto">
                         <div className="view mb-4 pb-2">
-                            <img src="https://mdbootstrap.com/img/illustrations/undraw_connected_world_wuay.svg" className="img-fluid" alt="smaple image" />
+                            <img src="https://mdbootstrap.com/img/illustrations/undraw_connected_world_wuay.svg" className="img-fluid" alt="smaple" />
                         </div>
                         </div>
                     </div>
@@ -69,8 +69,8 @@ class DevenirFreelance extends React.Component {
                         </div>
                         <div className="col-lg-5 mb-4">
                         <div className="view overlay">
-                            <img className="img-fluid mx-auto" src="https://mdbootstrap.com/img/illustrations/app-user-colour.svg" alt="Sample image" />
-                            <a>
+                            <img className="img-fluid mx-auto" src="https://mdbootstrap.com/img/illustrations/app-user-colour.svg" alt="Sample" />
+                            <a href="/">
                             <div className="mask rgba-white-slight" />
                             </a>
                         </div>
@@ -87,7 +87,7 @@ class DevenirFreelance extends React.Component {
                         <div className="col-md-4 mb-4">
                         <div className="testimonial">
                             <div className="avatar mx-auto">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(1).jpg" className="rounded-circle z-depth-1 img-fluid" />
+                            <img alt="" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(1).jpg" className="rounded-circle z-depth-1 img-fluid" />
                             </div>
                             <h4 className="font-weight-bold dark-grey-text mt-4">Anna Deynah</h4>
                             <h6 className="font-weight-bold blue-text my-3">Web Designer</h6>
@@ -106,7 +106,7 @@ class DevenirFreelance extends React.Component {
                         <div className="col-md-4 mb-4">
                         <div className="testimonial">
                             <div className="avatar mx-auto">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg" className="rounded-circle z-depth-1 img-fluid" />
+                            <img alt="" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg" className="rounded-circle z-depth-1 img-fluid" />
                             </div>
                             <h4 className="font-weight-bold dark-grey-text mt-4">John Doe</h4>
                             <h6 className="font-weight-bold blue-text my-3">Web Developer</h6>
@@ -125,7 +125,7 @@ class DevenirFreelance extends React.Component {
                         <div className="col-md-4 mb-4">
                         <div className="testimonial">
                             <div className="avatar mx-auto">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).jpg" className="rounded-circle z-depth-1 img-fluid" />
+                            <img alt="" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).jpg" className="rounded-circle z-depth-1 img-fluid" />
                             </div>
                             <h4 className="font-weight-bold dark-grey-text mt-4">Maria Kate</h4>
                             <h6 className="font-weight-bold blue-text my-3">Photographer</h6>
@@ -148,7 +148,7 @@ class DevenirFreelance extends React.Component {
                     <div className="row pr-lg-5">
                         <div className="col-md-7 mb-4">
                         <div className="view">
-                            <img src="https://mdbootstrap.com/img/illustrations/graphics(4).png" className="img-fluid" alt="smaple image" />
+                            <img src="https://mdbootstrap.com/img/illustrations/graphics(4).png" className="img-fluid" alt="smaple" />
                         </div>
                         </div>
                         <div className="col-md-5 d-flex align-items-center">
@@ -207,11 +207,11 @@ class DevenirFreelance extends React.Component {
                         <div className="row">
                         <div className="col-md-5 mb-4 mb-md-0">
                             <div className="view">
-                            <img src="https://mdbootstrap.com/img/illustrations/undraw_Group_chat_unwm.svg" className="img-fluid" alt="smaple image" />
+                            <img src="https://mdbootstrap.com/img/illustrations/undraw_Group_chat_unwm.svg" className="img-fluid" alt="smaple" />
                             </div>
                         </div>
                         <div className="col-md-7 mb-lg-0 mb-4">
-                            <form className action>
+                            <form>
                             <h3 className="font-weight-bold my-3">Inscription</h3>
                             <p className="text-muted mb-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, fuga similique quos aperiam tenetur quo ut rerum debitis.</p>
                             <div className="row d-flex justify-content-center">
