@@ -10,10 +10,6 @@ COPY . /app
 # Install app dependencies
 COPY package.json /usr/src/app/
 
-
-# Install git
-RUN apk add --no-cache git
-
 RUN npm install
 
 
