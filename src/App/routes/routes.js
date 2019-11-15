@@ -15,6 +15,7 @@ import Messages from '../../view/messages/messages'
 import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-freelance'
 import StatistiquesFreelance from "../../view/partenaire/statistiques/statistiques";
 import { freelanceAuthenticate } from "./middleware";
+import ProprietaireProfile from "../../view/proprietaire/profil/profil";
 
 export const Routes = [
     {
@@ -22,6 +23,11 @@ export const Routes = [
         exact: true,
         component: Home,
         loadData: () => loadHomeData()
+    },
+    {
+        path: '/profile/proprietaire',
+        exact: true,
+        component: ProprietaireProfile,
     },
     {
         path: '/profile/:name',
