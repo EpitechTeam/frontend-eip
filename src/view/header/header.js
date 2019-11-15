@@ -63,8 +63,9 @@ class Header extends React.Component {
     }
 
     isHomePage = () => {
-        if (typeof document !== "undefined")
+        if (typeof document !== "undefined") {
             return (window.location.pathname === "/");
+        }
         return false;
     };
 
