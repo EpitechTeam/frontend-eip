@@ -26,10 +26,25 @@ const initialState = {
 
 const freelanceReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_PROFILE': {
-            state = {...state, profile: action.payload};
-            break;
-        }
+        case 'SET_PROFILE':
+            state = {
+                ...state,
+                profile: action.payload
+            };
+        break;
+
+        case "SET_USER" :
+            console.log(action)
+            state = {
+                ...state,
+                profile : {
+                    name : action.response.user.firstname,
+                    avatar : action.response.user.img,
+                    location : action.response.user.city
+                }
+            }
+        break;
+
         default: return state;
     }
     return state;
