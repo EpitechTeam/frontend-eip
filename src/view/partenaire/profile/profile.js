@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {MDBCard, MDBInput } from "mdbreact";
+import {MDBBtn, MDBCard, MDBInput} from "mdbreact";
 import {faCameraRetro, faClock, faMapPin, faRunning, faThumbsUp, faWrench} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import freelanceProfile from '../../../reducer/freelanceProfile'
@@ -99,7 +99,7 @@ function ProfileCardDetails({profile}) {
             <div className="d-flex flex-row">
                 {
                     data.map((stat, idx) => (
-                        <div className="d-flex flex-column align-items-center justify-content-between"
+                        <div className="d-flex flex-column align-items-center justify-content-between" key={idx}
                              style={{minWidth: '145px', padding: '8px', textAlign: 'center',...calcBorderRadius(idx),
                                 backgroundColor: (idx===0) ? primaryColor: '', borderColor: (idx === 0)? primaryColor:'grey'}}>
                             <small style={{maxWidth: '14ch', margin: 'auto', color: (idx === 0)? 'white':'grey'}}>{stat.label}</small>
@@ -119,10 +119,10 @@ function ProfileCardDetails({profile}) {
                     height: '350px', backgroundImage: `url(${profile.avatar}}`, margin: '12px'}}>
 
                     <div className="d-flex flex-row justify-content-center align-items-baseline" style={{width: '100%', color: 'white'}}>
-                        <button type="button" className="btn btn-default btn-md btn-block btn-dark" style={{opacity: '70%'}}>
+                        <MDBBtn className="w-100" color="grey" size="sm" style={{opacity: '70%', width: '100%'}}>
                             <FontAwesomeIcon icon={faCameraRetro} size="1x" style={{marginRight: '5px'}}/>
                             Modifier photo
-                        </button>
+                        </MDBBtn>
                     </div>
                 </div>
 
@@ -159,8 +159,8 @@ function FreelancerSkills({skills}) {
                     <h5 style={{color: 'grey'}}>Compétences ({skills.length})</h5>
                 </li>
                 {
-                    skills.map(skill => (
-                        <li className="list-group-item">
+                    skills.map((skill, idx) => (
+                        <li className="list-group-item" key={idx}>
                             <h6 style={{fontWeight:'bold', color: '#656565'}}>{skill}</h6>
                         </li>))
                 }
@@ -171,18 +171,18 @@ function FreelancerSkills({skills}) {
 
 function PrefMissions({missions}) {
     let missionIcons = [faRunning, faWrench, faClock];
-    {/*<FontAwesomeIcon icon={faCameraRetro} size="1x" style={{marginRight: '5px'}}/>*/}
+
     return (
         <MDBCard style={{...cardStyle}}>
             <div className="d-flex flex-column" style={{padding: '16px', paddingLeft: '32px', minWidth: '1000px'}}>
                 <div className="d-flex flex-row justify-content-between align-items-end" style={{paddingBottom: '16px'}}>
                     <h5 style={{color: primaryColor}}>Préférences de missions</h5>
-                    <button type="button" className="btn btn-default btn-md blue-gradient">Modifier</button>
+                    <MDBBtn size="sm" gradient="blue">Modifier</MDBBtn>
                 </div>
                 <div className="d-flex flex-row justify-content-between" >
                     {
                         missions.map((mission, index) => (
-                            <div className="d-flex flex-row" style={{width: '400px'}}>
+                            <div className="d-flex flex-row" style={{width: '400px'}} key={index}>
                                 <FontAwesomeIcon icon={missionIcons[index]} size="1x" style={{marginRight: '5px'}}/>
                                 <div>
                                     <p>{mission.label}</p>
