@@ -31,7 +31,7 @@ export const Routes = [
         component: ProprietaireProfile,
     },
     {
-        path: '/profile/freelance',
+        path: '/profile',
         exact: true,
         component: FreelanceProfile,
     },
