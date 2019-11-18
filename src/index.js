@@ -12,7 +12,7 @@ import languageReducer from './reducer/language'
 import myCookies from './reducer/cookies'
 import authenticate from './reducer/authenticate'
 import missionReducer from './reducer/missions'
-import freelanceProfile from './reducer/freelanceProfile'
+import freelanceReducer from './reducer/freelanceProfile'
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 
@@ -26,7 +26,7 @@ if (typeof document === "undefined") {
         myCookies: myCookies,
         authenticate: authenticate,
         missions: missionReducer,
-        freelanceProfile: freelanceProfile
+        freelanceProfile: freelanceReducer
     })
 
     var SSR_store = createStore(reducer, window.__PRELOADED_STATE__, applyMiddleware(thunk))
