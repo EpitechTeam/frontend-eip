@@ -24,16 +24,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-function ProfileForm(props) {
-    return (
-        <div>
-            {props.labels.map(label => (
-                <MDBInput label={label} size="sm" />
-            ))}
-        </div>
-    );
-}
-
 class FreelanceProfile extends React.Component {
     constructor(props) {
         super(props);
