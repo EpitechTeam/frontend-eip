@@ -50,14 +50,14 @@ const createURL = state => {
   const isDefaultRoute =
     !state.query &&
     state.page === 1 &&
-    (state.menu && !state.menu.ville);
+    (state.menu && !state.menu.city);
 
   if (isDefaultRoute) {
     return '/recherche';
   }
 
-  const categoryPath = state.menu.ville
-    ? `${getCategorySlug(state.menu.ville)}/`
+  const categoryPath = state.menu.city
+    ? `${getCategorySlug(state.menu.city)}/`
     : '';
 
   return `/recherche/${categoryPath}`;
@@ -79,7 +79,7 @@ const urlToSearchState = location => {
  
   return {
     menu: {
-      ville: decodeURIComponent(category),
+      city: decodeURIComponent(category),
     }
   };
 };
@@ -89,8 +89,9 @@ const Hit = ({ hit }) => (
     <a href={hit.link} title={hit.name}>
       <img src={hit.img} alt={hit.name} width="340" height="270"></img>
     </a>
-    <a href={hit.link} title={hit.name}>{hit.name}</a>
-    <p>{hit.ville}</p>
+    <a href={hit.link} title={hit.lastname}>{hit.lastname}</a>
+    <p href={hit.link} title={hit.firstname}>{hit.firstname}</p>
+    <p>{hit.city}</p>
   </MDBCol>
 );
 
@@ -116,13 +117,13 @@ const Recherche = ({ location, history }) => {
 
   return (
     <div className="specialContainerRecherche">
-      <InstantSearch searchClient={searchClient} indexName="dev_places" searchState={searchState} onSearchStateChange={onSearchStateChange} createURL={createURL}>
+      <InstantSearch searchClient={searchClient} indexName="freelancer" searchState={searchState} onSearchStateChange={onSearchStateChange} createURL={createURL}>
         <MDBRow className="mt-5">
           <MDBCol xl="2">
             <ClearRefinements />
 
             <Panel className="mt-5" header="Ville">
-              <Menu attribute="ville" />
+              <Menu attribute="city" />
             </Panel>
           </MDBCol>
 
