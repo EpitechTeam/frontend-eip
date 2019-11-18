@@ -26,7 +26,7 @@ if (typeof document === "undefined") {
         myCookies: myCookies,
         authenticate: authenticate,
         missions: missionReducer,
-        freelanceProfile : freelanceReducer
+        freelanceProfile: freelanceReducer
     })
 
     var SSR_store = createStore(reducer, window.__PRELOADED_STATE__, applyMiddleware(thunk))
