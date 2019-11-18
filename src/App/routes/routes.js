@@ -15,6 +15,7 @@ import Messages from '../../view/messages/messages'
 import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-freelance'
 import StatistiquesFreelance from "../../view/partenaire/statistiques/statistiques";
 import { freelanceAuthenticate } from "./middleware";
+import FreelanceProfile from "../../view/partenaire/profile/profile";
 import ProprietaireProfile from "../../view/proprietaire/profil/profil";
 
 export const Routes = [
@@ -28,6 +29,11 @@ export const Routes = [
         path: '/profile/proprietaire',
         exact: true,
         component: ProprietaireProfile,
+    },
+    {
+        path: '/profile',
+        exact: true,
+        component: FreelanceProfile,
     },
     {
         path: '/profile/:name',
@@ -82,7 +88,7 @@ export const Routes = [
     {
         component: PageNotFound,
     }
-]
+];
 
 function getRoutes(location) {
     return (
