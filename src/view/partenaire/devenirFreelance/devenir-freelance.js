@@ -1,5 +1,6 @@
 import React from 'react'
 import './devenirFreelance.css'
+import AlgoliaPlaces from 'algolia-places-react';
 
 class DevenirFreelance extends React.Component {
     render() {
@@ -13,8 +14,9 @@ class DevenirFreelance extends React.Component {
                             <div className="col-md-6">
                             <h1 className="mb-4">Devenez <span className="text-warning">le meilleur</span><br /><span className="cyan-text">freelance</span> de votre région</h1>
                             <p className="mb-4 pb-2 dark-grey-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, culpa qui officia deserunt laborum fuga similique mollit id quos aperiam proident non ut rerum debitis.</p>
-                            <button type="button" className="btn btn-primary btn-rounded btn-md ml-md-0">Get started</button>
-                            <button type="button" className="btn btn-outline-grey btn-rounded btn-md">Get started</button>
+                            <a href="#searchDevenirFreelance">
+                                <button href="searchDevenirFreelance" type="button" className="btn btn-primary btn-rounded btn-md ml-md-0">Commencer</button>
+                            </a>
                             </div>
                             <div className="col-md-6">
                             <img src="https://mdbootstrap.com/img/illustrations/hiker-man-colour.svg" alt="" className="img-fluid" />
@@ -218,7 +220,7 @@ class DevenirFreelance extends React.Component {
                                     <div className="col-md-6 col-lg-3 mb-4">
                                     <div className="md-form md-outline form-lg">
                                         <input type="text" id="form1" className="form-control form-control-lg" />
-                                        <label htmlFor="form1">Name</label>
+                                        <label htmlFor="form1">Firstname</label>
                                     </div>
                                     </div>
                                     <div className="col-md-6 col-lg-3 mb-4">
@@ -233,10 +235,43 @@ class DevenirFreelance extends React.Component {
                                         <label htmlFor="form3">Password</label>
                                     </div>
                                     </div>
+                            </div>
+                            <div className="row d-flex justify-content-center">
                                     <div className="col-md-6 col-lg-3 mb-4">
-                                    <button className="btn btn-block btn-primary my-4">Sign up</button>
+                                    <div className="md-form md-outline form-lg">
+                                        <input type="text" id="form1" className="form-control form-control-lg" />
+                                        <label htmlFor="form1">Name</label>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div className="col-md-6 col-lg-3 mb-4">
+                                    <div id="searchDevenirFreelance" className="md-form md-outline form-lg">
+                                    <AlgoliaPlaces
+                                    placeholder='Pays, Région, Ville...'
+                            
+                                    options={{
+                                    appId: 'plIOZH1K5KVK',
+                                    apiKey: 'd3dabd9d74c1378eec2667aac653e04a',
+                                    language: 'fr',
+                                    countries: ['fr', 'de'],
+                                    type: 'city',
+                                    }}
+                                    
+                                    onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
+                                    this.setState({ville : suggestion.name})}
+                            
+                                    onLimit={({ message }) => 
+                                    console.log('Fired when you reached your current rate limit.')}
+                            
+                                    onError={({ message }) => 
+                                    console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
+                                    />
+                                    </div>  
+                                    </div>
+                                    <div className="col-md-6 col-lg-3 mb-4">
+                                    <button className="btn btn-block btn-primary my-4">S'inscrire</button>
+                                    </div>
+                                   
+                            </div>
                             </form>
                         </div>
                         </div>
