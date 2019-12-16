@@ -24,6 +24,7 @@ const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
         language: state.language,
+        freelanceProfile: state.freelanceProfile
     }
 }
 
@@ -159,11 +160,6 @@ class Header extends React.Component {
                                         <MDBNavItem>
                                             <MDBNavLink className="meConnecter"
                                                         onClick={() => this.setWhiteHeader()}
-                                                        to="/analytics/views">Statistiques</MDBNavLink>
-                                        </MDBNavItem>
-                                        <MDBNavItem>
-                                            <MDBNavLink className="meConnecter"
-                                                        onClick={() => this.setWhiteHeader()}
                                                         to="/messages" >Messages</MDBNavLink>
                                         </MDBNavItem>
                                         <MDBNavItem>
@@ -183,7 +179,7 @@ class Header extends React.Component {
                                         <MDBNavItem>
                                             <MDBDropdown>
                                                 <MDBDropdownToggle className="pt-1 pb-0 dopdown-toggle" nav caret>
-                                                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                                                    <img src={this.props.freelanceProfile.profile.avatar}
                                                          className="rounded-circle z-depth-0"
                                                          style={{height: "35px", padding: 0}} alt=""/>
                                                 </MDBDropdownToggle>

@@ -19,6 +19,7 @@
     "helmet": "^3.21.2",
     "history": "^4.10.1",
     "ignore-styles": "^5.0.1",
+    "lodash": "^4.17.15",
     "mdbreact": "^4.22.0",
     "mobile-detect": "^1.4.4",
     "node-fetch": "^2.6.0",

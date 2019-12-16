@@ -4,7 +4,6 @@ import {renderRoutes} from "react-router-config";
 import Home from '../../view/home/home'
 import PageNotFound from '../../view/404/404.js'
 import Proprietaire from '../../view/proprietaire/proprietaire'
-import Partenaire from '../../view/partenaire/partenaire'
 import {loadHomeData} from '../../reducer/home'
 import ConfierVosBiens from '../../view/page/confier-vos-biens/confier-vos-biens'
 import LaisserVousGuider from '../../view/page/laisser-vous-guider/laisser-vous-guider'
@@ -13,7 +12,6 @@ import FreelanceMission from '../../view/partenaire/mission/mission'
 import DashboardFreelance from '../../view/partenaire/dashboard/dashboard'
 import Messages from '../../view/messages/messages'
 import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-freelance'
-import StatistiquesFreelance from "../../view/partenaire/statistiques/statistiques";
 import { freelanceAuthenticate } from "./middleware";
 import FreelanceProfile from "../../view/partenaire/profile/profile";
 import ProprietaireProfile from "../../view/proprietaire/profil/profil";
@@ -38,7 +36,7 @@ export const Routes = [
     {
         path: '/profile/:name',
         exact: true,
-        component: Partenaire,
+        component: FreelanceProfile,
     },
     {
         path: '/proprietaire',
@@ -74,11 +72,6 @@ export const Routes = [
         path: '/dashboard/freelancer',
         exact: true,
         render: () => freelanceAuthenticate() ? <DashboardFreelance /> : <Redirect to="/"/>
-    },
-    {
-        path: '/analytics/views',
-        exact: true,
-        render: () => freelanceAuthenticate() ? <StatistiquesFreelance /> : <Redirect to="/"/>
     },
     {
         path: '/messages',

@@ -13,7 +13,7 @@ class SearchHome extends React.Component {
 
     render() {
         return (
-        <div>
+        <div id="searchHome">
             <h1 className="TitleHome">Votre partenaire Airbnb de confiance<br/>proche de chez vous</h1>
             <MDBContainer style={{paddingTop : "20px"}}>
                 <MDBRow>
