@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from "react-redux";
-import {MDBBtn, MDBCard, MDBInput} from "mdbreact";
+import {MDBBtn, MDBCard, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 import {faCameraRetro, faClock, faMapPin, faRunning, faThumbsUp, faWrench} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import freelanceProfile from '../../../reducer/freelanceProfile'
+import {updateBio, updateSkills} from "../../../reducer/freelanceProfile";
 
 let primaryColor = '#3972C0';
 let cardStyle = {marginTop: '24px', justifyContent: 'space-between'};
@@ -17,10 +17,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // example
-        // logout: () => {
-        //     dispatch(logout())
-        // }
+        updateBio: (bio) => { dispatch(updateBio(bio)) },
+        updateSkills: (skills) => { dispatch(updateSkills(skills)) }
     }
 };
 
@@ -37,15 +35,14 @@ class FreelanceProfile extends React.Component {
     render() {
         return (
             <div style={{
-                display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '76px',
-                height: '100vh'}}>
+               margin: '24px'}}>
                 <div className="d-flex flex-column">
                     <ProfileCardDetails profile={this.props.freelanceProfile.profile}/>
                     <div className="d-flex flex-row" style={{marginTop: '24px'}}>
                         <FreelancerSkills skills={this.props.freelanceProfile.profile.skills}/>
                         <div className="d-flex flex-column" style={{paddingLeft: '62px'}}>
                             <PrefMissions missions={this.props.freelanceProfile.profile.missions}/>
-                            <BioFreelance bio={this.props.freelanceProfile.profile.bio}/>
+                            <BioFreelance bio={this.props.freelanceProfile.profile.bio} updateBio={this.props.updateBio}/>
                         </div>
                     </div>
                 </div>
@@ -103,7 +100,6 @@ function ProfileCardDetails({profile}) {
 
     return (
         <MDBCard style={cardStyle}>
-
             <div className="d-flex flex-row" style={{ paddingRight: '24px'}}>
                 <div className="d-flex col-example align-items-end" style={{background: primaryColor, width: '350px',
                     height: '350px', backgroundImage: `url(${profile.avatar}}`, margin: '12px'}}>
@@ -142,16 +138,71 @@ function ProfileCardDetails({profile}) {
 }
 
 function FreelancerSkills({skills}) {
+    let [_skill, updateSkill] = useState("");
+    let [_skills, handleSkills] = useState(skills);
+    const [canEdit, toggleEdit] = useState(false);
+
+    function removeSkill(idx) {
+        _skills.splice(idx, 1);
+        handleSkills([..._skills]);
+        console.log(_skills);
+    }
+
+    function addSkill(skill) {
+        if (!skill || _skills.includes(skill))
+            return;
+        _skills.push(skill);
+        handleSkills([..._skills]);
+    }
+
+    function handleSkill(e) {
+        updateSkill(e.target.value);
+    }
+
+    function saveSkills(skills) {
+        // dispatch to redux and update using api
+        console.log("saving to redux, calling api..")
+        toggleEdit(!canEdit)
+    }
+
     return (
         <MDBCard style={{...cardStyle, minWidth: '300px'}}>
             <ul className="list-group">
-                <li className="list-group-item disabled">
-                    <h5 style={{color: 'grey'}}>Compétences ({skills.length})</h5>
+                <li className="list-group-item">
+                    <MDBRow className="justify-content-around align-items-center">
+                        <h5 style={{color: 'grey'}}>Compétences ({_skills.length})</h5>
+                        {
+                            canEdit ?
+                                <MDBBtn size="sm" gradient="aqua" onClick={() => saveSkills(_skills)}>
+                                    <MDBIcon icon="save" className="mr-1" />
+                                </MDBBtn> :
+                                <MDBBtn size="sm" gradient="blue" onClick={() => toggleEdit(!canEdit)}>
+                                    <MDBIcon icon="magic" className="mr-1" />
+                                </MDBBtn>
+                        }
+                    </MDBRow>
                 </li>
+                { canEdit ?
+                    <li  className="list-group-item" style={{listStyle: "none"}}>
+                        <MDBRow className="justify-content-around align-items-center" style={{margin: '-24px'}}>
+                            <MDBInput hint="Nouvelle compétence" onInput={(e) => handleSkill(e)}/>
+                            <MDBBtn size="sm" gradient="aqua" onClick={() => addSkill(_skill)}>
+                                <MDBIcon icon="plus" className="mr-1" />
+                            </MDBBtn>
+                        </MDBRow>
+                    </li> : null
+                }
                 {
-                    skills.map((skill, idx) => (
+                    _skills.sort((a, b) => a.localeCompare(b)).map((skill, idx) => (
                         <li className="list-group-item" key={idx}>
-                            <h6 style={{fontWeight:'bold', color: '#656565'}}>{skill}</h6>
+                            <MDBRow className="justify-content-between align-items-center" style={{margin: '0px'}}>
+                                <h6 style={{fontWeight:'bold', color: '#656565'}}>{skill}</h6>
+                                { canEdit ?
+                                    <MDBBtn size="sm" gradient="peach" onClick={() => removeSkill(idx)}>
+                                        <MDBIcon icon="trash-alt" className="mr-1" />
+                                    </MDBBtn> : null
+                                }
+                            </MDBRow>
                         </li>))
                 }
             </ul>
@@ -162,23 +213,47 @@ function FreelancerSkills({skills}) {
 function PrefMissions({missions}) {
     let missionIcons = [faRunning, faWrench, faClock];
 
+    const [canEdit, toggleEdit] = useState(false);
+    const [_missions, updateMissions] = useState(missions);
+
+
+    function saveMissions() {
+        console.log("save missions");
+        toggleEdit(!canEdit);
+        // dispatch _missions
+    }
+
+    function handleMission(e, index) {
+        console.log(e.target.value, _missions);
+        _missions[index].description = e.target.value;
+        updateMissions([..._missions]);
+    }
+
     return (
         <MDBCard style={{...cardStyle}}>
             <div className="d-flex flex-column" style={{padding: '16px', paddingLeft: '32px', minWidth: '1000px'}}>
                 <div className="d-flex flex-row justify-content-between align-items-end" style={{paddingBottom: '16px'}}>
                     <h5 style={{color: primaryColor}}>Préférences de missions</h5>
-                    <MDBBtn size="sm" gradient="blue">Modifier</MDBBtn>
+                    {
+                        canEdit ? <MDBBtn size="sm" gradient="aqua" type="submit" onClick={() => saveMissions()}>Sauvegarder</MDBBtn> :
+                            <MDBBtn size="sm" gradient="blue" onClick={() => toggleEdit(!canEdit)}>Modifier</MDBBtn>
+                    }
                 </div>
                 <div className="d-flex flex-row justify-content-between" >
                     {
-                        missions.map((mission, index) => (
-                            <div className="d-flex flex-row" style={{width: '400px'}} key={index}>
+                        _missions.map((mission, index) => (
+                            canEdit ?
+                                <div className="d-flex flex-row" style={{width: '400px'}} key={index}>
+                                    <MDBInput valueDefault={mission.description} type="textarea" label={mission.label}
+                                              onInput={(e) => handleMission(e, index)} style={{minWidth: '350px'}}/>
+                                </div> :
+                                <div className="d-flex flex-row" style={{width: '400px'}} key={index}>
                                 <FontAwesomeIcon icon={missionIcons[index]} size="1x" style={{marginRight: '5px'}}/>
                                 <div>
                                     <p>{mission.label}</p>
                                     <h6>{mission.description}</h6>
                                 </div>
-                            </div>
+                                </div>
                         ))
                     }
                 </div>
@@ -187,12 +262,33 @@ function PrefMissions({missions}) {
     )
 }
 
-function BioFreelance({bio}) {
+function BioFreelance({bio, updateBio}) {
+    const [canEdit, toggleEdit] = useState(false);
+    const [bioValue, setBio] = useState(bio);
+
+    function saveBio() {
+        updateBio(bioValue);
+        toggleEdit(!canEdit)
+    }
+
+    function handleText(e) {
+        setBio(e.target.value);
+    }
+
     return (
         <MDBCard style={{...cardStyle}}>
             <div className="d-flex flex-column" style={{padding: '16px', paddingLeft: '32px'}}>
-                <h5 style={{color: primaryColor, paddingBottom: '12px'}}>Vous en quelques mots</h5>
-                <h6>{bio}</h6>
+                <div className="d-flex flex-row justify-content-between">
+                    <h5 style={{color: primaryColor, paddingBottom: '12px'}}>Vous en quelques mots</h5>
+                    {
+                        canEdit ? <MDBBtn size="sm" gradient="aqua" type="submit" onClick={() => saveBio()}>Sauvegarder</MDBBtn> :
+                        <MDBBtn size="sm" gradient="blue" onClick={() => toggleEdit(!canEdit)}>Modifier</MDBBtn>
+                    }
+                </div>
+                {
+                    canEdit ? <MDBInput valueDefault={bio} type="textarea" label="Modifier votre description" onInput={(e) => handleText(e)}/> :
+                    <h6>{bio}</h6>
+                }
             </div>
         </MDBCard>
     )
