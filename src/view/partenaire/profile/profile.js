@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
-import {MDBBtn, MDBCard, MDBIcon, MDBInput, MDBRow} from "mdbreact";
+import {MDBBtn, MDBBtnGroup, MDBCard, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 import {faCameraRetro, faClock, faMapPin, faRunning, faThumbsUp, faWrench} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {updateBio, updateSkills} from "../../../reducer/freelanceProfile";
@@ -66,15 +66,15 @@ function ProfileCardDetails({profile}) {
 
             switch (index) {
                 case 0: {
-                    border = {...border,  borderRight: '0px', borderRadius: '6px 0px 0px 6px'};
+                    border = {borderRight: '0px', borderRadius: '6px 0px 0px 6px'};
                     break;
                 }
                 case 1: {
-                    border = {...border,  borderRight: '0px'};
+                    border = {borderRight: '0px'};
                     break;
                 }
                 case 3: {
-                    border = {...border,  borderLeft: '0px', borderRadius: '0px 6px 6px 0px'};
+                    border = {borderLeft: '0px', borderRadius: '0px 6px 6px 0px'};
                     break;
                 }
                 default: return border;
@@ -84,18 +84,25 @@ function ProfileCardDetails({profile}) {
 
         return (
             <div className="d-flex flex-row">
+                <MDBBtnGroup>
                 {
                     data.map((stat, idx) => (
-                        <div className="d-flex flex-column align-items-center justify-content-between" key={idx}
-                             style={{minWidth: '145px', padding: '8px', textAlign: 'center',...calcBorderRadius(idx),
-                                backgroundColor: (idx===0) ? primaryColor: '', borderColor: (idx === 0)? primaryColor:'grey'}}>
-                            <small style={{maxWidth: '14ch', margin: 'auto', color: (idx === 0)? 'white':'grey'}}>{stat.label}</small>
-                            <p style={{margin: 'auto', fontWeight: 'bold', color: (idx === 0)? 'white':'grey'}}>{stat.value}</p>
-                        </div>
+                            <MDBBtn color={idx === 0 ? "blue" : null} size="sm" style={{border: '1px'}}>
+                                <h6 style={{color: "#bababa"}}>{stat.label}</h6>
+                                <h6>{stat.value}</h6>
+                            </MDBBtn>
                     ))
                 }
+                </MDBBtnGroup>
             </div>
         );
+
+        {/*<div className="d-flex flex-column align-items-center justify-content-between" key={idx}*/}
+        {/*     style={{minWidth: '145px', padding: '8px', textAlign: 'center',...calcBorderRadius(idx),*/}
+        {/*         backgroundColor: (idx===0) ? primaryColor: '', borderColor: (idx === 0)? primaryColor:'grey'}}>*/}
+        {/*    <small style={{maxWidth: '14ch', margin: 'auto', color: (idx === 0)? 'white':'grey'}}>{stat.label}</small>*/}
+        {/*    <p style={{margin: 'auto', fontWeight: 'bold', color: (idx === 0)? 'white':'grey'}}>{stat.value}</p>*/}
+        {/*</div>*/}
     }
 
     return (
@@ -161,7 +168,7 @@ function FreelancerSkills({skills}) {
 
     function saveSkills(skills) {
         // dispatch to redux and update using api
-        console.log("saving to redux, calling api..")
+        console.log("saving to redux, calling api..");
         toggleEdit(!canEdit)
     }
 
