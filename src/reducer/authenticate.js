@@ -4,7 +4,9 @@ import history from '../App/routes/history'
 const initialState = {
     authenticate : typeof localStorage !== "undefined" ? localStorage.getItem('authenticate') === null ? "false" :  localStorage.getItem('authenticate') : "false",
     role : typeof localStorage !== "undefined" ? localStorage.getItem('role') === null ? "" : localStorage.getItem('role') : "",
-    token : typeof localStorage !== "undefined" ? localStorage.getItem('token') === null ? "" : localStorage.getItem('token') : ""
+    token : typeof localStorage !== "undefined" ? localStorage.getItem('token') === null ? "" : localStorage.getItem('token') : "",
+    erreurLoginMessage : "",
+    erreurRegisterMessage : ""
 }
 
 export function login(email, password) {
@@ -15,16 +17,44 @@ export function login(email, password) {
             response => Promise.all([
                 dispatch({ type : "SET_ROLE", response}),
                 dispatch({ type : "SET_TOKEN", response}),
-                dispatch({ type : "SET_AUTHENTICATE", authenticate : "true"})
+                dispatch({ type : "SET_AUTHENTICATE", authenticate : "true"}),
+                dispatch({ type : "SET_USER", response}),
             ]),
-            erreur => console.log("erreur login")
+            erreur => dispatch({ type : "ERREUR_LOGIN", erreur})
+        )
+    }
+}
+
+export function registerFreelance(body) {
+    return dispatch => {
+        let newData = new API()
+        return newData.registerFreelance(body)
+        .then (
+            response => Promise.all([
+                dispatch({ type : "SET_ROLE", response}),
+                dispatch({ type : "SET_TOKEN", response}),
+                dispatch({ type : "SET_AUTHENTICATE", authenticate : "true"}),
+                dispatch({ type : "SET_USER", response}),
+                dispatch({ type : "REDIRECT_PROFILE"})
+            ]),
+            erreur => dispatch({ type : "ERREUR_REGISTER", erreur})
         )
     }
 }
 
 export function logout() {
-    return dispatch => {
-        dispatch({ type : "SET_LOGOUT"})
+    return (dispatch, getState) => {
+        console.log(getState())
+        let newData = new API(getState().authenticate.token)
+        return newData.logout()
+        .then (
+            response => Promise.all([
+                dispatch({type : "SET_LOGOUT"})
+            ]),
+            erreur => Promise.all([
+                dispatch({type : "SET_LOGOUT"})
+            ])
+        )
     }
 }
 
@@ -64,6 +94,25 @@ const authenticateReducer = ( state = initialState,  action) => {
                 authenticate : "false",
                 role : "",
                 token : ""
+            }
+        break;
+
+        case "REDIRECT_PROFILE" :
+                history.push('/profile')
+                window.location.reload()
+        break;
+
+        case "ERREUR_LOGIN" :
+            state = {
+                ...state,
+                erreurLoginMessage : action.erreur.response.data.error
+            }
+        break;
+
+        case "ERREUR_REGISTER" :
+            state = {
+                ...state,
+                erreurRegisterMessage : action.erreur.response.data.errmsg
             }
         break;
 

@@ -1,7 +1,79 @@
 import React from 'react'
 import './devenirFreelance.css'
+import AlgoliaPlaces from 'algolia-places-react';
+import {connect} from "react-redux";
+import {registerFreelance} from '../../../reducer/authenticate'
+import { MDBAlert } from "mdbreact";
+
+const mapStateToProps = (state) => {
+    return {
+        authenticate: state.authenticate,
+        language: state.language,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        register: (body) => {
+            dispatch(registerFreelance(body))
+        }
+    }
+}
 
 class DevenirFreelance extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            email : "",
+            name : "",
+            firstname : "",
+            password : "",
+            ville : ""
+        }
+    }
+
+    checkForm = () => {        
+        let erreur = false
+        let message = ""
+
+        if (this.props.authenticate.authenticate !== "false") {
+            message = "Vous etes deja connecté"
+            erreur = true
+        }
+        if (this.state.email.indexOf('@') !== -1 && this.state.email.indexOf('.') === -1) {
+            message = " Probleme avec l'email"
+            erreur = true
+        }
+        if (this.state.name === "") {
+            message = " Probleme name"
+            erreur = true
+        }
+        if (this.state.firstname === "") {
+            message = " Probleme firstname"
+            erreur = true
+        }
+        if (this.state.password.length < 7) {
+            message = " Probleme password"
+            erreur = true
+        }
+        if (this.state.ville === "") {
+            message = " Probleme ville"
+            erreur = true
+        }
+
+        if (!erreur) {
+            this.props.register(this.state)
+        }
+        else {
+            this.setState({erreur : true, erreurMessage : message})
+        }
+    }
+
+    handleChange = event => {
+        this.setState({[event.target.name] : event.target.value})
+    }
+
     render() {
         return (
             <div>
@@ -13,8 +85,9 @@ class DevenirFreelance extends React.Component {
                             <div className="col-md-6">
                             <h1 className="mb-4">Devenez <span className="text-warning">le meilleur</span><br /><span className="cyan-text">freelance</span> de votre région</h1>
                             <p className="mb-4 pb-2 dark-grey-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, culpa qui officia deserunt laborum fuga similique mollit id quos aperiam proident non ut rerum debitis.</p>
-                            <button type="button" className="btn btn-primary btn-rounded btn-md ml-md-0">Get started</button>
-                            <button type="button" className="btn btn-outline-grey btn-rounded btn-md">Get started</button>
+                            <a href="#searchDevenirFreelance">
+                                <button href="searchDevenirFreelance" type="button" className="btn btn-primary btn-rounded btn-md ml-md-0">Commencer</button>
+                            </a>
                             </div>
                             <div className="col-md-6">
                             <img src="https://mdbootstrap.com/img/illustrations/hiker-man-colour.svg" alt="" className="img-fluid" />
@@ -211,33 +284,75 @@ class DevenirFreelance extends React.Component {
                             </div>
                         </div>
                         <div className="col-md-7 mb-lg-0 mb-4">
-                            <form>
                             <h3 className="font-weight-bold my-3">Inscription</h3>
                             <p className="text-muted mb-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, fuga similique quos aperiam tenetur quo ut rerum debitis.</p>
+                            {
+                                this.state.erreur ? 
+                                <MDBAlert color="danger">{this.state.erreurMessage}</MDBAlert>
+                                : ""
+                            }
+                            {
+                                this.props.authenticate.erreurRegisterMessage !== "" ?
+                                <MDBAlert color="danger">{this.props.authenticate.erreurRegisterMessage}</MDBAlert>
+                                : ""
+                            }
+                            
                             <div className="row d-flex justify-content-center">
-                                    <div className="col-md-6 col-lg-3 mb-4">
+                                    <div className="col-md-6 col-lg-4">
                                     <div className="md-form md-outline form-lg">
-                                        <input type="text" id="form1" className="form-control form-control-lg" />
-                                        <label htmlFor="form1">Name</label>
+                                        <input onChange={this.handleChange} name="firstname" type="text" id="form1" className="form-control form-control-lg" />
+                                        <label htmlFor="form1">{this.state.firstname === "" ? "Prénom" : ""}</label>
                                     </div>
                                     </div>
-                                    <div className="col-md-6 col-lg-3 mb-4">
+                                    <div className="col-md-6 col-lg-4">
                                     <div className="md-form md-outline form-lg">
-                                        <input type="text" id="form2" className="form-control form-control-lg" />
-                                        <label htmlFor="form2">Email</label>
+                                        <input onChange={this.handleChange} name="email"  type="text" id="form2" className="form-control form-control-lg" />
+                                        <label htmlFor="form2">{this.state.email === "" ? "Email" : ""}</label>
                                     </div>
                                     </div>
-                                    <div className="col-md-6 col-lg-3 mb-4">
+                                    <div className="col-md-6 col-lg-4">
                                     <div className="md-form md-outline form-lg">
-                                        <input type="text" id="form3" className="form-control form-control-lg" />
-                                        <label htmlFor="form3">Password</label>
+                                        <input onChange={this.handleChange} name="password" type="password" id="form3" className="form-control form-control-lg" />
+                                        <label htmlFor="form3">{this.state.password === "" ? "Password" : ""}</label>
                                     </div>
                                     </div>
-                                    <div className="col-md-6 col-lg-3 mb-4">
-                                    <button className="btn btn-block btn-primary my-4">Sign up</button>
+                            </div>
+                            <div className="row d-flex justify-content-center">
+                                    <div className="col-md-6 col-lg-4">
+                                    <div className="md-form md-outline form-lg">
+                                        <input onChange={this.handleChange} name="name" type="text" id="form4" className="form-control form-control-lg" />
+                                        <label htmlFor="form4">{this.state.name === "" ? "Name" : ""}</label>
                                     </div>
-                                </div>
-                            </form>
+                                    </div>
+                                    <div className="col-md-6 col-lg-4">
+                                    <div id="searchDevenirFreelance" className="md-form md-outline form-lg">
+                                    <AlgoliaPlaces
+                                    placeholder='Pays, Région, Ville...'
+                            
+                                    options={{
+                                    appId: 'plIOZH1K5KVK',
+                                    apiKey: 'd3dabd9d74c1378eec2667aac653e04a',
+                                    language: 'fr',
+                                    countries: ['fr', 'de'],
+                                    type: 'city',
+                                    }}
+                                    
+                                    onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
+                                    this.setState({ville : suggestion.name})}
+                            
+                                    onLimit={({ message }) => 
+                                    console.log('Fired when you reached your current rate limit.')}
+                            
+                                    onError={({ message }) => 
+                                    console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
+                                    />
+                                    </div>  
+                                    </div>
+                                    <div className="col-md-6 col-lg-4 mb-4">
+                                    <button onClick={this.checkForm} className="btn btn-block btn-primary my-4">S'inscrire</button>
+                                    </div>
+                                   
+                            </div>
                         </div>
                         </div>
 
@@ -251,4 +366,4 @@ class DevenirFreelance extends React.Component {
     }
 }
 
-export default DevenirFreelance
+export default connect(mapStateToProps, mapDispatchToProps)(DevenirFreelance)

@@ -1,4 +1,21 @@
+import axios from "axios"
+import defaults from "lodash/defaults"
+
 class API {
+    constructor(token) {
+        this.token = token
+   
+        let credentials = {}
+        const config = defaults(credentials, {
+          headers:{
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization' : 'Bearer ' + token
+          }
+        })
+        this.axios = axios.create(config)
+    }
+
     fetchHomeData = async () => {
         return "Hello Home"
     }
@@ -20,8 +37,42 @@ class API {
     }
 
     login = async (email, password) => {
-        await this.wait(1000)
-        return {role: 'freelance', token: '123'}
+        let body = {
+            email : email,
+            password : password
+        }
+        
+        let response = await axios.post(process.env.REACT_APP_API_URL + "/login", body)
+
+        let reduxFormatResponse = {
+            role : 'freelance',
+            token : response.data.token,
+            user : response.data.user
+        }
+        return reduxFormatResponse
+    }
+
+    registerFreelance = async (body) => {
+        let newBody = {
+            email : body.email,
+            password : body.password,
+            firstname : body.firstname,
+            lastname : body.name,
+            city : body.ville,
+            img : "https://img.icons8.com/plasticine/2x/user.png"
+        }
+
+        let response =  await axios.post(process.env.REACT_APP_API_URL + "/register", newBody)
+
+        return {
+            role : 'freelance',
+            token : response.data.token,
+            user : response.data.user
+        }
+    }
+
+    logout = async () => {
+        return await this.axios.post(process.env.REACT_APP_API_URL + "/logout")
     }
 
     getMissions = async () => {

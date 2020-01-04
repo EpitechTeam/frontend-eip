@@ -7,3 +7,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+#searchDevenirFreelance .ap-input {
+    height: 48px !important;
+}
