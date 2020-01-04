@@ -52,6 +52,7 @@ class FreelanceProfile extends React.Component {
 }
 
 function ProfileCardDetails({profile}) {
+    const [canEdit, toggleEdit] = useState(false);
 
     function StatsPreview({stats}) {
         let data = [
@@ -61,34 +62,13 @@ function ProfileCardDetails({profile}) {
             { label: 'Temps de réponse', value: stats.responseTime}
         ];
 
-        function calcBorderRadius(index) {
-            let border = {border: '1px solid grey'};
-
-            switch (index) {
-                case 0: {
-                    border = {borderRight: '0px', borderRadius: '6px 0px 0px 6px'};
-                    break;
-                }
-                case 1: {
-                    border = {borderRight: '0px'};
-                    break;
-                }
-                case 3: {
-                    border = {borderLeft: '0px', borderRadius: '0px 6px 6px 0px'};
-                    break;
-                }
-                default: return border;
-            }
-            return border;
-        }
-
         return (
-            <div className="d-flex flex-row">
+            <div className="btn-toolbar" role="toolbar">
                 <MDBBtnGroup>
                 {
                     data.map((stat, idx) => (
-                            <MDBBtn color={idx === 0 ? "blue" : null} size="sm" style={{border: '1px'}}>
-                                <h6 style={{color: "#bababa"}}>{stat.label}</h6>
+                            <MDBBtn color={idx === 0 ? "blue" : "grey"} size="lg" onClick={() => toggleEdit(!canEdit)}>
+                                <h6 style={{color: "#e2e2e2"}}>{stat.label}</h6>
                                 <h6>{stat.value}</h6>
                             </MDBBtn>
                     ))
@@ -96,13 +76,16 @@ function ProfileCardDetails({profile}) {
                 </MDBBtnGroup>
             </div>
         );
+    }
 
-        {/*<div className="d-flex flex-column align-items-center justify-content-between" key={idx}*/}
-        {/*     style={{minWidth: '145px', padding: '8px', textAlign: 'center',...calcBorderRadius(idx),*/}
-        {/*         backgroundColor: (idx===0) ? primaryColor: '', borderColor: (idx === 0)? primaryColor:'grey'}}>*/}
-        {/*    <small style={{maxWidth: '14ch', margin: 'auto', color: (idx === 0)? 'white':'grey'}}>{stat.label}</small>*/}
-        {/*    <p style={{margin: 'auto', fontWeight: 'bold', color: (idx === 0)? 'white':'grey'}}>{stat.value}</p>*/}
-        {/*</div>*/}
+    function ChangePreview() {
+        return (
+            <div>
+                <MDBBtn color="aqua" size="lg" onClick={() => toggleEdit(!canEdit)}>
+                    ok
+                </MDBBtn>
+            </div>
+        );
     }
 
     return (
@@ -134,7 +117,7 @@ function ProfileCardDetails({profile}) {
                             <FontAwesomeIcon icon={faThumbsUp} size="1x" color={primaryColor} style={{marginRight: '5px'}}/>
                             <p>{profile.stats.recommandations} recommandations</p>
                         </span>
-                        <StatsPreview stats={profile.stats}/>
+                        { canEdit ? <ChangePreview />: <StatsPreview stats={profile.stats}/> }
                     </div>
                 </div>
 
@@ -159,6 +142,7 @@ function FreelancerSkills({skills}) {
         if (!skill || _skills.includes(skill))
             return;
         _skills.push(skill);
+        updateSkill("");
         handleSkills([..._skills]);
     }
 
@@ -192,7 +176,7 @@ function FreelancerSkills({skills}) {
                 { canEdit ?
                     <li  className="list-group-item" style={{listStyle: "none"}}>
                         <MDBRow className="justify-content-around align-items-center" style={{margin: '-24px'}}>
-                            <MDBInput hint="Nouvelle compétence" onInput={(e) => handleSkill(e)}/>
+                            <MDBInput hint="Nouvelle compétence" value={_skill} onInput={(e) => handleSkill(e)}/>
                             <MDBBtn size="sm" gradient="aqua" onClick={() => addSkill(_skill)}>
                                 <MDBIcon icon="plus" className="mr-1" />
                             </MDBBtn>
