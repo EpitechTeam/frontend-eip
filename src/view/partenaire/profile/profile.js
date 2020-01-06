@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
-import {MDBBtn, MDBBtnGroup, MDBCard, MDBIcon, MDBInput, MDBRow} from "mdbreact";
+import {MDBBtn, MDBBtnGroup, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 import {faCameraRetro, faClock, faMapPin, faRunning, faThumbsUp, faWrench} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {updateBio, updateSkills} from "../../../reducer/freelanceProfile";
+import {updateBio, updateSkills, updateStats} from "../../../reducer/freelanceProfile";
 
 let primaryColor = '#3972C0';
 let cardStyle = {marginTop: '24px', justifyContent: 'space-between'};
@@ -18,7 +18,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         updateBio: (bio) => { dispatch(updateBio(bio)) },
-        updateSkills: (skills) => { dispatch(updateSkills(skills)) }
+        updateSkills: (skills) => { dispatch(updateSkills(skills)) },
+        updateStats: (skills) => { dispatch(updateStats(skills)) }
     }
 };
 
@@ -37,7 +38,7 @@ class FreelanceProfile extends React.Component {
             <div style={{
                margin: '24px'}}>
                 <div className="d-flex flex-column">
-                    <ProfileCardDetails profile={this.props.freelanceProfile.profile}/>
+                    <ProfileCardDetails profile={this.props.freelanceProfile.profile} updateStats={this.props.updateStats}/>
                     <div className="d-flex flex-row" style={{marginTop: '24px'}}>
                         <FreelancerSkills skills={this.props.freelanceProfile.profile.skills}/>
                         <div className="d-flex flex-column" style={{paddingLeft: '62px'}}>
@@ -51,7 +52,7 @@ class FreelanceProfile extends React.Component {
     }
 }
 
-function ProfileCardDetails({profile}) {
+function ProfileCardDetails({profile, updateStats}) {
     const [canEdit, toggleEdit] = useState(false);
 
     function StatsPreview({stats}) {
@@ -67,7 +68,7 @@ function ProfileCardDetails({profile}) {
                 <MDBBtnGroup>
                 {
                     data.map((stat, idx) => (
-                            <MDBBtn color={idx === 0 ? "blue" : "grey"} size="lg" onClick={() => toggleEdit(!canEdit)}>
+                            <MDBBtn key={idx} color={idx === 0 ? "blue" : "grey"} size="lg" onClick={() => toggleEdit(!canEdit)}>
                                 <h6 style={{color: "#e2e2e2"}}>{stat.label}</h6>
                                 <h6>{stat.value}</h6>
                             </MDBBtn>
@@ -78,13 +79,40 @@ function ProfileCardDetails({profile}) {
         );
     }
 
-    function ChangePreview() {
+    function ChangeStatsPreview({stats, updateStats}) {
+        const [active, updateActive] = useState(2);
+
+        let data = [
+            { label: 'ans', value: "0 - 2"},
+            { label: 'ans', value: "2 - 7"},
+            { label: 'ans +', value: "7"}
+        ];
+
+        function updateExperience(stats) {
+            const newStats = {...stats, experience: data[active].value.split(" ").join("") + " " + data[active].label};
+            console.log(newStats);
+            updateStats(newStats);
+            toggleEdit(!canEdit);
+        }
+
         return (
-            <div>
-                <MDBBtn color="aqua" size="lg" onClick={() => toggleEdit(!canEdit)}>
-                    ok
-                </MDBBtn>
-            </div>
+            <MDBRow>
+                <MDBCol>
+                    <p style={{margin: '12px'}}>Niveau d'expérience</p>
+                    <MDBBtnGroup>
+                        {
+                            data.map((stat, idx) => (
+                                <MDBBtn key={idx} color={idx === active ? "blue" : "grey"} size="lg" onClick={() => updateActive(idx)}>
+                                    <h6>{stat.value + " " + stat.label}</h6>
+                                </MDBBtn>
+                            ))
+                        }
+                    </MDBBtnGroup>
+                    <MDBBtn gradient="aqua" size="sm" onClick={() => updateExperience(stats)}>
+                        sauvegarder
+                    </MDBBtn>
+                </MDBCol>
+            </MDBRow>
         );
     }
 
@@ -117,7 +145,7 @@ function ProfileCardDetails({profile}) {
                             <FontAwesomeIcon icon={faThumbsUp} size="1x" color={primaryColor} style={{marginRight: '5px'}}/>
                             <p>{profile.stats.recommandations} recommandations</p>
                         </span>
-                        { canEdit ? <ChangePreview />: <StatsPreview stats={profile.stats}/> }
+                        { canEdit ? <ChangeStatsPreview stats={profile.stats} updateStats={updateStats} />: <StatsPreview stats={profile.stats}/> }
                     </div>
                 </div>
 

@@ -58,6 +58,20 @@ export function updateSkills(skills) {
     }
 }
 
+// Redux thunk
+export function updateStats(stats) {
+    return dispatch => {
+        // API GET
+        // let api = new freelanceAPI();
+        // return api.fetchProfile()
+        //     .then (
+        //         response => dispatch({type: "UPDATE_BIO", response}),
+        //         error => console.log("error freelance profile")
+        //     )
+        dispatch({type: "UPDATE_STATS", payload: stats})
+    }
+}
+
 const freelanceReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_PROFILE': {
@@ -70,6 +84,10 @@ const freelanceReducer = (state = initialState, action) => {
         }
         case 'UPDATE_SKILLS': {
             state = {...state, profile: {...state.profile, skills: action.payload}};
+            break;
+        }
+        case 'UPDATE_STATS': {
+            state = {...state, profile: {...state.profile, stats: action.payload}};
             break;
         }
         default: return state;
