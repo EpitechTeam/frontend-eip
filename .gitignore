@@ -7,3 +7,4 @@ yarn-debug.log*
 yarn-error.log*
 output
 package-lock.json
+.idea
