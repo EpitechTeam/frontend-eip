@@ -168,8 +168,7 @@ class Header extends React.Component {
                                                     <span className="mr-2">Mon profil freelance</span>
                                                 </MDBDropdownToggle>
                                                 <MDBDropdownMenu>
-                                                    <MDBDropdownItem href="/profile">Modifier mon
-                                                        profil</MDBDropdownItem>
+                                                    <a href="/profile">Modifier mon profil</a>
                                                     <MDBDropdownItem href="#!">Modifier mes
                                                         disponibilités</MDBDropdownItem>
                                                     <MDBDropdownItem href="#!">Parametre de mon
