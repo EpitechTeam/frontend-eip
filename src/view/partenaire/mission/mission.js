@@ -109,7 +109,7 @@ class FreelanceMission extends React.Component {
 
     render() {
         return (
-            <div className="h-100 main-body">
+            <div className="main-missions">
                 {this.renderSideNav()}
                 {this.renderBody()}
             </div>
