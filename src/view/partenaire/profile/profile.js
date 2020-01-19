@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
-import {MDBBtn, MDBBtnGroup, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow} from "mdbreact";
-import {faCameraRetro, faClock, faMapPin, faRunning, faThumbsUp, faWrench} from "@fortawesome/free-solid-svg-icons";
+import {MDBBtn, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow, MDBContainer, MDBModal, MDBModalHeader, MDBModalBody} from "mdbreact";
+import {faCameraRetro, faMapPin} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {updateBio, updateSkills, updateStats} from "../../../reducer/freelanceProfile";
+import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP} from "../../../reducer/freelanceProfile";
 
 let primaryColor = '#3972C0';
-let cardStyle = {marginTop: '24px', justifyContent: 'space-between'};
+let cardStyle = {marginTop: '24px', justifyContent: 'space-between', minHeight : '200px'};
 
 const mapStateToProps = (state) => {
     return {
@@ -17,6 +17,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        uploadFile: (token, data) => { dispatch(uploadPP(token, data))},
+        getProfile: (token) => { dispatch(getProfile(token))},
+        setProfile: (token, state) => { dispatch(setProfile(token, state))},
+        getProfileUrl : (url) => { dispatch(getProfileUrl(url))},
         updateBio: (bio) => { dispatch(updateBio(bio)) },
         updateSkills: (skills) => { dispatch(updateSkills(skills)) },
         updateStats: (skills) => { dispatch(updateStats(skills)) }
@@ -26,139 +30,148 @@ const mapDispatchToProps = (dispatch) => {
 class FreelanceProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {canEdit: true};
+
+        //chage le profil avec le token du user connecté
+        if (typeof this.props.match.params.name === "undefined") {
+            this.props.getProfile(this.props.authenticate.token)
+            this.state = {selectedFile : null, modal : false, canEdit: true};
+        }
+        else {
+            //Charge si il y a un /profile/name.firstname
+            this.props.getProfileUrl(props.match.name)
+            this.state = {selectedFile : null, modal : false, canEdit: false};
+
+        }
     }
 
     handleEdit(edit) {
         this.setState({canEdit: !edit});
     }
 
+    uploadModal = () => {
+        this.setState({modal : !this.state.modal})
+    }
+
+    onFilesAdded = (event) => {
+        this.setState({
+            selectedFile: event.target.files[0],
+            loaded: 0,
+        })
+    }
+
+    upload = () => {
+        const data = new FormData()
+        data.append('image', this.state.selectedFile, this.state.selectedFile.name)
+        console.log(this.state)
+        this.props.uploadFile(this.props.authenticate.token, data)
+        this.setState({modal : !this.state.modal})
+    }
+
     render() {
+        console.log(this.state)
         return (
-            <div style={{
-               margin: '24px'}}>
-                <div className="d-flex flex-column">
-                    <ProfileCardDetails profile={this.props.freelanceProfile.profile} updateStats={this.props.updateStats}/>
-                    <div className="d-flex flex-row" style={{marginTop: '24px'}}>
-                        <FreelancerSkills skills={this.props.freelanceProfile.profile.skills}/>
-                        <div className="d-flex flex-column" style={{paddingLeft: '62px'}}>
-                            <PrefMissions missions={this.props.freelanceProfile.profile.missions}/>
-                            <BioFreelance bio={this.props.freelanceProfile.profile.bio} updateBio={this.props.updateBio}/>
+            <MDBContainer>
+                    <MDBModal isOpen={this.state.modal}
+                    toggle={this.toggle}>
+                        <MDBModalHeader toggle={this.toggle}>Changer de photo de profil</MDBModalHeader>
+                        <MDBModalBody>
+                        <div className="input-group">
+                            <div className="custom-file">
+                            <input
+                                onChange={this.onFilesAdded}
+                                type="file"
+                                className="custom-file-input"
+                                id="inputGroupFile01"
+                                name="file"
+                                aria-describedby="inputGroupFileAddon01"
+                            />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                Séléctionner une image
+                            </label>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <br/>
+                        {
+                            this.state.selectedFile !== null ?
+                            <div>
+                            <p>{this.state.selectedFile.name}</p> 
+                            <MDBBtn className="w-100" onClick={this.upload} gradient="blue">Sauvegarder</MDBBtn>
+                            </div>
+                            : ""
+                        }
+                        </MDBModalBody>
+                    </MDBModal>
+
+                    <MDBRow>
+                    <MDBCol className="mt-3">
+                    <ProfileCardDetails upload={this.uploadModal} canEdit={this.state.canEdit} profile={this.props.freelanceProfile.profile} updateStats={this.props.updateStats}/>
+                    </MDBCol>
+                    </MDBRow>
+                    {
+                        this.props.freelanceProfile.profile.type === "freelance" ? 
+                        <MDBRow>
+                        <MDBCol md="4">
+                        <FreelancerSkills token={this.props.authenticate.token} editSkills={this.props.setProfile} canEdit={this.state.canEdit} skills={this.props.freelanceProfile.profile.skills}/>
+                        </MDBCol>
+                        <MDBCol md="8">
+                        <BioFreelance token={this.props.authenticate.token} editBio={this.props.setProfile} canEdit={this.state.canEdit} bio={this.props.freelanceProfile.profile.bio} updateBio={this.props.updateBio}/>
+                        </MDBCol>
+                        </MDBRow>
+                        : ""
+                    }
+            </MDBContainer>
         )
     }
 }
 
-function ProfileCardDetails({profile, updateStats}) {
-    const [canEdit, toggleEdit] = useState(false);
-
-    function StatsPreview({stats}) {
-        let data = [
-            { label: 'Tarif indicatif', value: stats.price},
-            { label: 'Expérience', value: stats.experience},
-            { label: 'Taux de réponse', value: stats.responseRate},
-            { label: 'Temps de réponse', value: stats.responseTime}
-        ];
-
-        return (
-            <div className="btn-toolbar" role="toolbar">
-                <MDBBtnGroup>
-                {
-                    data.map((stat, idx) => (
-                            <MDBBtn key={idx} color={idx === 0 ? "blue" : "grey"} size="lg" onClick={() => toggleEdit(!canEdit)}>
-                                <h6 style={{color: "#e2e2e2"}}>{stat.label}</h6>
-                                <h6>{stat.value}</h6>
-                            </MDBBtn>
-                    ))
-                }
-                </MDBBtnGroup>
-            </div>
-        );
-    }
-
-    function ChangeStatsPreview({stats, updateStats}) {
-        const [active, updateActive] = useState(2);
-
-        let data = [
-            { label: 'ans', value: "0 - 2"},
-            { label: 'ans', value: "2 - 7"},
-            { label: 'ans +', value: "7"}
-        ];
-
-        function updateExperience(stats) {
-            const newStats = {...stats, experience: data[active].value.split(" ").join("") + " " + data[active].label};
-            console.log(newStats);
-            updateStats(newStats);
-            toggleEdit(!canEdit);
-        }
-
-        return (
-            <MDBRow>
-                <MDBCol>
-                    <p style={{margin: '12px'}}>Niveau d'expérience</p>
-                    <MDBBtnGroup>
-                        {
-                            data.map((stat, idx) => (
-                                <MDBBtn key={idx} color={idx === active ? "blue" : "grey"} size="lg" onClick={() => updateActive(idx)}>
-                                    <h6>{stat.value + " " + stat.label}</h6>
-                                </MDBBtn>
-                            ))
-                        }
-                    </MDBBtnGroup>
-                    <MDBBtn gradient="aqua" size="sm" onClick={() => updateExperience(stats)}>
-                        sauvegarder
-                    </MDBBtn>
-                </MDBCol>
-            </MDBRow>
-        );
-    }
+function ProfileCardDetails(props) {
+    let profile = props.profile
+    let canEdit = props.canEdit
 
     return (
         <MDBCard style={cardStyle}>
-            <div className="d-flex flex-row" style={{ paddingRight: '24px'}}>
-                <div className="d-flex col-example align-items-end" style={{background: primaryColor, width: '350px',
-                    height: '350px', backgroundImage: `url(${profile.avatar}}`, margin: '12px'}}>
-
+                <MDBRow>
+                <MDBCol md="4">
+                    <img alt="profile" style={{maxWidth : "350px"}} src={profile.avatar} ></img>
+                    {
+                    canEdit ?
                     <div className="d-flex flex-row justify-content-center align-items-baseline" style={{width: '100%', color: 'white'}}>
-                        <MDBBtn className="w-100" color="grey" size="sm" style={{opacity: '70%', width: '100%'}}>
+                        <MDBBtn onClick={props.upload} className="w-100" color="grey" size="sm" style={{opacity: '70%', width: '100%'}}>
                             <FontAwesomeIcon icon={faCameraRetro} size="1x" style={{marginRight: '5px'}}/>
                             Modifier photo
                         </MDBBtn>
                     </div>
-                </div>
-
+                    : ""
+                    }
+                </MDBCol>
+                
+                <MDBCol md="8">
                 <div className="d-flex flex-column" style={{padding: '16px', paddingLeft: '32px'}}>
                     <div>
                         <h2 style={{fontWeight: 'initial'}}>{profile.name} {profile.surname}</h2>
                         <h3>{profile.caption}</h3>
-                        <span className="d-flex flex-row align-items-baseline">
+                        {
+                            typeof profile.location !== "undefined" ?
+                            <span className="d-flex flex-row align-items-baseline">
                             <FontAwesomeIcon icon={faMapPin} size="1x" color={primaryColor} style={{marginRight: '5px'}}/>
                             <p>{profile.location}</p>
-                        </span>
+                            </span> : ""
+                        }
                     </div>
 
-                    <div className="d-flex flex-column" style={{paddingTop: '20px'}}>
-                        <span className="d-flex flex-row align-items-baseline">
-                            <FontAwesomeIcon icon={faThumbsUp} size="1x" color={primaryColor} style={{marginRight: '5px'}}/>
-                            <p>{profile.stats.recommandations} recommandations</p>
-                        </span>
-                        { canEdit ? <ChangeStatsPreview stats={profile.stats} updateStats={updateStats} />: <StatsPreview stats={profile.stats}/> }
-                    </div>
+                    
                 </div>
-
-            </div>
-
+                </MDBCol>
+                </MDBRow>
         </MDBCard>
     );
 }
 
-function FreelancerSkills({skills}) {
+function FreelancerSkills(props) {
+    let skills = props.skills
+    let canEdit = props.canEdit
     let [_skill, updateSkill] = useState("");
     let [_skills, handleSkills] = useState(skills);
-    const [canEdit, toggleEdit] = useState(false);
 
     function removeSkill(idx) {
         _skills.splice(idx, 1);
@@ -179,9 +192,7 @@ function FreelancerSkills({skills}) {
     }
 
     function saveSkills(skills) {
-        // dispatch to redux and update using api
-        console.log("saving to redux, calling api..");
-        toggleEdit(!canEdit)
+        props.editSkills(props.token, {skills : skills})
     }
 
     return (
@@ -194,10 +205,9 @@ function FreelancerSkills({skills}) {
                             canEdit ?
                                 <MDBBtn size="sm" gradient="aqua" onClick={() => saveSkills(_skills)}>
                                     <MDBIcon icon="save" className="mr-1" />
-                                </MDBBtn> :
-                                <MDBBtn size="sm" gradient="blue" onClick={() => toggleEdit(!canEdit)}>
-                                    <MDBIcon icon="magic" className="mr-1" />
                                 </MDBBtn>
+                                : ""
+                                
                         }
                     </MDBRow>
                 </li>
@@ -229,65 +239,15 @@ function FreelancerSkills({skills}) {
     );
 }
 
-function PrefMissions({missions}) {
-    let missionIcons = [faRunning, faWrench, faClock];
-
-    const [canEdit, toggleEdit] = useState(false);
-    const [_missions, updateMissions] = useState(missions);
-
-
-    function saveMissions() {
-        console.log("save missions");
-        toggleEdit(!canEdit);
-        // dispatch _missions
-    }
-
-    function handleMission(e, index) {
-        console.log(e.target.value, _missions);
-        _missions[index].description = e.target.value;
-        updateMissions([..._missions]);
-    }
-
-    return (
-        <MDBCard style={{...cardStyle}}>
-            <div className="d-flex flex-column" style={{padding: '16px', paddingLeft: '32px', minWidth: '1000px'}}>
-                <div className="d-flex flex-row justify-content-between align-items-end" style={{paddingBottom: '16px'}}>
-                    <h5 style={{color: primaryColor}}>Préférences de missions</h5>
-                    {
-                        canEdit ? <MDBBtn size="sm" gradient="aqua" type="submit" onClick={() => saveMissions()}>Sauvegarder</MDBBtn> :
-                            <MDBBtn size="sm" gradient="blue" onClick={() => toggleEdit(!canEdit)}>Modifier</MDBBtn>
-                    }
-                </div>
-                <div className="d-flex flex-row justify-content-between" >
-                    {
-                        _missions.map((mission, index) => (
-                            canEdit ?
-                                <div className="d-flex flex-row" style={{width: '400px'}} key={index}>
-                                    <MDBInput valueDefault={mission.description} type="textarea" label={mission.label}
-                                              onInput={(e) => handleMission(e, index)} style={{minWidth: '350px'}}/>
-                                </div> :
-                                <div className="d-flex flex-row" style={{width: '400px'}} key={index}>
-                                <FontAwesomeIcon icon={missionIcons[index]} size="1x" style={{marginRight: '5px'}}/>
-                                <div>
-                                    <p>{mission.label}</p>
-                                    <h6>{mission.description}</h6>
-                                </div>
-                                </div>
-                        ))
-                    }
-                </div>
-            </div>
-        </MDBCard>
-    )
-}
-
-function BioFreelance({bio, updateBio}) {
-    const [canEdit, toggleEdit] = useState(false);
+function BioFreelance(props) {
+    let bio = props.bio
+    let updateBio = props.updateBio
+    let canEdit = props.canEdit
     const [bioValue, setBio] = useState(bio);
 
     function saveBio() {
         updateBio(bioValue);
-        toggleEdit(!canEdit)
+        props.editBio(props.token, {bio : bioValue})
     }
 
     function handleText(e) {
@@ -298,10 +258,10 @@ function BioFreelance({bio, updateBio}) {
         <MDBCard style={{...cardStyle}}>
             <div className="d-flex flex-column" style={{padding: '16px', paddingLeft: '32px'}}>
                 <div className="d-flex flex-row justify-content-between">
-                    <h5 style={{color: primaryColor, paddingBottom: '12px'}}>Vous en quelques mots</h5>
+                    <h5 style={{color: primaryColor, paddingBottom: '12px'}}>Description</h5>
                     {
                         canEdit ? <MDBBtn size="sm" gradient="aqua" type="submit" onClick={() => saveBio()}>Sauvegarder</MDBBtn> :
-                        <MDBBtn size="sm" gradient="blue" onClick={() => toggleEdit(!canEdit)}>Modifier</MDBBtn>
+                        ""
                     }
                 </div>
                 {

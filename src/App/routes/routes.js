@@ -15,6 +15,9 @@ import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-fre
 import { freelanceAuthenticate } from "./middleware";
 import FreelanceProfile from "../../view/partenaire/profile/profile";
 import ProprietaireProfile from "../../view/proprietaire/profil/profil";
+import EditProfile from "../../view/partenaire/profile/edit";
+import DevenirProprietaire from "../../view/proprietaire/devenirProprietaire/devenirProprietaire";
+import { getProfileUrl } from "../../reducer/freelanceProfile";
 
 export const Routes = [
     {
@@ -34,9 +37,15 @@ export const Routes = [
         component: FreelanceProfile,
     },
     {
+        path: '/profile/parameters',
+        exact: true,
+        component: EditProfile,
+    },
+    {
         path: '/profile/:name',
         exact: true,
         component: FreelanceProfile,
+        loadData : (match) => getProfileUrl(match.params.name)
     },
     {
         path: '/proprietaire',
@@ -57,6 +66,11 @@ export const Routes = [
         path: '/create-profile',
         exact: true,
         component: DevenirFreelance
+    },
+    {
+        path: '/create-profile-proprietaire',
+        exact: true,
+        component: DevenirProprietaire
     },
     {
         path: '/laisser-vous-guider',

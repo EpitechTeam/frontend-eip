@@ -2,7 +2,7 @@ import API from '../API/api'
 
 const initialState = {
     seo : {},
-    data : ""
+    data : []
 }
 
 export function getSEOHome() {
@@ -48,6 +48,7 @@ const homeReducer = (state = initialState, action) => {
       break;
 
       case "SET_HOME" :
+        console.log(action)
       state = {
         ...state,
         data : action.response

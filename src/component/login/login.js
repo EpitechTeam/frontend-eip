@@ -1,8 +1,7 @@
 import React from 'react'
-import { MDBInput, MDBBtn } from 'mdbreact'
+import { MDBInput, MDBBtn, MDBAlert } from 'mdbreact'
 import { login } from '../../reducer/authenticate'
 import {connect} from "react-redux";
-import { MDBAlert } from "mdbreact";
 
 const mapStateToProps = (state) => {
   return {
@@ -39,13 +38,12 @@ class Login extends React.Component {
     render () {
         return (
            <div>
-                  <p className="h5 text-center mb-4">Connection</p>
                   {
                     this.props.authenticate.erreurLoginMessage !== "" ?
-                    <MDBAlert color="danger">{this.props.authenticate.erreurLoginMessage}</MDBAlert>
+                    <MDBAlert className="mb-2" color="danger">{this.props.authenticate.erreurLoginMessage}</MDBAlert>
                     : ""
                   }
-                  <div className="grey-text">
+                  <div className="grey-text mt-5">
                     <MDBInput
                       label="Type your email"
                       icon="envelope"
@@ -68,7 +66,7 @@ class Login extends React.Component {
                     />
                   </div>
                   <div className="text-center">
-                    <MDBBtn onClick={this.checkForm} className="w-100">Connection</MDBBtn>
+                    <MDBBtn onClick={this.checkForm} className="w-100">Connexion</MDBBtn>
                   </div>
           </div>
         )

@@ -18,9 +18,26 @@ export function login(email, password) {
                 dispatch({ type : "SET_ROLE", response}),
                 dispatch({ type : "SET_TOKEN", response}),
                 dispatch({ type : "SET_AUTHENTICATE", authenticate : "true"}),
-                dispatch({ type : "SET_USER", response}),
+                dispatch({ type : "SET_PROFILE", payload : response.user }),
             ]),
             erreur => dispatch({ type : "ERREUR_LOGIN", erreur})
+        )
+    }
+}
+
+export function registerProprietaire(body) {
+    return dispatch => {
+        let newData = new API()
+        return newData.registerProprietaire(body)
+        .then (
+            response => Promise.all([
+                dispatch({ type : "SET_ROLE", response}),
+                dispatch({ type : "SET_TOKEN", response}),
+                dispatch({ type : "SET_AUTHENTICATE", authenticate : "true"}),
+                dispatch({ type : "SET_USER", response}),
+                dispatch({ type : "REDIRECT_PROFILE"})
+            ]),
+            erreur => dispatch({ type : "ERREUR_REGISTER", erreur})
         )
     }
 }
@@ -87,6 +104,7 @@ const authenticateReducer = ( state = initialState,  action) => {
         case "SET_LOGOUT" :
             localStorage.setItem('role', "")
             localStorage.setItem('token', "")
+            localStorage.removeItem('profile');
             localStorage.setItem('authenticate', false)
             history.push('/')
             window.location.reload()
@@ -110,6 +128,7 @@ const authenticateReducer = ( state = initialState,  action) => {
         break;
 
         case "ERREUR_REGISTER" :
+            console.log(action.erreur)
             state = {
                 ...state,
                 erreurRegisterMessage : action.erreur.response.data.errmsg

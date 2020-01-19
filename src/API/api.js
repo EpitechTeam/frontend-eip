@@ -17,7 +17,9 @@ class API {
     }
 
     fetchHomeData = async () => {
-        return "Hello Home"
+        let response = await axios.get(process.env.REACT_APP_API_URL + "/freelance")
+        console.log(response.data)
+        return response.data
     }
 
     fetchSEOHome = async () => {
@@ -28,6 +30,63 @@ class API {
                 text: "Venez trouvez un partenaire pour votre offre Airbnb"
             }
         )
+    }
+
+    getProfileFreelance = async () => {
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/me")
+
+        response = response.data
+        let reduxResponse = {
+                name : response.firstname,
+                surname : response.lastname,
+                caption: response.type + " " + response.city,
+                avatar: response.img,
+                email : response.email,
+                location : response.city,
+                skills: response.skills,
+                missions: response.missions,
+                bio: response.bio,
+                type : response.type,
+                company : response.company,
+                siret : response.siret,
+                phone : response.phone
+        }
+
+        return reduxResponse
+    }
+
+    uploadPP = async (data) => {
+        console.log(data)
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/upload", data)
+        response = response.data
+
+        let body = {
+            img : response.url
+        }
+        response = await this.axios.post(process.env.REACT_APP_API_URL + "/edit", body)
+        return response
+    }
+
+    setProfileFreelance = async (state) => {
+        console.log(state)
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/edit", state)
+
+        response = response.data
+        console.log(response)
+        let reduxResponse = {
+            name : response.firstname,
+            surname : response.lastname,
+            caption: response.type + " " + response.city,
+            avatar: response.img,
+            email : response.email,
+            location : response.city,
+            skills: response.skills,
+            missions: response.missions,
+            bio: response.bio,
+            type : response.type
+        }
+
+        return reduxResponse
     }
 
     wait = async (ms) => {
@@ -44,10 +103,24 @@ class API {
         
         let response = await axios.post(process.env.REACT_APP_API_URL + "/login", body)
 
+        let token = response.data.token
+
+        response = response.data.user
         let reduxFormatResponse = {
-            role : 'freelance',
-            token : response.data.token,
-            user : response.data.user
+            role : response.type,
+            token : token, 
+            user : {
+                name : response.firstname,
+                surname : response.lastname,
+                caption: response.type + " " + response.city,
+                avatar: response.img,
+                email : response.email,
+                location : response.city,
+                skills: response.skills,
+                missions: response.missions,
+                bio: response.bio,
+                type : response.type
+            }
         }
         return reduxFormatResponse
     }
@@ -59,7 +132,8 @@ class API {
             firstname : body.firstname,
             lastname : body.name,
             city : body.ville,
-            img : "https://img.icons8.com/plasticine/2x/user.png"
+            img : "https://img.icons8.com/plasticine/2x/user.png",
+            type : "freelance"
         }
 
         let response =  await axios.post(process.env.REACT_APP_API_URL + "/register", newBody)
@@ -71,11 +145,43 @@ class API {
         }
     }
 
+    registerProprietaire = async (body) => {
+        let newBody = {
+            email : body.email,
+            password : body.password,
+            firstname : body.name,
+            lastname : body.lastname,
+            img : "https://img.icons8.com/plasticine/2x/user.png",
+            type : "proprietaire"
+        }
+
+        console.log(newBody)
+
+        let response =  await axios.post(process.env.REACT_APP_API_URL + "/register", newBody)
+
+        return {
+            role : 'proprietaire',
+            token : response.data.token,
+            user : response.data.user
+        }
+    }
+
     logout = async () => {
         return await this.axios.post(process.env.REACT_APP_API_URL + "/logout")
     }
 
-    getMissions = async () => {
+    getMissions = async (city) => {
+        let profile = JSON.parse(localStorage.getItem('profile'))
+        let newBody = {
+            city : profile.location
+        }
+        console.log(profile)
+        console.log(newBody)
+        let response =  await axios.get(process.env.REACT_APP_API_URL + "/mission", newBody)
+
+        console.log(response)
+        return response.data
+
         return [
             {
                 name: "Mission 1",

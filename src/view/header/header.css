@@ -28,3 +28,7 @@
 .white-header .nav-link {
     color: hsl(0,0%,11%) !important;
 }
+
+.menuDropDown {
+    display: inline-grid;
+}

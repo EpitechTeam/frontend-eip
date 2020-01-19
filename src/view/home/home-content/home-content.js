@@ -1,24 +1,15 @@
 import React from 'react';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBRow } from "mdbreact";
 import "./home-content.css";
+import {connect} from "react-redux";
 
-let partenaires = [
-    {
-        name: 'Abderrahim Cherkaoui',
-        city: 'Montpellier',
-        img: "https://scontent-mrs2-2.xx.fbcdn.net/v/t1.0-9/13339507_622022821285857_1151376654593387753_n.jpg?_nc_cat=105&_nc_oc=AQmtMvLp6ETWoPWj1GpZb2jpdoO3ll0Wbquaga2Kyidq-A42EycuRCKuG75joomydQasZ_coawdiSgnysa_vSINJ&_nc_ht=scontent-mrs2-2.xx&oh=36bc35971f254665dd8720655142b399&oe=5E6080C7"
-    },
-    {
-        name: 'Léo Lecherbonnier',
-        city: 'Montpellier',
-        img: "https://scontent-mrs2-2.xx.fbcdn.net/v/t1.0-9/67738419_2829297270478805_7693979391574933504_n.jpg?_nc_cat=102&_nc_oc=AQlnreQrUHRlLLfxiUWjLKqHVqI-q4N14aB1Ym0R2oY_jAI-b7LccSXfr2_yvqUqYC9pemRqDd62WMOfTHyeD39q&_nc_ht=scontent-mrs2-2.xx&oh=83d92c57692695c39b74f2b7228da0f3&oe=5E3E1353"
-    },
-    {
-        name: 'Léo Lecherbonnier Copie',
-        city: 'Montpellier',
-        img: "https://scontent-mrs2-2.xx.fbcdn.net/v/t1.0-9/67738419_2829297270478805_7693979391574933504_n.jpg?_nc_cat=102&_nc_oc=AQlnreQrUHRlLLfxiUWjLKqHVqI-q4N14aB1Ym0R2oY_jAI-b7LccSXfr2_yvqUqYC9pemRqDd62WMOfTHyeD39q&_nc_ht=scontent-mrs2-2.xx&oh=83d92c57692695c39b74f2b7228da0f3&oe=5E3E1353"
+const mapStateToProps = (state) => {
+    return {
+        authenticate: state.authenticate,
+        freelanceProfile: state.freelanceProfile,
+        home : state.home
     }
-];
+};
 
 let villes = [
     {
@@ -28,27 +19,39 @@ let villes = [
     {
         name: 'Perpignan',
         img: 'https://static2.mclcm.net/iod/images/v2/69/citytheque/localite_101_6510/1200x630_100_300_000000x30x0.jpg'
+    },
+    {
+        name: 'Toulouse',
+        img: 'https://images.unsplash.com/photo-1533375954403-dcc42d37d33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'
+    },
+    {
+        name: 'Bordeaux',
+        img: 'https://images.unsplash.com/photo-1509636902752-929c7497f3d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'
     }
 ];
 
 class HomeContent extends React.Component {
 
     renderPartenaires = () => {
-        let data = partenaires.map((item, i) => {
-            return (
-                <MDBCol key={i} lg="3" md="6" className="mb-lg-0 mb-4">
-                    <MDBCard>
-                        <MDBCardImage
-                            src={item.img}
-                            top
-                            alt="partenaire"
-                        />
-                        <MDBCardBody className="text-center">
-                            {item.name}
-                        </MDBCardBody>
-                    </MDBCard>
-                </MDBCol>
-            )
+        let data = this.props.home.data.map((item, i) => {
+            if (item.type === "freelance") {
+                return (
+                    <MDBCol key={i} lg="3" md="6" className="mb-lg-0 mb-4">
+                        <MDBCard>
+                            <MDBCardImage
+                                src={item.img}
+                                top
+                                alt="partenaire"
+                            />
+                            <MDBCardBody className="text-center">
+                                <p>{item.firstname}</p>
+                                <p>{item.city}</p>
+                            </MDBCardBody>
+                        </MDBCard>
+                    </MDBCol>
+                )
+            }
+            return ""
         });
 
         return (
@@ -58,7 +61,7 @@ class HomeContent extends React.Component {
                 </MDBRow>
             </MDBContainer>
         )
-    };
+    }
 
     renderVilles = () => {
         let data = villes.map((item, i) => {
@@ -134,4 +137,4 @@ class HomeContent extends React.Component {
     }
 }
 
-export default HomeContent;
+export default connect(mapStateToProps)(HomeContent);

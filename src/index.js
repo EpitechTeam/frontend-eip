@@ -15,6 +15,7 @@ import missionReducer from './reducer/missions'
 import freelanceReducer from './reducer/freelanceProfile'
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
+import homeReducer from './reducer/home';
 
 const rootElement = document.getElementById('root') || document.createElement('div')
 
@@ -23,6 +24,7 @@ if (typeof document === "undefined") {
 
     const reducer = combineReducers({
         language: languageReducer,
+        home : homeReducer,
         myCookies: myCookies,
         authenticate: authenticate,
         missions: missionReducer,
