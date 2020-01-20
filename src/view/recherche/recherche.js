@@ -86,7 +86,7 @@ const urlToSearchState = location => {
 
 const Hit = ({ hit }) => (
   <MDBCol xl="4">
-    <a href={"/profile/" + hit.firstname + "." + hit.lastname} title={hit.name}>
+    <a href={"/profile/" + hit.objectID} title={hit.name}>
       <img src={hit.img} alt={hit.name} width="340" height="270"></img>
     </a>
     <a href={hit.link} title={hit.lastname}>{hit.lastname}</a>

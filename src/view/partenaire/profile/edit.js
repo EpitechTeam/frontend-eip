@@ -3,6 +3,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBAlert, MDBNav, MDBNavItem, MDB
 import { getProfile, setProfile } from "../../../reducer/freelanceProfile";
 import AlgoliaPlaces from 'algolia-places-react';
 import {connect} from "react-redux";
+import { resetPassword } from '../../../reducer/authenticate';
 
 const mapStateToProps = (state) => {
     return {
@@ -14,7 +15,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getProfile: (token) => { dispatch(getProfile(token))},
-        setProfile: (token, state) => { dispatch(setProfile(token, state))}
+        setProfile: (token, state) => { dispatch(setProfile(token, state))},
+        resetPassword: (token, password) => {dispatch(resetPassword(token, password))}
     }
 }
 
@@ -29,7 +31,9 @@ class EditProfile extends React.Component {
         phone : "",
         erreurEditMessage : "",
         validEditMessage : "",
-        activeItem: "1"
+        activeItem: "1",
+        password : "",
+        password1 : ""
     }
 
     componentDidMount() {
@@ -51,6 +55,12 @@ class EditProfile extends React.Component {
           this.setState({
             activeItem: tab
           });
+        }
+    }
+
+    verifyFormMDP = () => {
+        if (this.state.password === this.state.password1) {
+            this.props.resetPassword(this.props.authenticate.token, this.state.password)
         }
     }
 
@@ -301,7 +311,7 @@ class EditProfile extends React.Component {
                 <input
                 value={this.state.password}
                 onChange={this.handleChange}
-                name="siret"
+                name="password"
                 type="password"
                 id="password"
                 className="form-control"
@@ -320,7 +330,7 @@ class EditProfile extends React.Component {
                 />
                 <br />
                 <div className="text-center mt-4">
-                <MDBBtn onClick={this.verifyForm} className="w-100" color="unique" type="submit">
+                <MDBBtn onClick={this.verifyFormMDP} className="w-100" color="unique" type="submit">
                     Sauvegarder
                 </MDBBtn>
                 </div>

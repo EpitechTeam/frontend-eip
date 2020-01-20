@@ -1,20 +1,21 @@
 import API from "../API/api"
 
 const initialProfile = {
-    name: 'Monty',
-    surname: 'Criel',
-    caption: 'Freelance Montpellier',
-    avatar: 'https://assurewealth.com.au/wp-content/uploads/2016/08/bwlionroar-350x350.jpg',
-    email: 'monty.criel@gmail.com',
-    password: 'i<3b0oB1Z',
-    location: 'Montpellier, France',
-    skills: ['Accueil', 'Animation', "Piscine", 'Courses', 'Jardinage'],
+    name: '',
+    surname: '',
+    caption: '',
+    avatar: '',
+    email: '',
+    password: '',
+    location: '',
+    skills: [''],
     missions: [
         {label: 'Déplacement', description: 'Déplacement sur lieux de propriétés dans toute la France métropole'},
         {label: 'Compétences', description: 'Recherche des missions en gîtes'},
         {label: 'Durée de mission', description: 'Recherche des missions ~3-6 mois'}
     ],
-    bio: "Expérience dans l'hôtellrie ainsi que la gestion de multiple propriétés, c'est ma passion !"
+    bio: "",
+    id : ""
 }
 
 const initialState = {
@@ -46,6 +47,20 @@ export function uploadPP(token, data) {
             erreur => console.log(erreur)
         )
     }
+}
+
+export function setPayed(token) {
+    return dispatch => {
+        let newData = new API(token)
+        return newData.setPayed()
+        .then (
+            payload => Promise.all([
+                dispatch({ type : "SEE_MISSIONS"}),
+                dispatch({ type : "TURN_ON_PAYED" })
+            ]),
+            erreur => console.log(erreur)
+        )
+    } 
 }
 
 export function setProfile(token, state) {
@@ -119,6 +134,7 @@ export function updateStats(stats) {
 const freelanceReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_PROFILE': {
+            console.log(action.payload)
             localStorage.setItem('profile', JSON.stringify(action.payload))
             state = {...state, profile: action.payload};
             break;

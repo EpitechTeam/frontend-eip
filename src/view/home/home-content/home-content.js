@@ -122,7 +122,7 @@ class HomeContent extends React.Component {
                 </div>
                 <div className="mt-5">
                     <MDBContainer>
-                        <h2 className="font-weight-bold">Partenaires à la une dans votre ville</h2>
+                        <h2 className="font-weight-bold">Partenaires à la une</h2>
                         {this.renderPartenaires()}
                     </MDBContainer>
                 </div>

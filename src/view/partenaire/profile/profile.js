@@ -38,7 +38,7 @@ class FreelanceProfile extends React.Component {
         }
         else {
             //Charge si il y a un /profile/name.firstname
-            this.props.getProfileUrl(props.match.name)
+            this.props.getProfileUrl(props.match.params.name)
             this.state = {selectedFile : null, modal : false, canEdit: false};
 
         }
@@ -59,18 +59,19 @@ class FreelanceProfile extends React.Component {
         })
     }
 
-    upload = () => {
+    upload = async () => {
         const data = new FormData()
         data.append('image', this.state.selectedFile, this.state.selectedFile.name)
         console.log(this.state)
-        this.props.uploadFile(this.props.authenticate.token, data)
+        await this.props.uploadFile(this.props.authenticate.token, data)
         this.setState({modal : !this.state.modal})
+        localStorage.removeItem('profile');
+        window.location.reload()
     }
 
     render() {
-        console.log(this.state)
         return (
-            <MDBContainer>
+            <MDBContainer className="mt-5">
                     <MDBModal isOpen={this.state.modal}
                     toggle={this.toggle}>
                         <MDBModalHeader toggle={this.toggle}>Changer de photo de profil</MDBModalHeader>
@@ -191,8 +192,10 @@ function FreelancerSkills(props) {
         updateSkill(e.target.value);
     }
 
-    function saveSkills(skills) {
-        props.editSkills(props.token, {skills : skills})
+    async function saveSkills(skills) {
+        await props.editSkills(props.token, {skills : skills})
+        localStorage.removeItem('profile');
+        window.location.reload()
     }
 
     return (
@@ -245,9 +248,11 @@ function BioFreelance(props) {
     let canEdit = props.canEdit
     const [bioValue, setBio] = useState(bio);
 
-    function saveBio() {
-        updateBio(bioValue);
-        props.editBio(props.token, {bio : bioValue})
+    async function saveBio() {
+        await updateBio(bioValue);
+        await props.editBio(props.token, {bio : bioValue})
+        await localStorage.removeItem('profile');
+        window.location.reload()
     }
 
     function handleText(e) {

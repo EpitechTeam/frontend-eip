@@ -5,8 +5,50 @@ const initialState = {
     authenticate : typeof localStorage !== "undefined" ? localStorage.getItem('authenticate') === null ? "false" :  localStorage.getItem('authenticate') : "false",
     role : typeof localStorage !== "undefined" ? localStorage.getItem('role') === null ? "" : localStorage.getItem('role') : "",
     token : typeof localStorage !== "undefined" ? localStorage.getItem('token') === null ? "" : localStorage.getItem('token') : "",
+    paid : typeof localStorage !== "undefined" ? localStorage.getItem('paid') === null ? "" : localStorage.getItem('paid') : "",
     erreurLoginMessage : "",
     erreurRegisterMessage : ""
+}
+
+export function forgotMDP(email) {
+    return dispatch => {
+        let newData = new API()
+        return newData.forgotMDP(email)
+        .then (
+            response => Promise.all([
+                
+            ]),
+            erreur => dispatch({ type : "ERREUR_LOGIN", erreur})
+        )
+    }
+}
+
+export function resetMDP(token, password) {
+    return dispatch => {
+        console.log(token)
+        let newData = new API()
+        return newData.resetMDP(token, password)
+        .then (
+            response => Promise.all([
+                dispatch({ type : "REDIRECT_HOME"})
+            ]),
+            erreur => dispatch({ type : "ERREUR_LOGIN", erreur})
+        )
+    }
+}
+
+export function resetPassword(token, password) {
+    return dispatch => {
+        console.log(token)
+        let newData = new API(token)
+        return newData.resetPassword(password)
+        .then (
+            response => Promise.all([
+                dispatch({ type : "REDIRECT_HOME"})
+            ]),
+            erreur => dispatch({ type : "ERREUR_LOGIN", erreur})
+        )
+    }
 }
 
 export function login(email, password) {
@@ -19,6 +61,7 @@ export function login(email, password) {
                 dispatch({ type : "SET_TOKEN", response}),
                 dispatch({ type : "SET_AUTHENTICATE", authenticate : "true"}),
                 dispatch({ type : "SET_PROFILE", payload : response.user }),
+                dispatch({ type : "SET_PAID", payload : response.paid }),
             ]),
             erreur => dispatch({ type : "ERREUR_LOGIN", erreur})
         )
@@ -34,8 +77,9 @@ export function registerProprietaire(body) {
                 dispatch({ type : "SET_ROLE", response}),
                 dispatch({ type : "SET_TOKEN", response}),
                 dispatch({ type : "SET_AUTHENTICATE", authenticate : "true"}),
-                dispatch({ type : "SET_USER", response}),
-                dispatch({ type : "REDIRECT_PROFILE"})
+                dispatch({ type : "SET_PROFILE", payload: response.user}),
+                dispatch({ type : "SET_PAID", payload : response.paid }),
+                //dispatch({ type : "REDIRECT_PLAN"})
             ]),
             erreur => dispatch({ type : "ERREUR_REGISTER", erreur})
         )
@@ -51,7 +95,7 @@ export function registerFreelance(body) {
                 dispatch({ type : "SET_ROLE", response}),
                 dispatch({ type : "SET_TOKEN", response}),
                 dispatch({ type : "SET_AUTHENTICATE", authenticate : "true"}),
-                dispatch({ type : "SET_USER", response}),
+                dispatch({ type : "SET_PROFILE", payload: response.user}),
                 dispatch({ type : "REDIRECT_PROFILE"})
             ]),
             erreur => dispatch({ type : "ERREUR_REGISTER", erreur})
@@ -85,6 +129,13 @@ const authenticateReducer = ( state = initialState,  action) => {
             localStorage.setItem('authenticate', action.authenticate)
         break;
 
+        case "TURN_ON_PAYED" :
+            state = {
+                paid : "true"
+            }
+            localStorage.setItem('paid', "true")
+        break;
+
         case "SET_ROLE" :
             state = {
                 ...state,
@@ -99,6 +150,14 @@ const authenticateReducer = ( state = initialState,  action) => {
                 token : action.response.token
             }
             localStorage.setItem('token', action.response.token)
+        break;
+
+        case "SET_PAID" : 
+            state = {
+                ...state,
+                paid : action.payload === false ? "false" : "true"
+            }
+            localStorage.setItem('paid', action.payload)
         break;
 
         case "SET_LOGOUT" :
@@ -117,6 +176,16 @@ const authenticateReducer = ( state = initialState,  action) => {
 
         case "REDIRECT_PROFILE" :
                 history.push('/profile')
+                window.location.reload()
+        break;
+
+        case "REDIRECT_HOME" :
+            history.push('/')
+            window.location.reload()
+        break;
+
+        case "REDIRECT_PLAN" :
+                history.push('/create-profile-proprietaire/plan')
                 window.location.reload()
         break;
 

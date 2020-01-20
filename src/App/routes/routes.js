@@ -12,12 +12,16 @@ import FreelanceMission from '../../view/partenaire/mission/mission'
 import DashboardFreelance from '../../view/partenaire/dashboard/dashboard'
 import Messages from '../../view/messages/messages'
 import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-freelance'
-import { freelanceAuthenticate } from "./middleware";
+import { freelanceAuthenticate, adminAndProprioAuthenticate } from "./middleware";
 import FreelanceProfile from "../../view/partenaire/profile/profile";
 import ProprietaireProfile from "../../view/proprietaire/profil/profil";
 import EditProfile from "../../view/partenaire/profile/edit";
 import DevenirProprietaire from "../../view/proprietaire/devenirProprietaire/devenirProprietaire";
 import { getProfileUrl } from "../../reducer/freelanceProfile";
+import CreationCompte from "../../view/proprietaire/creationCompte/creationCompte";
+import ResetToken from "../../component/resetToken/resetToken";
+import DebugMission from "../../view/debug/debug"
+import CheckoutProprietaire from "../../view/proprietaire/creationCompte/checkout";
 
 export const Routes = [
     {
@@ -39,7 +43,7 @@ export const Routes = [
     {
         path: '/profile/parameters',
         exact: true,
-        component: EditProfile,
+        render: () => freelanceAuthenticate() ? <EditProfile /> : <Redirect to="/"/>,
     },
     {
         path: '/profile/:name',
@@ -73,6 +77,16 @@ export const Routes = [
         component: DevenirProprietaire
     },
     {
+        path: '/create-profile-proprietaire/plan',
+        exact: true,
+        component: CreationCompte
+    },
+    {
+        path: '/create-profile-proprietaire/checkout',
+        exact: true,
+        component: CheckoutProprietaire
+    },
+    {
         path: '/laisser-vous-guider',
         exact: true,
         component: LaisserVousGuider
@@ -86,6 +100,16 @@ export const Routes = [
         path: '/dashboard/freelancer',
         exact: true,
         render: () => freelanceAuthenticate() ? <DashboardFreelance /> : <Redirect to="/"/>
+    },
+    {
+        path : '/reset/:token',
+        exact : true,
+        component : ResetToken
+    },
+    {
+        path : '/debug/mission',
+        exact : true,
+        render : () => adminAndProprioAuthenticate() ? <DebugMission /> : <Redirect to="/"/>
     },
     {
         path: '/messages',

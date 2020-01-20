@@ -16,6 +16,7 @@ import freelanceReducer from './reducer/freelanceProfile'
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 import homeReducer from './reducer/home';
+import debugReducer from './reducer/debug';
 
 const rootElement = document.getElementById('root') || document.createElement('div')
 
@@ -28,7 +29,8 @@ if (typeof document === "undefined") {
         myCookies: myCookies,
         authenticate: authenticate,
         missions: missionReducer,
-        freelanceProfile: freelanceReducer
+        freelanceProfile: freelanceReducer,
+        debug : debugReducer
     })
 
     var SSR_store = createStore(reducer, window.__PRELOADED_STATE__, applyMiddleware(thunk))

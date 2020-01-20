@@ -6,6 +6,7 @@ import freelanceReducer from './reducer/freelanceProfile';
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 import homeReducer from './reducer/home';
+import debugReducer from './reducer/debug';
 
 var store
 
@@ -15,7 +16,8 @@ const reducer = combineReducers({
     myCookies: myCookies,
     authenticate: authenticate,
     missions: missionReducer,
-    freelanceProfile: freelanceReducer
+    freelanceProfile: freelanceReducer,
+    debug : debugReducer
 })
 
 store = createStore(reducer, applyMiddleware(thunk))

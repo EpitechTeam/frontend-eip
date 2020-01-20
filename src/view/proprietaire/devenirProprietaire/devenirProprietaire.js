@@ -8,10 +8,7 @@ import {
 from 'mdbreact'
 import CreateProprietaire from '../../../component/createProprietaire/createProprietaire'
 import {connect} from "react-redux";
-import House from '../../../assets/house.png'
-import Stats from '../../../assets/stats.png'
-import Details from '../../../assets/details.png'
-import Revenue from '../../../assets/revenue.png'
+import LazyLoad from 'react-lazy-load';
 import './devenirProprietaire.css'
 
 const mapStateToProps = (state) => {
@@ -20,6 +17,16 @@ const mapStateToProps = (state) => {
         language: state.language
     }
 }
+
+function importAll(r) {
+  let images = {};
+  // eslint-disable-next-line
+  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+
+// eslint-disable-next-line
+const images = importAll(require.context('../../../assets/', false, /\.(png|jpe?g|svg)$/));
 
 class DevenirProprietaire extends React.Component {
     state = {
@@ -55,7 +62,9 @@ class DevenirProprietaire extends React.Component {
                             </a>
                             </div>
                             <div className="col-md-6">
-                            <img alt="maison" className="w-100" src={House}/>
+                            <LazyLoad offsetRight={100} offsetLeft={100} debounce={false} height={500} throttle={0}>
+                            <img alt="maison" className="w-100" src={images["house.png"]}/>
+                            </LazyLoad>
                             </div>
                         </div>
                         </div>
@@ -66,7 +75,9 @@ class DevenirProprietaire extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6 pr-lg-5">
-                <img src={Details} className="img-fluid aos-init aos-animate" alt="dashboard" data-aos="fade-right" />
+              <LazyLoad offsetRight={100} offsetLeft={100} debounce={false} height={500} throttle={0}>
+                <img src={images["details.png"]} className="img-fluid aos-init aos-animate" alt="dashboard" data-aos="fade-right" />
+                </LazyLoad>
               </div>
               <div className="col-md-6 pl-lg-5">
                 <p className="subtitle aos-init aos-animate" data-aos="fade-up">01</p>
@@ -113,7 +124,9 @@ class DevenirProprietaire extends React.Component {
                 occaecat cupidatat non proident.</p>
             </div>
             <div className="col-md-6 pl-lg-5">
-              <img src={Stats} className="img-fluid aos-init aos-animate" alt="dashboard" data-aos="fade-left" data-aos-delay={200} />
+            <LazyLoad offsetRight={100} offsetLeft={100} debounce={false} height={500} throttle={0}>
+              <img src={images["stats.png"]} className="img-fluid aos-init aos-animate" alt="dashboard" data-aos="fade-left" data-aos-delay={200} />
+              </LazyLoad>
             </div>
           </div>
         </div>
@@ -122,7 +135,9 @@ class DevenirProprietaire extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-md-6 pr-lg-5">
-                <img src={Revenue} className="img-fluid aos-init aos-animate" alt="dashboard" data-aos="fade-right" />
+              <LazyLoad offsetRight={100} offsetLeft={100} debounce={false} height={500} throttle={0}>
+                <img src={images["revenue.png"]} className="img-fluid aos-init aos-animate" alt="dashboard" data-aos="fade-right" />
+                </LazyLoad>
               </div>
               <div className="col-md-6 pl-lg-5">
                 <p className="subtitle aos-init aos-animate" data-aos="fade-up">03</p>

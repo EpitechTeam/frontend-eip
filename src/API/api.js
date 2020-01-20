@@ -18,7 +18,6 @@ class API {
 
     fetchHomeData = async () => {
         let response = await axios.get(process.env.REACT_APP_API_URL + "/freelance")
-        console.log(response.data)
         return response.data
     }
 
@@ -32,14 +31,38 @@ class API {
         )
     }
 
+    getProfileFreelanceWithUrl = async (url) => {
+        let response = await axios.get(process.env.REACT_APP_API_URL + /user/ + url)
+        
+        response = response.data
+        let caption = typeof response.city === "undefined" ? response.type : response.type + " " + response.city
+        let reduxResponse = {
+            name : response.firstname,
+            surname : response.lastname,
+            caption: caption,
+            avatar: response.img,
+            email : response.email,
+            location : response.city,
+            skills: response.skills,
+            missions: response.missions,
+            bio: response.bio,
+            type : response.type,
+            company : response.company,
+            siret : response.siret,
+            phone : response.phone
+        }
+        return reduxResponse
+    }
+
     getProfileFreelance = async () => {
         let response = await this.axios.post(process.env.REACT_APP_API_URL + "/me")
 
         response = response.data
+        let caption = typeof response.city === "undefined" ? response.type : response.type + " " + response.city
         let reduxResponse = {
                 name : response.firstname,
                 surname : response.lastname,
-                caption: response.type + " " + response.city,
+                caption: caption,
                 avatar: response.img,
                 email : response.email,
                 location : response.city,
@@ -49,10 +72,22 @@ class API {
                 type : response.type,
                 company : response.company,
                 siret : response.siret,
-                phone : response.phone
+                phone : response.phone,
+                id : response._id
         }
 
         return reduxResponse
+    }
+
+    setPayed = async (data) => {
+        let body = {
+            payed : {
+                status : true
+            }
+        }
+
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/edit", body)
+        return response.data
     }
 
     uploadPP = async (data) => {
@@ -72,11 +107,11 @@ class API {
         let response = await this.axios.post(process.env.REACT_APP_API_URL + "/edit", state)
 
         response = response.data
-        console.log(response)
+        let caption = typeof response.city === "undefined" ? response.type : response.type + " " + response.city
         let reduxResponse = {
             name : response.firstname,
             surname : response.lastname,
-            caption: response.type + " " + response.city,
+            caption: caption,
             avatar: response.img,
             email : response.email,
             location : response.city,
@@ -95,6 +130,46 @@ class API {
         })
     }
 
+    resetPassword = async (password) => {
+        let body = {
+            password : password
+        }
+
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/modifyPassword", body)
+        return response
+    }
+
+    resetMDP = async (token, password) => {
+        let body = {
+            password : password,
+            resetPasswordToken : token
+        }
+
+        console.log(body)
+        let response = await axios.post(process.env.REACT_APP_API_URL + "/reset", body)
+        console.log(response)
+        return response
+    }
+
+    forgotMDP = async (email) => {
+        let body = {
+            email : email
+        }
+
+        console.log(body)
+
+        let response = await axios.post(process.env.REACT_APP_API_URL + "/forgot", body)
+        console.log(response)
+        return response
+    }
+
+    sendNewMission = async(body) => {
+        console.log(body)
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/createmission", body)
+        console.log(response)
+        return response
+    }
+
     login = async (email, password) => {
         let body = {
             email : email,
@@ -106,21 +181,24 @@ class API {
         let token = response.data.token
 
         response = response.data.user
+        let caption = typeof response.city === "undefined" ? response.type : response.type + " " + response.city
         let reduxFormatResponse = {
             role : response.type,
             token : token, 
             user : {
                 name : response.firstname,
                 surname : response.lastname,
-                caption: response.type + " " + response.city,
+                caption: caption,
                 avatar: response.img,
                 email : response.email,
                 location : response.city,
                 skills: response.skills,
                 missions: response.missions,
                 bio: response.bio,
-                type : response.type
-            }
+                type : response.type,
+                id : response._id
+            },
+            paid : response.type === "freelance" ? "true" : response.payed.status
         }
         return reduxFormatResponse
     }
@@ -162,7 +240,8 @@ class API {
         return {
             role : 'proprietaire',
             token : response.data.token,
-            user : response.data.user
+            user : response.data.user,
+            paid : response.data.user.payed.status
         }
     }
 
@@ -173,11 +252,11 @@ class API {
     getMissions = async (city) => {
         let profile = JSON.parse(localStorage.getItem('profile'))
         let newBody = {
-            city : profile.location
+            
         }
         console.log(profile)
         console.log(newBody)
-        let response =  await axios.get(process.env.REACT_APP_API_URL + "/mission", newBody)
+        let response =  await this.axios.post(process.env.REACT_APP_API_URL + "/getmission", newBody)
 
         console.log(response)
         return response.data

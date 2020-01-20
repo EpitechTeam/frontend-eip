@@ -48,7 +48,6 @@ const homeReducer = (state = initialState, action) => {
       break;
 
       case "SET_HOME" :
-        console.log(action)
       state = {
         ...state,
         data : action.response

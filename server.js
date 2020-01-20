@@ -18,6 +18,8 @@ import DocumentMeta, {render} from 'react-document-meta';
 import { renderToStaticMarkup } from 'react-dom/server';
 import missionReducer from "./src/reducer/missions";
 import freelanceReducer from "./src/reducer/freelanceProfile";
+import homeReducer from './src/reducer/home'
+import debugReducer from './src/reducer/debug'
 
 const bodyParser  = require("body-parser")
 const compression = require('compression');
@@ -94,12 +96,14 @@ else {
     //Methode principale pour render en SSR
     const renderPage = async (reducer, store, context, promises, location, req, res, next) => {
         const indexFile = path.resolve('./base/index.html');
-
+        console.log(store.getState())
         //Render avec la methode SSR proposé par React
         const html = ReactDOMServer.renderToString(<Provider store={store}><StaticRouter context={context} location={location}><App location={location}/></StaticRouter></Provider>)
         
         //Mettre le state redux en string
         const serializedState = JSON.stringify(store.getState())
+        console.log("laa")
+        console.log(serializedState)
 
         //Get la meta
         const meta = rewindAsStaticMarkup()
@@ -134,7 +138,16 @@ else {
         const context = {}
 
         //Créer le store redux
-        const reducer = combineReducers({language : languageReducer, myCookies : myCookies, authenticate : authenticate, missions: missionReducer, freelanceProfile: freelanceReducer})
+        const reducer = combineReducers({
+          language : languageReducer,
+          myCookies : myCookies,
+          authenticate : authenticate,
+          missions: missionReducer,
+          freelanceProfile: freelanceReducer,
+          home : homeReducer,
+          debug : debugReducer
+        })
+
         const store = createStore(reducer, applyMiddleware(thunk))
     
         //Trouver quel route a display

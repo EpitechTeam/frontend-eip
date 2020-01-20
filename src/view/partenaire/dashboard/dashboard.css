@@ -1,0 +1,22 @@
+.side-nav-custom-dashboard {
+    width: 240px;
+    background-color: #f7f7f7;
+    height: calc(100vh - 56px);
+    position: -webkit-sticky;
+    top: 56px;
+    padding: 25px;
+    z-index: 1;
+}
+
+.stats-body {
+    width: 100%;
+    height: calc(100vh - 56px);
+}
+
+.stat-item {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    border-radius: 7px;
+    min-height: 180px;
+}

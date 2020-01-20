@@ -53,6 +53,17 @@
     min-height: 180px;
 }
 
+.imageMission {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.dealMission {
+    color: green;
+    font-weight: 400;
+}
+
 .mission-item-left {
     padding: 25px;
     background-color: #ededed;

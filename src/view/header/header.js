@@ -199,7 +199,7 @@ class Header extends React.Component {
                                     : ""
                             }
                             {
-                                this.props.authenticate.role === "proprietaire" ? 
+                                this.props.authenticate.role === "proprietaire" && this.props.authenticate.paid === "true" ? 
                                 <React.Fragment>
                                         <MDBNavItem>
                                             <MDBNavLink className="meConnecter"
@@ -244,7 +244,44 @@ class Header extends React.Component {
                                             </MDBDropdown>
                                         </MDBNavItem>
                                     </React.Fragment>
-                                : ""
+                                : 
+                                    ""
+                            }
+                            {
+                                this.props.authenticate.role === "proprietaire" && this.props.authenticate.paid === "false" ?
+                                <React.Fragment>
+                                        <MDBNavItem>
+                                        <a className="border border-light rounded mr-1 nav-link Ripple-parent"
+                                        rel="noopener noreferrer" href="/create-profile-proprietaire/plan">Compléter mon profil</a>
+                                        </MDBNavItem>
+                                        <MDBNavItem>
+                                            <MDBDropdown>
+                                                <MDBDropdownToggle nav caret>
+                                                    <span className="mr-2">Mon profil</span>
+                                                </MDBDropdownToggle>
+                                                <MDBDropdownMenu>
+                                                <div className="menuDropDown">
+                                                <a href="/profile">Mon profil</a>
+                                                </div>
+                                                </MDBDropdownMenu>
+                                            </MDBDropdown>
+                                        </MDBNavItem>
+                                        <MDBNavItem>
+                                            <MDBDropdown>
+                                                <MDBDropdownToggle className="pt-1 pb-0 dopdown-toggle" nav caret>
+                                                    <img src={this.props.freelanceProfile.profile.avatar}
+                                                        className="rounded-circle z-depth-0"
+                                                        style={{height: "35px", padding: 0}} alt=""/>
+                                                </MDBDropdownToggle>
+                                                <MDBDropdownMenu className="dropdown-default" right>
+                                                <div className="menuDropDown">
+                                                <a href="/profile/parameters">Parametres</a>
+                                                <MDBDropdownItem href="#" onClick={this.props.logout}>Log out</MDBDropdownItem>
+                                                </div>
+                                                </MDBDropdownMenu>
+                                            </MDBDropdown>
+                                        </MDBNavItem>
+                                    </React.Fragment> : ""
                             }
                         </MDBNavbarNav>
                     </MDBCollapse>

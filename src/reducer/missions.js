@@ -4,9 +4,9 @@ const initialState = {
     missions: []
 };
 
-export function getMissions() {
+export function getMissions(token) {
     return dispatch => {
-        let newData = new API();
+        let newData = new API(token);
         return newData.getMissions()
             .then(
                 response => dispatch({type: "GET_MISSIONS", response}),

@@ -9,14 +9,15 @@ import {faArrowAltCircleRight, faBan, faCheckDouble, faPen} from "@fortawesome/f
 
 const mapStateToProps = (state) => {
     return {
-        missions: state.missions
+        missions: state.missions,
+        authenticate: state.authenticate
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getMissions: () => {
-            dispatch(getMissions())
+        getMissions: (token) => {
+            dispatch(getMissions(token))
         }
     }
 };
@@ -26,13 +27,13 @@ class FreelanceMission extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: "CURRENT"
+            selected: "WAITING"
         }
     }
 
     componentWillMount = async () => {
         let {getMissions} = this.props;
-        await getMissions();
+        await getMissions(this.props.authenticate.token);
 
         if (typeof document !== undefined) {
             let params = new URLSearchParams(window.location.search);
@@ -80,11 +81,13 @@ class FreelanceMission extends React.Component {
                 <div className="mission-item">
                     <div className="mission-item-left">
                         <div className="mission-item-owner">{item.houseOwner}</div>
-                        <div className="mission-item-pic">Photo</div>
+                        <div className="mission-item-pic"><img src={item.img} alt="image mission" className="imageMission"/></div>
                     </div>
                     <div className="mission-item-right">
                         <div className="mission-item-name">{item.name}<span className="mission-item-date">&nbsp;({item.date})</span></div>
                         <div className="mission-item-description">{item.object}</div>
+                        <br/>
+                        <p className="dealMission">{item.deal}€</p>
                     </div>
                 </div>
             )
