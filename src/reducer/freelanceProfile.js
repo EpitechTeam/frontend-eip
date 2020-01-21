@@ -15,7 +15,8 @@ const initialProfile = {
         {label: 'Durée de mission', description: 'Recherche des missions ~3-6 mois'}
     ],
     bio: "",
-    id : ""
+    id : "",
+    emailVerified : true
 }
 
 const initialState = {
@@ -29,6 +30,19 @@ export function getProfileUrl(url) {
         .then (
             payload => Promise.all([
                 dispatch({ type : "SET_PROFILE", payload}),
+            ]),
+            erreur => console.log(erreur)
+        )
+    }
+}
+
+export function validEmail(id) {
+    return dispatch => {
+        let newData = new API()
+        return newData.validEmail(id)
+        .then (
+            payload => Promise.all([
+                dispatch({ type : "REDIRECT_HOME"})
             ]),
             erreur => console.log(erreur)
         )

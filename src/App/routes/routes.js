@@ -22,6 +22,7 @@ import CreationCompte from "../../view/proprietaire/creationCompte/creationCompt
 import ResetToken from "../../component/resetToken/resetToken";
 import DebugMission from "../../view/debug/debug"
 import CheckoutProprietaire from "../../view/proprietaire/creationCompte/checkout";
+import ValidEmail from "../../component/validEmail/validEmail";
 
 export const Routes = [
     {
@@ -105,6 +106,11 @@ export const Routes = [
         path : '/reset/:token',
         exact : true,
         component : ResetToken
+    },
+    {
+        path : '/valid/:id',
+        exact : true,
+        component : ValidEmail
     },
     {
         path : '/debug/mission',

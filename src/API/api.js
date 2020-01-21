@@ -73,10 +73,22 @@ class API {
                 company : response.company,
                 siret : response.siret,
                 phone : response.phone,
-                id : response._id
+                id : response._id,
+                emailVerified : response.emailVerified
         }
 
         return reduxResponse
+    }
+
+    validEmail = async (id) => {
+        console.log(id)
+        let body = {
+            emailVerified : true,
+            user_id : id
+        }
+
+        let response = await axios.post(process.env.REACT_APP_API_URL + "/validEmail", body)
+        return response.data
     }
 
     setPayed = async (data) => {
@@ -196,10 +208,12 @@ class API {
                 missions: response.missions,
                 bio: response.bio,
                 type : response.type,
-                id : response._id
+                id : response._id,
+                emailVerified : response.emailVerified
             },
             paid : response.type === "freelance" ? "true" : response.payed.status
         }
+        console.log(reduxFormatResponse)
         return reduxFormatResponse
     }
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
-import {MDBBtn, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow, MDBContainer, MDBModal, MDBModalHeader, MDBModalBody} from "mdbreact";
+import {MDBBtn, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow, MDBContainer, MDBModal, MDBModalHeader, MDBModalBody, MDBAlert} from "mdbreact";
 import {faCameraRetro, faMapPin} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP} from "../../../reducer/freelanceProfile";
@@ -72,7 +72,11 @@ class FreelanceProfile extends React.Component {
 
     render() {
         return (
-            <MDBContainer className="mt-5">
+            <MDBContainer className="marginHeader">
+                    {
+                        this.props.freelanceProfile.profile.emailVerified === false && this.state.canEdit ?
+                        <MDBAlert>Veuillez verifiez votre email pour valider votre compte</MDBAlert>: ""
+                    }
                     <MDBModal isOpen={this.state.modal}
                     toggle={this.toggle}>
                         <MDBModalHeader toggle={this.toggle}>Changer de photo de profil</MDBModalHeader>
