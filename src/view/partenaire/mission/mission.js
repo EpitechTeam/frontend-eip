@@ -81,7 +81,7 @@ class FreelanceMission extends React.Component {
                 <div className="mission-item">
                     <div className="mission-item-left">
                         <div className="mission-item-owner">{item.houseOwner}</div>
-                        <div className="mission-item-pic"><img src={item.img} alt="image mission" className="imageMission"/></div>
+                        <div className="mission-item-pic"><img src={item.img} alt="mission" className="imageMission"/></div>
                     </div>
                     <div className="mission-item-right">
                         <div className="mission-item-name">{item.name}<span className="mission-item-date">&nbsp;({item.date})</span></div>

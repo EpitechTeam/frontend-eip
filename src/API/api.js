@@ -250,84 +250,12 @@ class API {
     }
 
     getMissions = async (city) => {
-        let profile = JSON.parse(localStorage.getItem('profile'))
-        let newBody = {
-            
-        }
-        console.log(profile)
-        console.log(newBody)
+        let newBody = {}
+
         let response =  await this.axios.post(process.env.REACT_APP_API_URL + "/getmission", newBody)
 
-        console.log(response)
         return response.data
-
-        return [
-            {
-                name: "Mission 1",
-                object: "Texte descriptif de la mission",
-                houseOwner: "M. Dupont",
-                status: "CURRENT",
-                statusNb: 1,
-                date: "12/11/2019"
-            },
-            {
-                name: "Mission 2",
-                object: "Texte descriptif de la mission 2",
-                houseOwner: "Mme. Eloat",
-                status: "DONE",
-                statusNb: 2,
-                date: "08/11/2019"
-            },
-            {
-                name: "Mission 3",
-                object: "Texte descriptif de la mission 3",
-                houseOwner: "M. Rochet",
-                status: "WAITING",
-                statusNb: 0,
-                date: "11/11/2019"
-            },
-            {
-                name: "Mission 4",
-                object: "Texte descriptif de la mission 4",
-                houseOwner: "Mme. Frediche",
-                status: "CANCELED",
-                statusNb: -1,
-                date: "14/11/2019"
-            },
-            {
-                name: "Mission 5 copie",
-                object: "Texte descriptif de la mission 4",
-                houseOwner: "Mme. Frediche",
-                status: "CANCELED",
-                statusNb: -1,
-                date: "14/11/2019"
-            },
-            {
-                name: "Mission 5 copie",
-                object: "Texte descriptif de la mission 4",
-                houseOwner: "Mme. Frediche",
-                status: "CANCELED",
-                statusNb: -1,
-                date: "14/11/2019"
-            },
-            {
-                name: "Mission 5 copie",
-                object: "Texte descriptif de la mission 4",
-                houseOwner: "Mme. Frediche",
-                status: "CANCELED",
-                statusNb: -1,
-                date: "14/11/2019"
-            },
-            {
-                name: "Mission 5 copie",
-                object: "Texte descriptif de la mission 4",
-                houseOwner: "Mme. Frediche",
-                status: "CANCELED",
-                statusNb: -1,
-                date: "14/11/2019"
-            },
-        ];
-    };
+    }
 }
 
 export default API

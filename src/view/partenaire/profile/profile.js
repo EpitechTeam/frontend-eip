@@ -4,6 +4,7 @@ import {MDBBtn, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow, MDBContainer, MDBMod
 import {faCameraRetro, faMapPin} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP} from "../../../reducer/freelanceProfile";
+import LazyLoad from 'react-lazy-load';
 
 let primaryColor = '#3972C0';
 let cardStyle = {marginTop: '24px', justifyContent: 'space-between', minHeight : '200px'};
@@ -133,7 +134,9 @@ function ProfileCardDetails(props) {
         <MDBCard style={cardStyle}>
                 <MDBRow>
                 <MDBCol md="4">
-                    <img alt="profile" style={{maxWidth : "350px"}} src={profile.avatar} ></img>
+                <LazyLoad offsetRight={100} offsetLeft={100} debounce={false} height={200} throttle={0}>
+                <img alt="profile" style={{maxWidth : "350px"}} src={profile.avatar} ></img>
+                </LazyLoad>
                     {
                     canEdit ?
                     <div className="d-flex flex-row justify-content-center align-items-baseline" style={{width: '100%', color: 'white'}}>
