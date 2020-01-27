@@ -145,7 +145,7 @@ export function updateStats(stats) {
     }
 }
 
-const freelanceReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_PROFILE': {
             console.log(action.payload)
@@ -170,4 +170,4 @@ const freelanceReducer = (state = initialState, action) => {
     return state;
 };
 
-export default freelanceReducer;
+export default profileReducer;

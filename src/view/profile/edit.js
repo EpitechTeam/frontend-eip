@@ -1,14 +1,14 @@
 import React from 'react'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBAlert, MDBNav, MDBNavItem, MDBNavLink, MDBTabContent, MDBTabPane } from 'mdbreact';
-import { getProfile, setProfile } from "../../../reducer/freelanceProfile";
+import { getProfile, setProfile } from "../../reducer/profile";
 import AlgoliaPlaces from 'algolia-places-react';
 import {connect} from "react-redux";
-import { resetPassword } from '../../../reducer/authenticate';
+import { resetPassword } from '../../reducer/authenticate';
 
 const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
-        freelanceProfile: state.freelanceProfile
+        profile: state.profile
     }
 }
 
@@ -38,7 +38,7 @@ class EditProfile extends React.Component {
 
     componentDidMount() {
         this.props.getProfile(this.props.authenticate.token)
-        let profile = this.props.freelanceProfile.profile
+        let profile = this.props.profile.profile
         this.setState({
             email : profile.email,
             firstname : profile.name,

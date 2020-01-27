@@ -17,7 +17,7 @@ import fetch from 'node-fetch'
 import DocumentMeta, {render} from 'react-document-meta';
 import { renderToStaticMarkup } from 'react-dom/server';
 import missionReducer from "./src/reducer/missions";
-import freelanceReducer from "./src/reducer/freelanceProfile";
+import profileReducer from "./src/reducer/profile";
 import homeReducer from './src/reducer/home'
 import debugReducer from './src/reducer/debug'
 
@@ -143,7 +143,7 @@ else {
           myCookies : myCookies,
           authenticate : authenticate,
           missions: missionReducer,
-          freelanceProfile: freelanceReducer,
+          profile: profileReducer,
           home : homeReducer,
           debug : debugReducer
         })

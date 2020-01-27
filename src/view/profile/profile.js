@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {MDBBtn, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow, MDBContainer, MDBModal, MDBModalHeader, MDBModalBody, MDBAlert} from "mdbreact";
 import {faCameraRetro, faMapPin} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP} from "../../../reducer/freelanceProfile";
+import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP} from "../../reducer/profile";
 import LazyLoad from 'react-lazy-load';
 
 let primaryColor = '#3972C0';
@@ -12,7 +12,7 @@ let cardStyle = {marginTop: '24px', justifyContent: 'space-between', minHeight :
 const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
-        freelanceProfile: state.freelanceProfile
+        profile: state.profile
     }
 };
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-class FreelanceProfile extends React.Component {
+class Profile extends React.Component {
     constructor(props) {
         super(props);
 
@@ -74,7 +74,7 @@ class FreelanceProfile extends React.Component {
         return (
             <MDBContainer className="marginHeader">
                     {
-                        this.props.freelanceProfile.profile.emailVerified === false && this.state.canEdit ?
+                        this.props.profile.profile.emailVerified === false && this.state.canEdit ?
                         <MDBAlert>Veuillez verifiez votre email pour valider votre compte</MDBAlert>: ""
                     }
                     <MDBModal isOpen={this.state.modal}
@@ -110,17 +110,17 @@ class FreelanceProfile extends React.Component {
 
                     <MDBRow>
                     <MDBCol className="mt-3">
-                    <ProfileCardDetails upload={this.uploadModal} canEdit={this.state.canEdit} profile={this.props.freelanceProfile.profile} updateStats={this.props.updateStats}/>
+                    <ProfileCardDetails upload={this.uploadModal} canEdit={this.state.canEdit} profile={this.props.profile.profile} updateStats={this.props.updateStats}/>
                     </MDBCol>
                     </MDBRow>
                     {
-                        this.props.freelanceProfile.profile.type === "freelance" ? 
+                        this.props.profile.profile.type === "freelance" ? 
                         <MDBRow>
                         <MDBCol md="4">
-                        <FreelancerSkills token={this.props.authenticate.token} editSkills={this.props.setProfile} canEdit={this.state.canEdit} skills={this.props.freelanceProfile.profile.skills}/>
+                        <FreelancerSkills token={this.props.authenticate.token} editSkills={this.props.setProfile} canEdit={this.state.canEdit} skills={this.props.profile.profile.skills}/>
                         </MDBCol>
                         <MDBCol md="8">
-                        <BioFreelance token={this.props.authenticate.token} editBio={this.props.setProfile} canEdit={this.state.canEdit} bio={this.props.freelanceProfile.profile.bio} updateBio={this.props.updateBio}/>
+                        <BioFreelance token={this.props.authenticate.token} editBio={this.props.setProfile} canEdit={this.state.canEdit} bio={this.props.profile.profile.bio} updateBio={this.props.updateBio}/>
                         </MDBCol>
                         </MDBRow>
                         : ""
@@ -285,4 +285,4 @@ function BioFreelance(props) {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FreelanceProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

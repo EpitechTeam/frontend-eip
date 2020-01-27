@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
         language: state.language,
-        freelanceProfile: state.freelanceProfile,
+        profile: state.profile,
         debug : state.debug
     }
 }
@@ -41,12 +41,12 @@ class DebugMission extends React.Component {
     }
 
     sendNewMission = async () => {
-        await this.setState({user_id : this.props.freelanceProfile.profile.id})
+        await this.setState({user_id : this.props.profile.profile.id})
         await this.props.sendNewMission(this.props.authenticate.token, this.state)
     }
 
     componentDidMount() {
-        this.setState({user_id : this.props.freelanceProfile.profile.id})
+        this.setState({user_id : this.props.profile.profile.id})
     }
 
     render() {

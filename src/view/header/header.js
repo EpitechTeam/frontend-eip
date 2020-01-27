@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
         language: state.language,
-        freelanceProfile: state.freelanceProfile
+        profile: state.profile
     }
 }
 
@@ -177,7 +177,7 @@ class Header extends React.Component {
                                         <MDBNavItem>
                                             <MDBDropdown>
                                                 <MDBDropdownToggle className="pt-1 pb-0 dopdown-toggle" nav caret>
-                                                    <img src={this.props.freelanceProfile.profile.avatar}
+                                                    <img src={this.props.profile.profile.avatar}
                                                          className="rounded-circle z-depth-0"
                                                          style={{height: "35px", padding: 0}} alt=""/>
                                                 </MDBDropdownToggle>
@@ -219,7 +219,7 @@ class Header extends React.Component {
                                         <MDBNavItem>
                                             <MDBDropdown>
                                                 <MDBDropdownToggle className="pt-1 pb-0 dopdown-toggle" nav caret>
-                                                    <img src={this.props.freelanceProfile.profile.avatar}
+                                                    <img src={this.props.profile.profile.avatar}
                                                          className="rounded-circle z-depth-0"
                                                          style={{height: "35px", padding: 0}} alt=""/>
                                                 </MDBDropdownToggle>
@@ -257,7 +257,7 @@ class Header extends React.Component {
                                         <MDBNavItem>
                                             <MDBDropdown>
                                                 <MDBDropdownToggle className="pt-1 pb-0 dopdown-toggle" nav caret>
-                                                    <img src={this.props.freelanceProfile.profile.avatar}
+                                                    <img src={this.props.profile.profile.avatar}
                                                         className="rounded-circle z-depth-0"
                                                         style={{height: "35px", padding: 0}} alt=""/>
                                                 </MDBDropdownToggle>

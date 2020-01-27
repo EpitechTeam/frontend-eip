@@ -13,11 +13,10 @@ import DashboardFreelance from '../../view/partenaire/dashboard/dashboard'
 import Messages from '../../view/messages/messages'
 import DevenirFreelance from '../../view/partenaire/devenirFreelance/devenir-freelance'
 import { freelanceAuthenticate, adminAndProprioAuthenticate } from "./middleware";
-import FreelanceProfile from "../../view/partenaire/profile/profile";
-import ProprietaireProfile from "../../view/proprietaire/profil/profil";
-import EditProfile from "../../view/partenaire/profile/edit";
+import Profile from "../../view/profile/profile";
+import EditProfile from "../../view/profile/edit";
 import DevenirProprietaire from "../../view/proprietaire/devenirProprietaire/devenirProprietaire";
-import { getProfileUrl } from "../../reducer/freelanceProfile";
+import { getProfileUrl } from "../../reducer/profile";
 import CreationCompte from "../../view/proprietaire/creationCompte/creationCompte";
 import ResetToken from "../../component/resetToken/resetToken";
 import DebugMission from "../../view/debug/debug"
@@ -32,14 +31,9 @@ export const Routes = [
         loadData: () => loadHomeData()
     },
     {
-        path: '/profile/proprietaire',
-        exact: true,
-        component: ProprietaireProfile,
-    },
-    {
         path: '/profile',
         exact: true,
-        component: FreelanceProfile,
+        component: Profile,
     },
     {
         path: '/profile/parameters',
@@ -49,7 +43,7 @@ export const Routes = [
     {
         path: '/profile/:name',
         exact: true,
-        component: FreelanceProfile,
+        component: Profile,
         loadData : (match) => getProfileUrl(match.params.name)
     },
     {

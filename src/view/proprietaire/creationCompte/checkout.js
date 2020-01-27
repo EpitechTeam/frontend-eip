@@ -2,13 +2,13 @@ import React from 'react'
 import { MDBContainer } from 'mdbreact'
 import './creationCompte.css'
 import { connect } from 'react-redux'
-import { setPayed } from '../../../reducer/freelanceProfile'
+import { setPayed } from '../../../reducer/profile'
 
 const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
         language: state.language,
-        freelanceProfile: state.freelanceProfile
+        profile: state.profile
     }
 }
 

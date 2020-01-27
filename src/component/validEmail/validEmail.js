@@ -1,11 +1,11 @@
 import React from 'react' 
 import { connect } from 'react-redux'
-import { validEmail } from '../../reducer/freelanceProfile';
+import { validEmail } from '../../reducer/profile';
 
 const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
-        freelanceProfile: state.freelanceProfile
+        profile: state.profile
     }
 };
 

@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
-        freelanceProfile: state.freelanceProfile,
+        profile: state.profile,
         home : state.home
     }
 };

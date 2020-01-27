@@ -2,7 +2,7 @@ import languageReducer from './reducer/language'
 import myCookies from './reducer/cookies'
 import authenticate from './reducer/authenticate'
 import missionReducer from './reducer/missions'
-import freelanceReducer from './reducer/freelanceProfile';
+import profileReducer from './reducer/profile';
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 import homeReducer from './reducer/home';
@@ -16,7 +16,7 @@ const reducer = combineReducers({
     myCookies: myCookies,
     authenticate: authenticate,
     missions: missionReducer,
-    freelanceProfile: freelanceReducer,
+    profile: profileReducer,
     debug : debugReducer
 })
 
