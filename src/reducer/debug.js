@@ -25,7 +25,7 @@ const debugReducer = ( state = initialState,  action) => {
         state = {
             debug : true
         };
-        history.push('/missions')
+        history.push('/app/missions')
         window.location.reload()
         break;
 

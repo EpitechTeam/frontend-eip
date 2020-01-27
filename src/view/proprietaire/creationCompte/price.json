@@ -1,0 +1,22 @@
+{
+    "plan" : [
+        {
+            "query" : "first",
+            "price" : 9.99,
+            "name" : "First",
+            "plan_id" : "plan_GctGQPjbau8Cdk"
+        },
+        {
+            "query" : "plus",
+            "price" : 19.99,
+            "name" : "Plus",
+            "plan_id" : "plan_GctH3aVzUXLtbO"
+        },
+        {
+            "query" : "pro",
+            "price" : 99.99,
+            "name" : "Pro",
+            "plan_id" : "plan_GctHYqSIAxk1No"
+        }
+    ]
+}

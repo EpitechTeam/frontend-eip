@@ -80,6 +80,17 @@ class API {
         return reduxResponse
     }
 
+    subscriptionPlan = async (email, payment_method, plan) => {
+        let body = {
+            email : email,
+            payment_method : payment_method,
+            plan : plan
+        }
+
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + '/subscribe', body)
+        console.log(response)
+    }
+
     validEmail = async (id) => {
         console.log(id)
         let body = {

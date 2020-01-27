@@ -20,7 +20,7 @@ import { getProfileUrl } from "../../reducer/profile";
 import CreationCompte from "../../view/proprietaire/creationCompte/creationCompte";
 import ResetToken from "../../component/resetToken/resetToken";
 import DebugMission from "../../view/debug/debug"
-import CheckoutProprietaire from "../../view/proprietaire/creationCompte/checkout";
+import MainCheckout from "../../view/proprietaire/creationCompte/main-checkout";
 import ValidEmail from "../../component/validEmail/validEmail";
 
 export const Routes = [
@@ -79,7 +79,7 @@ export const Routes = [
     {
         path: '/create-profile-proprietaire/checkout',
         exact: true,
-        component: CheckoutProprietaire
+        component: MainCheckout
     },
     {
         path: '/laisser-vous-guider',

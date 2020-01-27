@@ -14,7 +14,6 @@ class Footer extends React.Component {
     render() {
         let location = typeof document !== "undefined" ? window.location.pathname : this.props.location
         
-        console.log(location)
         if (this.state.urlShow.indexOf(location) !== -1) {
             return (
                 <MDBFooter className="specialColor font-small pt-4 mt-4">
