@@ -93,12 +93,12 @@ export const Routes = [
         component: LaisserVousGuider
     },
     {
-        path: '/missions',
+        path: '/app/missions',
         exact: true,
         render: () => freelanceAuthenticate() ? <FreelanceMission /> : <Redirect to="/"/>
     },
     {
-        path: '/dashboard/freelancer',
+        path: '/app/dashboard',
         exact: true,
         render: () => freelanceAuthenticate() ? <DashboardFreelance /> : <Redirect to="/"/>
     },
@@ -118,7 +118,7 @@ export const Routes = [
         render : () => adminAndProprioAuthenticate() ? <DebugMission /> : <Redirect to="/"/>
     },
     {
-        path: '/messages',
+        path: '/app/messages',
         exact: true,
         component: Messages
     },

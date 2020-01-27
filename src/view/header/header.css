@@ -1,5 +1,9 @@
 .meConnecter {
-    color : black !important;
+    color : white !important;
+}
+
+.meConnecterBlack {
+    color: black !important;
 }
 
 .flexible-navbar {
@@ -31,4 +35,8 @@
 
 .menuDropDown {
     display: inline-grid;
+}
+
+.marginANavs {
+    padding: 8px;
 }

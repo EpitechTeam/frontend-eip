@@ -25,11 +25,11 @@ class App extends React.Component {
             <CookiesProvider>
                 <div>
                     <Header/>
-                    <div id="main-body" style={{marginTop: this.state.marginTop ? "56px" : ""}}>
+                    <div id="main-body" style={{marginTop: this.state.marginTop ? "56px" : "", minHeight : "100vh"}}>
                         {getRoutes(this.props.location)}
                     </div>
                     <MyCookies/>
-                    <Footer/>
+                    <Footer location={this.props.location}/>
                 </div>
             </CookiesProvider>
         )

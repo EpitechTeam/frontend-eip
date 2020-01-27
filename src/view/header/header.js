@@ -151,20 +151,14 @@ class Header extends React.Component {
                             {
                                 this.props.authenticate.role === "freelance" ?
                                     <React.Fragment>
-                                        <MDBNavItem>
-                                            <MDBNavLink className="meConnecter"
-                                                        onClick={() => this.setWhiteHeader()}
-                                                        to="/missions">Missions</MDBNavLink>
+                                        <MDBNavItem className="marginANavs">
+                                            <a className={ this.state.whiteHeader ? "meConnecterBlack" : "meConnecter"} href="/app/missions">Missions</a>
                                         </MDBNavItem>
-                                        <MDBNavItem>
-                                            <MDBNavLink className="meConnecter"
-                                                        onClick={() => this.setWhiteHeader()}
-                                                        to="/dashboard/freelancer">Dashboard</MDBNavLink>
+                                        <MDBNavItem className="marginANavs">
+                                            <a className={ this.state.whiteHeader ? "meConnecterBlack" : "meConnecter"} href="/app/dashboard">Dashboard</a>
                                         </MDBNavItem>
-                                        <MDBNavItem>
-                                            <MDBNavLink className="meConnecter"
-                                                        onClick={() => this.setWhiteHeader()}
-                                                        to="/messages" >Messages</MDBNavLink>
+                                        <MDBNavItem className="marginANavs">
+                                            <a className={ this.state.whiteHeader ? "meConnecterBlack" : "meConnecter"} href="/app/messages" >Messages</a>
                                         </MDBNavItem>
                                         <MDBNavItem>
                                             <MDBDropdown>
@@ -201,20 +195,14 @@ class Header extends React.Component {
                             {
                                 this.props.authenticate.role === "proprietaire" && this.props.authenticate.paid === "true" ? 
                                 <React.Fragment>
-                                        <MDBNavItem>
-                                            <MDBNavLink className="meConnecter"
-                                                        onClick={() => this.setWhiteHeader()}
-                                                        to="/missions">Missions</MDBNavLink>
+                                        <MDBNavItem className="marginANavs">
+                                        <a className={ this.state.whiteHeader ? "meConnecterBlack" : "meConnecter"} href="/app/missions">Missions</a>
                                         </MDBNavItem>
-                                        <MDBNavItem>
-                                            <MDBNavLink className="meConnecter"
-                                                        onClick={() => this.setWhiteHeader()}
-                                                        to="/dashboard/freelancer">Dashboard</MDBNavLink>
+                                        <MDBNavItem className="marginANavs">
+                                            <a className={ this.state.whiteHeader ? "meConnecterBlack" : "meConnecter"} href="/app/dashboard">Dashboard</a>
                                         </MDBNavItem>
-                                        <MDBNavItem>
-                                            <MDBNavLink className="meConnecter"
-                                                        onClick={() => this.setWhiteHeader()}
-                                                        to="/messages" >Messages</MDBNavLink>
+                                        <MDBNavItem className="marginANavs">
+                                            <a className={ this.state.whiteHeader ? "meConnecterBlack" : "meConnecter"} href="/app/messages" >Messages</a>
                                         </MDBNavItem>
                                         <MDBNavItem>
                                             <MDBDropdown>
