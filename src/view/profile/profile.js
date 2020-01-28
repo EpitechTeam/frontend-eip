@@ -140,7 +140,7 @@ function ProfileCardDetails(props) {
                 <MDBRow>
                 <MDBCol md="4">
                 <LazyLoad offsetRight={100} className="alignImage" offsetLeft={100} debounce={false} height={200} throttle={0}>
-                <img alt="profile" style={{maxWidth : "350px"}} src={profile.avatar} ></img>
+                <img alt="profile" style={{maxWidth : "350px", maxHeight : "100%"}} src={profile.avatar} ></img>
                 </LazyLoad>
                     {
                     canEdit ?
@@ -158,7 +158,7 @@ function ProfileCardDetails(props) {
                 <div className="d-flex flex-column" style={{padding: '16px', paddingLeft: '32px'}}>
                     <div>
                         <h2 style={{fontWeight: 'initial'}}>{profile.name} {profile.surname}</h2>
-                        <h3>{profile.caption}</h3>
+                        <h3>{profile.caption.charAt(0).toUpperCase() + profile.caption.slice(1)}</h3>
                         {
                             typeof profile.location !== "undefined" ?
                             <span className="d-flex flex-row align-items-baseline">
