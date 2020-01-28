@@ -49,7 +49,8 @@ class API {
             type : response.type,
             company : response.company,
             siret : response.siret,
-            phone : response.phone
+            phone : response.phone,
+            disponible : response.disponible
         }
         return reduxResponse
     }
@@ -74,7 +75,8 @@ class API {
                 siret : response.siret,
                 phone : response.phone,
                 id : response._id,
-                emailVerified : response.emailVerified
+                emailVerified : response.emailVerified,
+                disponible : response.disponible
         }
 
         return reduxResponse
@@ -88,11 +90,10 @@ class API {
         }
 
         let response = await this.axios.post(process.env.REACT_APP_API_URL + '/subscribe', body)
-        console.log(response)
+        return response
     }
 
     validEmail = async (id) => {
-        console.log(id)
         let body = {
             emailVerified : true,
             user_id : id
@@ -100,6 +101,47 @@ class API {
 
         let response = await axios.post(process.env.REACT_APP_API_URL + "/validEmail", body)
         return response.data
+    }
+
+    changeDisponible = async (disponible) => {
+        let body = {
+            disponible : disponible
+        }
+
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/changeDisponibilite", body)
+        
+        response = response.data
+        let caption = typeof response.city === "undefined" ? response.type : response.type + " " + response.city
+        let reduxResponse = {
+                name : response.firstname,
+                surname : response.lastname,
+                caption: caption,
+                avatar: response.img,
+                email : response.email,
+                location : response.city,
+                skills: response.skills,
+                missions: response.missions,
+                bio: response.bio,
+                type : response.type,
+                company : response.company,
+                siret : response.siret,
+                phone : response.phone,
+                id : response._id,
+                emailVerified : response.emailVerified,
+                disponible : response.disponible
+        }
+
+        return reduxResponse
+    }
+
+    sendEmail = async (email) => {
+        console.log(email)
+        let body = {
+            email : email
+        }
+
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/sendEmailVerification", body)
+        return response
     }
 
     setPayed = async (data) => {
@@ -141,7 +183,8 @@ class API {
             skills: response.skills,
             missions: response.missions,
             bio: response.bio,
-            type : response.type
+            type : response.type,
+            disponible : response.disponible
         }
 
         return reduxResponse
@@ -220,7 +263,8 @@ class API {
                 bio: response.bio,
                 type : response.type,
                 id : response._id,
-                emailVerified : response.emailVerified
+                emailVerified : response.emailVerified,
+                disponible : response.disponible
             },
             paid : response.type === "freelance" ? "true" : response.payed.status
         }
@@ -236,7 +280,8 @@ class API {
             lastname : body.name,
             city : body.ville,
             img : "https://img.icons8.com/plasticine/2x/user.png",
-            type : "freelance"
+            type : "freelance",
+            disponible : true
         }
 
         let response =  await axios.post(process.env.REACT_APP_API_URL + "/register", newBody)

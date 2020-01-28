@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {MDBBtn, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow, MDBContainer, MDBModal, MDBModalHeader, MDBModalBody, MDBAlert} from "mdbreact";
 import {faCameraRetro, faMapPin} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP} from "../../reducer/profile";
+import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP, sendEmail, changeDisponible} from "../../reducer/profile";
 import LazyLoad from 'react-lazy-load';
 import './profile.css'
 
@@ -25,7 +25,9 @@ const mapDispatchToProps = (dispatch) => {
         getProfileUrl : (url) => { dispatch(getProfileUrl(url))},
         updateBio: (bio) => { dispatch(updateBio(bio)) },
         updateSkills: (skills) => { dispatch(updateSkills(skills)) },
-        updateStats: (skills) => { dispatch(updateStats(skills)) }
+        updateStats: (skills) => { dispatch(updateStats(skills)) },
+        sendEmail: (token, email) => { dispatch(sendEmail(token, email))},
+        changeDisponible : (token, disponible) => { dispatch(changeDisponible(token, disponible))}
     }
 };
 
@@ -71,12 +73,20 @@ class Profile extends React.Component {
         window.location.reload()
     }
 
+    sendEmail = () => {
+        this.props.sendEmail(this.props.authenticate.token, this.props.profile.profile.email)
+    }
+    
+    disponible = async () => {
+        await this.props.changeDisponible(this.props.authenticate.token, this.props.profile.profile.disponible)
+    }
+
     render() {
         return (
             <MDBContainer className="marginHeader">
                     {
                         this.props.profile.profile.emailVerified === false && this.state.canEdit ?
-                        <MDBAlert>Veuillez verifiez votre email pour valider votre compte</MDBAlert>: ""
+                        <MDBAlert>Veuillez verifiez votre email pour valider votre compte <span style={{textDecoration : "underline", cursor : "pointer"}} alt="réenvoyer l'email" onClick={this.sendEmail}>(réenvoyer l'email)</span></MDBAlert>: ""
                     }
                     <MDBModal isOpen={this.state.modal}
                     toggle={this.toggle}>
@@ -111,7 +121,7 @@ class Profile extends React.Component {
 
                     <MDBRow>
                     <MDBCol className="mt-3">
-                    <ProfileCardDetails upload={this.uploadModal} canEdit={this.state.canEdit} profile={this.props.profile.profile} updateStats={this.props.updateStats}/>
+                    <ProfileCardDetails upload={this.uploadModal} disponible={this.disponible} canEdit={this.state.canEdit} profile={this.props.profile.profile} updateStats={this.props.updateStats}/>
                     </MDBCol>
                     </MDBRow>
                     {
@@ -161,14 +171,33 @@ function ProfileCardDetails(props) {
                         <h3>{profile.caption.charAt(0).toUpperCase() + profile.caption.slice(1)}</h3>
                         {
                             typeof profile.location !== "undefined" ?
+                            <div>
                             <span className="d-flex flex-row align-items-baseline">
-                            <FontAwesomeIcon icon={faMapPin} size="1x" color={primaryColor} style={{marginRight: '5px'}}/>
+                            <FontAwesomeIcon icon={faMapPin} size="lg" color={primaryColor} style={{marginRight: '5px'}}/>
                             <p>{profile.location}</p>
-                            </span> : ""
+                            </span>
+                            {
+                                canEdit ?
+                                <div className='custom-control custom-switch'>
+                                <input
+                                type='checkbox'
+                                className='custom-control-input'
+                                id='customSwitches'
+                                checked={profile.disponible}
+                                onChange={props.disponible}
+                                />
+                                <label className='custom-control-label' htmlFor='customSwitches'>
+                                A l'écoute de nouvelles missions
+                                </label>
+                                </div> : 
+                                <div>
+                                <MDBIcon className={ profile.disponible ? "green-text" : "red-text" } size="lg" icon="bell" /> { profile.disponible ? "A l'écoute de nouvelles missions" : "N'est présentement pas à l'écoute de nouvelles missions"}
+                                </div>
+                            }
+                            </div>
+                            : ""
                         }
                     </div>
-
-                    
                 </div>
                 </MDBCol>
                 </MDBRow>

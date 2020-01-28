@@ -16,7 +16,8 @@ const initialProfile = {
     ],
     bio: "",
     id : "",
-    emailVerified : true
+    emailVerified : true,
+    disponible: false
 }
 
 const initialState = {
@@ -40,6 +41,32 @@ export function validEmail(id) {
     return dispatch => {
         let newData = new API()
         return newData.validEmail(id)
+        .then (
+            payload => Promise.all([
+                dispatch({ type : "REDIRECT_HOME"})
+            ]),
+            erreur => console.log(erreur)
+        )
+    }
+}
+
+export function changeDisponible(token, disponible) {
+    return dispatch => {
+        let newData = new API(token)
+        return newData.changeDisponible(disponible)
+        .then (
+            payload => Promise.all([
+                dispatch({ type : "SET_PROFILE", payload}),
+            ]),
+            erreur => console.log(erreur)
+        )
+    }
+}
+
+export function sendEmail(token, email) {
+    return dispatch => {
+        let newData = new API(token)
+        return newData.sendEmail(email)
         .then (
             payload => Promise.all([
                 dispatch({ type : "REDIRECT_HOME"})
@@ -148,7 +175,6 @@ export function updateStats(stats) {
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_PROFILE': {
-            console.log(action.payload)
             localStorage.setItem('profile', JSON.stringify(action.payload))
             state = {...state, profile: action.payload};
             break;
