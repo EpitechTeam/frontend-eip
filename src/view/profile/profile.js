@@ -5,6 +5,7 @@ import {faCameraRetro, faMapPin} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP} from "../../reducer/profile";
 import LazyLoad from 'react-lazy-load';
+import './profile.css'
 
 let primaryColor = '#3972C0';
 let cardStyle = {marginTop: '24px', justifyContent: 'space-between', minHeight : '200px'};
@@ -138,7 +139,7 @@ function ProfileCardDetails(props) {
         <MDBCard style={cardStyle}>
                 <MDBRow>
                 <MDBCol md="4">
-                <LazyLoad offsetRight={100} offsetLeft={100} debounce={false} height={200} throttle={0}>
+                <LazyLoad offsetRight={100} className="alignImage" offsetLeft={100} debounce={false} height={200} throttle={0}>
                 <img alt="profile" style={{maxWidth : "350px"}} src={profile.avatar} ></img>
                 </LazyLoad>
                     {

@@ -262,6 +262,10 @@ class API {
 
         let response =  await axios.post(process.env.REACT_APP_API_URL + "/register", newBody)
 
+        console.log(response)
+
+        response.data.user.avatar = response.data.user.img
+
         return {
             role : 'proprietaire',
             token : response.data.token,
