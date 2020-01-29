@@ -36,6 +36,16 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+function importAll(r) {
+    let images = {};
+    // eslint-disable-next-line
+    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+    return images;
+}
+
+// eslint-disable-next-line
+const images = importAll(require.context('../../assets/', false, /\.(png|jpe?g|svg)$/));
+
 class Header extends React.Component {
 
     state = {
@@ -124,7 +134,7 @@ class Header extends React.Component {
                            expand="md">
                     <a href="/" title="home">
                         <MDBNavbarBrand>
-                            <strong className="black-text">EIP</strong>
+                            <img alt="main-logo" className="brand-logo ml-3" src={this.state.whiteHeader ? images["willally-logo.png"] : images["willally-logo-white.png"]}/>
                         </MDBNavbarBrand>
                     </a>
                     <MDBNavbarToggler onClick={this.toggleCollapse}/>

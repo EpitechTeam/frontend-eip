@@ -18,6 +18,10 @@
     transition: all 0.1s;
 }
 
+.brand-logo {
+    width: 100px;
+}
+
 .home-header .nav-link {
     color: white !important;
 }
