@@ -83,8 +83,9 @@ class DevenirFreelance extends React.Component {
                         <div className="container h-100">
                         <div className="row align-items-center h-100">
                             <div className="col-md-6">
-                            <h1 className="mb-4">Devenez <span className="text-warning">le meilleur</span><br /><span className="cyan-text">freelance</span> de votre région</h1>
-                            <p className="mb-4 pb-2 dark-grey-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, culpa qui officia deserunt laborum fuga similique mollit id quos aperiam proident non ut rerum debitis.</p>
+                            <h1 className="mb-4">Obtenez <span className="text-warning">un revenu</span><br />en <span className="cyan-text">gérant</span> des biens immobiliers</h1>
+                            <p className="mb-4 pb-2 dark-grey-text">Gérer des biens immobiliers vous tente? Willally vous propose de vous associer avec des propriétaires
+                            Airbnb et de générer un revenu.</p>
                             <a href="#searchDevenirFreelance">
                                 <button href="searchDevenirFreelance" type="button" className="btn btn-primary btn-rounded btn-md ml-md-0">Commencer</button>
                             </a>
@@ -99,7 +100,7 @@ class DevenirFreelance extends React.Component {
 
 
                     <div className="dark-grey-text text-center">
-                    <h3 className="font-weight-bold pt-5 pb-2">Lorem ipsum dolor sit amet</h3>
+                    <h3 className="font-weight-bold pt-5 pb-2">Devenez freelance dans l'immobilier</h3>
                     <div className="row mx-3">
                       <div className="col-md-4 px-4 mb-4">
                         <div className="view">
@@ -127,16 +128,16 @@ class DevenirFreelance extends React.Component {
                         </div>
                         </div>
                     </div>
-                    <h3 className="font-weight-bold mb-4 pb-2">Lorem ipsum dolor sit amet</h3>
-                    <p className="text-center mx-auto mb-4 pb-2">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore et quasi architecto explicabo.</p>
-                    <button type="button" className="btn btn-deep-purple btn-rounded">Design your site now</button>
+                    <h3 className="font-weight-bold mb-4 pb-2">Willally disponible partout</h3>
+                    <p className="text-center mx-auto mb-4 pb-2">Rejoignez Willally et faites partie du réseau des freelances partenaires partout à travers le monde.</p>
+                    <button type="button" className="btn btn-deep-purple btn-rounded">Je commence</button>
                     </div>
 
                     <div>
                     <div className="row">
                         <div className="col-lg-7 mb-4 align-self-center text-center text-lg-left">
-                        <h2 className="h2 mb-5">Notre application</h2>
-                        <p className="text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur veniam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum.</p>
+                        <h2 className="h2 mb-5">Notre app</h2>
+                        <p className="text-muted mb-4">L'app Willally permet de voir vos missions et de voir les informations nécessaires aux réservations à venir. Vous pouvez gérer votre compte, vos revenus, contactez les voyageurs et bien plus encore.</p>
                         <button type="button" className="btn btn-cyan waves-effect btn-md ml-lg-0"><i className="fab fa-apple fa-lg pr-1" /> App Store</button>
                         <button type="button" className="btn btn-cyan waves-effect btn-md"><i className="fab fa-google-play fa-lg pr-1" /> Google Play</button>
                         </div>
@@ -152,10 +153,8 @@ class DevenirFreelance extends React.Component {
                     </div>
 
                     <div className="team-section text-center dark-grey-text">
-                    <h3 className="font-weight-bold mb-4 pb-2">Testimonials</h3>
-                    <p className="text-center w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam
-                        eum porro a pariatur veniam.</p>
+                    <h3 className="font-weight-bold mb-4 pb-2">Ils sont partenaires!</h3>
+                    <p className="text-center w-responsive mx-auto mb-5">Willally promet de satisfaire propriétaires comme partenaires.</p>
                     <div className="row text-center">
                         <div className="col-md-4 mb-4">
                         <div className="testimonial">
@@ -227,8 +226,8 @@ class DevenirFreelance extends React.Component {
                         <div className="col-md-5 d-flex align-items-center">
                         <div>
                             <h3 className="font-weight-bold mb-4">Restez indépendant</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adip elit. Maiores deleniti explicabo voluptatem quisquam nulla asperiores aspernatur aperiam voluptate et consectetur minima delectus, fugiat eum soluta blanditiis adipisci, velit dolore magnam.</p>
-                            <button type="button" className="btn btn-orange btn-rounded mx-0">Download</button>
+                            <p>Vous êtes libres d'intérompre un partenariat à tout moment. Gérez vous-même vos revenus.</p>
+                            <button type="button" className="btn btn-orange btn-rounded mx-0">Commencer</button>
                         </div>
                         </div>
                     </div>
@@ -237,15 +236,15 @@ class DevenirFreelance extends React.Component {
 
                     <div>
                     <div className="white-text grey p-5 rounded">
-                        <h3 className="text-center font-weight-bold mb-4 pb-2">Counter</h3>
+                        <h3 className="text-center font-weight-bold mb-4 pb-2">Être partenaire c'est ...</h3>
                         <div className="row">
                         <div className="col-md-4 mb-4">
                             <div className="row">
                             <div className="col-6 pr-0">
-                                <h4 className="display-4 text-right mb-0 count-up" data-from={0} data-to={42} data-time={2000}>42</h4>
+                                <h4 className="display-4 text-right mb-0 count-up" data-from={0} data-to={42} data-time={2000}>1</h4>
                             </div>
                             <div className="col-6">
-                                <p className="text-uppercase font-weight-normal mb-1">Projects</p>
+                                <p className="text-uppercase font-weight-normal mb-1">Source de revenus</p>
                                 <p className="mb-0"><i className="fas fa-briefcase fa-2x mb-0" /></p>
                             </div>
                             </div>
@@ -253,10 +252,10 @@ class DevenirFreelance extends React.Component {
                         <div className="col-md-4 mb-4">
                             <div className="row">
                             <div className="col-6 pr-0">
-                                <h4 className="display-4 text-right mb-0 count1" data-from={0} data-to={3500} data-time={2000}>3,500</h4>
+                                <h4 className="display-4 text-right mb-0 count1" data-from={0} data-to={3500} data-time={2000}>124</h4>
                             </div>
                             <div className="col-6">
-                                <p className="text-uppercase font-weight-normal mb-1">Customers</p>
+                                <p className="text-uppercase font-weight-normal mb-1">Freelances</p>
                                 <p className="mb-0"><i className="fas fa-user fa-2x mb-0" /></p>
                             </div>
                             </div>
@@ -264,7 +263,7 @@ class DevenirFreelance extends React.Component {
                         <div className="col-md-4 mb-4">
                             <div className="row">
                             <div className="col-6 pr-0">
-                                <h4 className="display-4 text-right"><span className="d-flex justify-content-end"><span className="count2" data-from={0} data-to={100} data-time={2000}>0</span> %</span></h4>
+                                <h4 className="display-4 text-right"><span className="d-flex justify-content-end"><span className="count2" data-from={0} data-to={100} data-time={2000}>100</span> %</span></h4>
                             </div>
                             <div className="col-6">
                                 <p className="text-uppercase font-weight-normal mb-1">Satisfaction</p>
@@ -285,7 +284,7 @@ class DevenirFreelance extends React.Component {
                         </div>
                         <div className="col-md-7 mb-lg-0 mb-4">
                             <h3 className="font-weight-bold my-3">Inscription</h3>
-                            <p className="text-muted mb-4 pb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, fuga similique quos aperiam tenetur quo ut rerum debitis.</p>
+                            <p className="text-muted mb-4 pb-2">Devenez partenaire et commencez à générer des revenus!</p>
                             {
                                 this.state.erreur ? 
                                 <MDBAlert color="danger">{this.state.erreurMessage}</MDBAlert>
