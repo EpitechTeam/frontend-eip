@@ -69,6 +69,7 @@ class DashboardFreelance extends React.Component {
             labels: ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"],
             datasets: [
                 {
+                    label: "Recommendations",
                     data: [12, 2, 3, 19, 5],
                     backgroundColor: [
                         "rgba(255, 134,159,0.4)",
