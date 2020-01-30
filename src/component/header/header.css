@@ -6,6 +6,10 @@
     color: black !important;
 }
 
+.headerMargin {
+    margin-bottom: 50px;
+}
+
 .flexible-navbar {
     color: white;
     box-shadow: none;

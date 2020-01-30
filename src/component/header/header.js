@@ -91,6 +91,7 @@ class Header extends React.Component {
 
     setWhiteHeader = () => {
         if (typeof document !== "undefined") {
+            console.log(document.getElementById("main-body").style.marginTop)
             document.getElementById("main-body").style.marginTop = "56px";
             this.setState({
                 whiteHeader: true
@@ -269,7 +270,7 @@ class Header extends React.Component {
 
     render() {
         return (
-            <header id="headerNavbar">
+            <header className={this.state.whiteHeader ? "headerMargin" : ""} id="headerNavbar">
                 <MDBModal isOpen={this.state.modal && this.props.authenticate.authenticate === "false"}
                           toggle={this.toggle}>
                     <MDBModalHeader toggle={this.toggle}>Connexion</MDBModalHeader>
