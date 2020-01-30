@@ -102,8 +102,6 @@ else {
         
         //Mettre le state redux en string
         const serializedState = JSON.stringify(store.getState())
-        console.log("laa")
-        console.log(serializedState)
 
         //Get la meta
         const meta = rewindAsStaticMarkup()

@@ -175,7 +175,9 @@ export function updateStats(stats) {
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_PROFILE': {
-            localStorage.setItem('profile', JSON.stringify(action.payload))
+            if (typeof localStorage !== "undefined") {
+                localStorage.setItem('profile', JSON.stringify(action.payload))
+            }
             state = {...state, profile: action.payload};
             break;
         }
