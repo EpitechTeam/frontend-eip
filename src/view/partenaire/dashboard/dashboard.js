@@ -9,7 +9,7 @@ import {
   faMoneyCheckAlt,
   faChartBar,
   faWallet,
-  faReceipt, faCheck, faEye, faStreetView, faUsers, faCubes, faBullseye, faHourglassHalf
+  faReceipt, faCheck, faEye, faStreetView, faUsers, faCubes, faHourglassHalf
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './dashboard.css'

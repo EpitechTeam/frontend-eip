@@ -15,15 +15,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class FreelanceMissionPage extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillMount = async () => {
-
-    };
-
     renderMission = () => {
         return (
             <MDBRow>
