@@ -5,6 +5,7 @@ import getRoutes from './routes/routes'
 import Header from '../component/header/header'
 import Footer from '../component/footer/footer'
 import MyCookies from '../component/cookies/cookies'
+import "./app.css";
 
 class App extends React.Component {
     static propTypes = {
@@ -25,7 +26,7 @@ class App extends React.Component {
             <CookiesProvider>
                 <div>
                     <Header/>
-                    <div id="main-body" style={{marginTop: this.state.marginTop ? "56px" : "", minHeight : "100vh"}}>
+                    <div id="main-body" style={{marginTop: this.state.marginTop ? "56px" : "", minHeight : "calc(100vh-56px)"}}>
                         {getRoutes(this.props.location)}
                     </div>
                     <MyCookies/>

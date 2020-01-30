@@ -66,11 +66,10 @@ class DashboardFreelance extends React.Component {
             ]
         },
         dataBar: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"],
             datasets: [
                 {
-                    label: "% of Votes",
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [12, 2, 3, 19, 5],
                     backgroundColor: [
                         "rgba(255, 134,159,0.4)",
                         "rgba(98,  182, 239,0.4)",
@@ -278,11 +277,11 @@ class DashboardFreelance extends React.Component {
             return (
                 <div className="stats-body p-xl-5">
                     <div className="stat-box p-4">
-                        <h2>Reviews</h2>
+                        <h2>Recommendations</h2>
                         <div className="stat-item">
                             <MDBRow className="mt-5">
                                 <MDBCol>
-                                    <h3>Review</h3>
+                                    <h3>Recommendations</h3>
                                     <Bar data={this.state.dataBar} options={this.state.barChartOptions}/>
                                 </MDBCol>
                             </MDBRow>

@@ -20,6 +20,14 @@
     width: 100%;
 }
 
+.mission-body a, .mission-body a:hover {
+    color: inherit;
+}
+
+.mission-body a:hover {
+    transform: scale(.99);
+}
+
 .status {
     display: flex;
     flex-direction: column;
@@ -108,4 +116,27 @@
 
 .mission-item-description {
     margin-top: 20px;
+}
+
+.main-mission-page {
+    background-color: #f1f1f1;
+    height: calc(100vh - 56px);
+}
+
+.mission-page-body {
+    background-color: white;
+    border-radius: 10px;
+    min-height: 300px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
 }
