@@ -14,6 +14,7 @@ const initialProfile = {
         {label: 'Compétences', description: 'Recherche des missions en gîtes'},
         {label: 'Durée de mission', description: 'Recherche des missions ~3-6 mois'}
     ],
+    ratings: {one: 3, two: 6, three: 20, four: 67, five: 88},
     bio: "",
     id : "",
     emailVerified : true,
