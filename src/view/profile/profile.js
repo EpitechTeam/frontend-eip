@@ -1,27 +1,14 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
-import {
-    MDBBtn,
-    MDBBtnGroup,
-    MDBCard,
-    MDBCol,
-    MDBIcon,
-    MDBInput,
-    MDBRow,
-    MDBContainer,
-    MDBModal,
-    MDBModalHeader,
-    MDBModalBody,
-    MDBAlert,
+import {MDBBtn, MDBCard, MDBCol, MDBIcon, MDBInput, MDBRow, MDBContainer, MDBModal, MDBModalHeader, MDBModalBody, MDBAlert,
     MDBDropdownMenu, MDBDropdownItem, MDBDropdown, MDBDropdownToggle, MDBListGroup, MDBListGroupItem
 } from "mdbreact";
-import {faCameraRetro, faMapPin} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { HorizontalBar } from "react-chartjs-2";
+import {faCameraRetro} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {updateBio, updateSkills, updateStats, getProfile, getProfileUrl, setProfile, uploadPP, sendEmail, changeDisponible} from "../../reducer/profile";
 import LazyLoad from 'react-lazy-load';
 import './profile.css'
-import {Bar} from "react-chartjs-2";
 
 let primaryColor = '#3972C0';
 let cardStyle = {marginTop: '14px', marginBottom: '24px', justifyContent: 'space-between'};
