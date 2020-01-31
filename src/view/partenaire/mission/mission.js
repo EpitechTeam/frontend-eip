@@ -78,18 +78,22 @@ class FreelanceMission extends React.Component {
 
         let data = res.map((item, i) => {
             return (
-                <div className="mission-item">
-                    <div className="mission-item-left">
-                        <div className="mission-item-owner">{item.houseOwner}</div>
-                        <div className="mission-item-pic"><img src={item.img} alt="mission" className="imageMission"/></div>
+                <Link to={`/app/missions/${item._id}`}>
+                    <div className="mission-item">
+                        <div className="mission-item-left">
+                            <div className="mission-item-owner">{item.houseOwner}</div>
+                            <div className="mission-item-pic"><img src={item.img} alt="mission"
+                                                                   className="imageMission"/></div>
+                        </div>
+                        <div className="mission-item-right">
+                            <div className="mission-item-name">{item.name}<span
+                                className="mission-item-date">&nbsp;({item.date})</span></div>
+                            <div className="mission-item-description">{item.object}</div>
+                            <br/>
+                            <p className="dealMission">{item.deal}€</p>
+                        </div>
                     </div>
-                    <div className="mission-item-right">
-                        <div className="mission-item-name">{item.name}<span className="mission-item-date">&nbsp;({item.date})</span></div>
-                        <div className="mission-item-description">{item.object}</div>
-                        <br/>
-                        <p className="dealMission">{item.deal}€</p>
-                    </div>
-                </div>
+                </Link>
             )
         });
 

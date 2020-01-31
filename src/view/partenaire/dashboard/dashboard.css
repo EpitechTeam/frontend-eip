@@ -10,13 +10,40 @@
 
 .stats-body {
     width: 100%;
+    background-color: #f1f1f1;
     height: calc(100vh - 56px);
 }
 
 .stat-item {
     background-color: #fff;
     display: flex;
-    flex-direction: row;
     border-radius: 7px;
     min-height: 180px;
 }
+
+.stat-item-row {
+    display: flex;
+    align-items: center;
+}
+
+.stat-revenu {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.stat-box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 8px hsla(0,0%,11%, 0.1);
+}
+
+.stat-icon {
+    color: #848484;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-analytics-item-important {
+    font-weight: bold;
+ }

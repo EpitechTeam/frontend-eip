@@ -55,8 +55,8 @@ class DevenirProprietaire extends React.Component {
                         <div className="container h-100">
                         <div className="row align-items-center h-100">
                             <div className="col-md-6">
-                            <h1 className="mb-4">Trouvez <span className="text-warning">un freelance</span><br /><span className="cyan-text">pour s'occuper</span> de votre annonce</h1>
-                            <p className="mb-4 pb-2 dark-grey-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, culpa qui officia deserunt laborum fuga similique mollit id quos aperiam proident non ut rerum debitis.</p>
+                            <h1 className="mb-4">Trouvez <span className="text-warning">un freelance</span><br /><span className="cyan-text">pour s'occuper</span> de votre logement</h1>
+                            <p className="mb-4 pb-2 dark-grey-text">Confiez votre logement à un partenaire de confiance qui vous aidera à gérer vos biens. </p>
                             <a href="#searchDevenirFreelance">
                                 <button  onClick={this.toggle} type="button" className="btn btn-primary btn-rounded btn-md ml-md-0">Commencer</button>
                             </a>
@@ -81,29 +81,17 @@ class DevenirProprietaire extends React.Component {
               </div>
               <div className="col-md-6 pl-lg-5">
                 <p className="subtitle aos-init aos-animate" data-aos="fade-up">01</p>
-                <h2 className="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay={200}>Aspernatur aut odit fugit sed quia consetur.</h2>
-                <p className="mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay={400}>Lorem ipsum dolor sit amet consectetur adipicing elit sed do usmod tempor incididunt.enim ad
-                  minim
-                  veniam, quis nostrud exer citation ulla mco laboris nisi ut aliquip commodo.</p>
+                <h2 className="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay={200}>Trouvez votre partenaire</h2>
+                <p className="mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay={400}>Willally vous propose de potentiels partenaires dans la ville choisie.
+                Prenez contact, devenez partenaires et gérez vos biens en toute simplicité.</p>
                 <ul className="list-unstyled">
                   <li className="d-flex mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay={500}>
                     <div className="pr-3 pr-lg-5">
                       <i className="fa fa-check text-secondary bg-white shadow icon-sm" />
                     </div>
                     <div>
-                      <h5>Extreme Security</h5>
-                      <p>Lorem ipsum dolor sit amet consectetur elit sed do eiusmod tempor incididunt labore dolore
-                        magna.</p>
-                    </div>
-                  </li>
-                  <li className="d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay={550}>
-                    <div className="pr-3 pr-lg-5">
-                      <i className="fa fa-check text-secondary bg-white shadow icon-sm" />
-                    </div>
-                    <div>
-                      <h5>Extreme Security</h5>
-                      <p>Lorem ipsum dolor sit amet consectetur elit sed do eiusmod tempor incididunt labore dolore
-                        magna.</p>
+                      <h5>Fiabilité</h5>
+                      <p>Les freelances disponibles sur la plateforme sont vérifiés et validés. Soyez sereins.</p>
                     </div>
                   </li>
                 </ul>
@@ -116,12 +104,10 @@ class DevenirProprietaire extends React.Component {
           <div className="row">
             <div className="col-md-6 pr-lg-5">
               <p className="subtitle aos-init aos-animate" data-aos="fade-up">02</p>
-              <h2 className="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay={200}>Eausmod tempor magna nostrud exercitation</h2>
-              <p data-aos="fade-up" data-aos-delay={300} className="aos-init aos-animate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi
-                aliquip commodo consequat. duis aute.</p>
-              <p className="mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay={400}>Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint
-                occaecat cupidatat non proident.</p>
+              <h2 className="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay={200}>Tableau de bord</h2>
+              <p data-aos="fade-up" data-aos-delay={300} className="aos-init aos-animate">Willally vous donne accès à un tableau de bord pour vous permettre de suivre les réservations, vos revenus et d'autres informations essentielles.
+                  Chaque réservation sera proposée à votre partenaire sous forme de mission.</p>
+              <p className="mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay={400}>En plus, gardez un oeil sur les statistiques avec des outils en temps réel.</p>
             </div>
             <div className="col-md-6 pl-lg-5">
             <LazyLoad offsetRight={100} offsetLeft={100} debounce={false} height={500} throttle={0}>
@@ -141,19 +127,16 @@ class DevenirProprietaire extends React.Component {
               </div>
               <div className="col-md-6 pl-lg-5">
                 <p className="subtitle aos-init aos-animate" data-aos="fade-up">03</p>
-                <h2 className="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay={200}>Aspernatur aut odit fugit sed quia consetur.</h2>
-                <p className="mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay={400}>Lorem ipsum dolor sit amet consectetur adipicing elit sed do usmod tempor incididunt.enim ad
-                  minim
-                  veniam, quis nostrud exer citation ulla mco laboris nisi ut aliquip commodo.</p>
+                <h2 className="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay={200}>Conservez une rentabilité élevée.</h2>
+                <p className="mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay={400}>La plateforme Willally vous évite de perdre de l'argent et de conserver une rentabilité élevée.</p>
                 <ul className="list-unstyled">
                   <li className="d-flex mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay={500}>
                     <div className="pr-3 pr-lg-5">
                       <i className="fa fa-check text-secondary bg-white shadow icon-sm" />
                     </div>
                     <div>
-                      <h5>Extreme Security</h5>
-                      <p>Lorem ipsum dolor sit amet consectetur elit sed do eiusmod tempor incididunt labore dolore
-                        magna.</p>
+                      <h5>Paiements sécurisés</h5>
+                      <p>Les transactions sur Willally sont sécurisées, tout comme vos données bancaires.</p>
                     </div>
                   </li>
                   <li className="d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay={550}>
@@ -161,7 +144,7 @@ class DevenirProprietaire extends React.Component {
                       <i className="fa fa-check text-secondary bg-white shadow icon-sm" />
                     </div>
                     <div>
-                      <h5>Extreme Security</h5>
+                      <h5>Fiable</h5>
                       <p>Lorem ipsum dolor sit amet consectetur elit sed do eiusmod tempor incididunt labore dolore
                         magna.</p>
                     </div>
@@ -174,7 +157,7 @@ class DevenirProprietaire extends React.Component {
         </MDBContainer>
        
                     <div className="mt-5 white-text grey p-5 rounded">
-                        <h3 className="text-center font-weight-bold mb-4 pb-2">Quelques chiffres</h3>
+                        <h3 className="text-center font-weight-bold mb-4 pb-2">Willally c'est ...</h3>
                         <div className="row">
                         <div className="col-md-4 mb-4">
                             <div className="row">
@@ -182,7 +165,7 @@ class DevenirProprietaire extends React.Component {
                                 <h4 className="display-4 text-right mb-0 count-up" data-from={0} data-to={42} data-time={2000}>42</h4>
                             </div>
                             <div className="col-6">
-                                <p className="text-uppercase font-weight-normal mb-1">Propriétaire</p>
+                                <p className="text-uppercase font-weight-normal mb-1">Propriétaires</p>
                                 <p className="mb-0"><i className="fas fa-briefcase fa-2x mb-0" /></p>
                             </div>
                             </div>

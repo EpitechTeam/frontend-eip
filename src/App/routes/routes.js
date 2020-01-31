@@ -22,6 +22,7 @@ import ResetToken from "../../component/resetToken/resetToken";
 import DebugMission from "../../view/debug/debug"
 import MainCheckout from "../../view/proprietaire/creationCompte/main-checkout";
 import ValidEmail from "../../component/validEmail/validEmail";
+import FreelanceMissionPage from "../../view/partenaire/mission/missionPage";
 
 export const Routes = [
     {
@@ -90,6 +91,11 @@ export const Routes = [
         path: '/app/missions',
         exact: true,
         render: () => freelanceAuthenticate() ? <FreelanceMission /> : <Redirect to="/"/>
+    },
+    {
+        path: '/app/missions/:missionId',
+        exact: true,
+        render: () => freelanceAuthenticate() ? <FreelanceMissionPage /> : <Redirect to="/"/>
     },
     {
         path: '/app/dashboard',

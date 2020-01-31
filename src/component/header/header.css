@@ -6,6 +6,10 @@
     color: black !important;
 }
 
+.headerMargin {
+    margin-bottom: 50px;
+}
+
 .flexible-navbar {
     color: white;
     box-shadow: none;
@@ -16,6 +20,10 @@
     color: white !important;
     box-shadow: none !important;
     transition: all 0.1s;
+}
+
+.brand-logo {
+    width: 100px;
 }
 
 .home-header .nav-link {
