@@ -38,11 +38,13 @@ class HomeContent extends React.Component {
                 return (
                     <MDBCol key={i} lg="3" md="6" className="mb-lg-0 mb-4">
                         <MDBCard>
+                            <a href={"/profile/" + item.objectID}>
                             <MDBCardImage
                                 src={item.img}
                                 top
                                 alt="partenaire"
                             />
+                            </a>
                             <MDBCardBody className="text-center">
                                 <p>{item.firstname}</p>
                                 <p>{item.city}</p>
