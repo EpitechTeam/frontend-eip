@@ -4,7 +4,7 @@ import {renderRoutes} from "react-router-config";
 import Home from '../../view/home/home'
 import PageNotFound from '../../view/404/404.js'
 import Proprietaire from '../../view/proprietaire/proprietaire'
-import {loadHomeData} from '../../reducer/home'
+import {getHomeData} from '../../reducer/home'
 import ConfierVosBiens from '../../view/page/confier-vos-biens/confier-vos-biens'
 import LaisserVousGuider from '../../view/page/laisser-vous-guider/laisser-vous-guider'
 import Recherche from '../../view/recherche/recherche'
@@ -29,7 +29,7 @@ export const Routes = [
         path: '/',
         exact: true,
         component: Home,
-        loadData: () => loadHomeData()
+        loadData: () => getHomeData()
     },
     {
         path: '/profile',
