@@ -40,7 +40,7 @@ export function getProfileUrl(url) {
 
 export function validEmail(id) {
     return dispatch => {
-        let newData = new API()
+        let newData = new API();
         return newData.validEmail(id)
         .then (
             payload => Promise.all([
