@@ -17,7 +17,7 @@ class API {
     }
 
     fetchHomeData = async () => {
-        let response = await axios.get(process.env.REACT_APP_API_URL + "/freelance")
+        let response = await axios.post(process.env.REACT_APP_API_URL + "/freelance")
         return response.data
     }
 
