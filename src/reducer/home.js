@@ -19,10 +19,11 @@ export function getSEOHome() {
 export function getHomeData() {
     return dispatch => {
       let newData = new API();
+      console.log("la")
       return newData.fetchHomeData()
       .then (
         response => dispatch({ type : "SET_HOME", response}),
-        erreur => console.log("erreur seo")
+        erreur => console.log("erreur data home")
       )
     }
 }
