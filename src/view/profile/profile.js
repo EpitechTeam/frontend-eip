@@ -26,9 +26,6 @@ const mapDispatchToProps = (dispatch) => {
         getProfile: (token) => { dispatch(getProfile(token))},
         setProfile: (token, state) => { dispatch(setProfile(token, state))},
         getProfileUrl : (url) => { dispatch(getProfileUrl(url))},
-        updateBio: (bio) => { dispatch(updateBio(bio)) },
-        updateSkills: (skills) => { dispatch(updateSkills(skills)) },
-        updateStats: (skills) => { dispatch(updateStats(skills)) },
         sendEmail: (token, email) => { dispatch(sendEmail(token, email))},
         changeDisponible : (token, disponible) => { dispatch(changeDisponible(token, disponible))}
     }
@@ -40,12 +37,12 @@ class Profile extends React.Component {
 
         //chage le profil avec le token du user connecté
         if (typeof this.props.match.params.name === "undefined") {
-            this.props.getProfile(this.props.authenticate.token)
+            this.props.getProfile(this.props.authenticate.token);
             this.state = {selectedFile : null, modal : false, canEdit: true};
         }
         else {
             //Charge si il y a un /profile/name.firstname
-            this.props.getProfileUrl(props.match.params.name)
+            this.props.getProfileUrl(props.match.params.name);
             this.state = {selectedFile : null, modal : false, canEdit: false};
 
         }
