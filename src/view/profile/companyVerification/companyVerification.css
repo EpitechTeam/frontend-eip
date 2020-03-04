@@ -1,0 +1,22 @@
+.legal-doc {
+    position: relative;
+}
+
+.legal-doc-actions {
+    position: absolute;
+    width: 60px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.doc-status {
+    padding-right: 12px;
+}
+
+.doc-status:hover {
+    opacity: .5;
+}
+
+.trash-icon:hover {
+    opacity: .5;
+}

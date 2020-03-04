@@ -4,6 +4,7 @@ import { getProfile, setProfile } from "../../reducer/profile";
 import AlgoliaPlaces from 'algolia-places-react';
 import {connect} from "react-redux";
 import { resetPassword } from '../../reducer/authenticate';
+import LegalDocuments from "./companyVerification/companyVerification";
 
 const mapStateToProps = (state) => {
     return {
@@ -128,7 +129,12 @@ class EditProfile extends React.Component {
                     </MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
-                    <MDBNavLink to="#" active={this.state.activeItem === "3"} onClick={this.toggle("3")} role="tab" >
+                    <MDBNavLink to="#" active={this.state.activeItem === "3"} onClick={this.toggle("3")} role="tab">
+                        Documents
+                    </MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                    <MDBNavLink to="#" active={this.state.activeItem === "4"} onClick={this.toggle("4")} role="tab" >
                     Mot de passe
                     </MDBNavLink>
                 </MDBNavItem>
@@ -286,7 +292,6 @@ class EditProfile extends React.Component {
                 id="company"
                 className="form-control"
                 />
-                <br />
                 <div className="text-center mt-4">
                 <MDBBtn onClick={this.verifyForm} className="w-100" color="unique" type="submit">
                     Sauvegarder
@@ -294,6 +299,10 @@ class EditProfile extends React.Component {
                 </div>
                 </MDBTabPane>
                 <MDBTabPane tabId="3" role="tabpanel">
+                    <p className="h4 mt-3 text-center mb-4">Documents légaux</p>
+                    <LegalDocuments />
+                </MDBTabPane>
+                <MDBTabPane tabId="4" role="tabpanel">
                 <p className="h4 mt-3 text-center mb-4">Mot de passe</p>
                 {
                     this.state.erreurEditMessage !== "" ?
