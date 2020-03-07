@@ -4,7 +4,7 @@ import defaults from "lodash/defaults"
 class API {
     constructor(token) {
         this.token = token
-   
+
         let credentials = {}
         const config = defaults(credentials, {
           headers:{
@@ -33,7 +33,7 @@ class API {
 
     getProfileFreelanceWithUrl = async (url) => {
         let response = await axios.get(process.env.REACT_APP_API_URL + /user/ + url)
-        
+
         response = response.data
         let caption = typeof response.city === "undefined" ? response.type : response.type + " " + response.city
         let reduxResponse = {
@@ -109,7 +109,7 @@ class API {
         }
 
         let response = await this.axios.post(process.env.REACT_APP_API_URL + "/changeDisponibilite", body)
-        
+
         response = response.data
         let caption = typeof response.city === "undefined" ? response.type : response.type + " " + response.city
         let reduxResponse = {
@@ -241,7 +241,7 @@ class API {
             email : email,
             password : password
         }
-        
+
         let response = await axios.post(process.env.REACT_APP_API_URL + "/login", body)
 
         let token = response.data.token
@@ -250,7 +250,7 @@ class API {
         let caption = typeof response.city === "undefined" ? response.type : response.type + " " + response.city
         let reduxFormatResponse = {
             role : response.type,
-            token : token, 
+            token : token,
             user : {
                 name : response.firstname,
                 surname : response.lastname,
@@ -268,7 +268,26 @@ class API {
             },
             paid : response.type === "freelance" ? "true" : response.payed.status
         }
-        console.log(reduxFormatResponse)
+
+        if (response.type === "admin") {
+            const backoffice = document.createElement('iframe');
+            backoffice.setAttribute('src', process.env.REACT_APP_ADMIN_URL + '?token=' + token);
+            backoffice.style.display = 'none';
+            document.body.appendChild(backoffice);
+
+            window.addEventListener("message", event => {
+                if (event.origin !== process.env.REACT_APP_ADMIN_URL)
+                    return;
+                if (event.data == 'token-stored')
+                    window.location.replace(process.env.REACT_APP_ADMIN_URL);
+            });
+
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            const error = new Error('Authentication error');
+            error.response = { data: { error: 'Votre compte administrateur n\'a pas pu se connecter au backoffice.' } };
+            throw error;
+        }
+
         return reduxFormatResponse
     }
 

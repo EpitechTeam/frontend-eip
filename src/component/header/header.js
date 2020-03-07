@@ -87,6 +87,12 @@ class Header extends React.Component {
                 whiteHeader: false
             });
         }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const shouldLogin = this.props.authenticate.authenticate === "false";
+        if (urlParams.has('login') && shouldLogin) {
+            this.setState({ modal: true });
+        }
     }
 
     setWhiteHeader = () => {
@@ -186,7 +192,7 @@ class Header extends React.Component {
                     : ""
             }
             {
-                this.props.authenticate.role === "proprietaire" && this.props.authenticate.paid === "true" ? 
+                this.props.authenticate.role === "proprietaire" && this.props.authenticate.paid === "true" ?
                 <React.Fragment>
                         <MDBNavItem className="marginANavs">
                         <a className={ this.state.whiteHeader ? "meConnecterBlack" : "meConnecter"} href="/app/missions">Missions</a>
@@ -225,7 +231,7 @@ class Header extends React.Component {
                             </MDBDropdown>
                         </MDBNavItem>
                     </React.Fragment>
-                : 
+                :
                     ""
             }
             {
