@@ -31,7 +31,7 @@ class Footer extends React.Component {
                     <div className="footer-copyright text-center py-3">
                         <MDBContainer fluid>
                             &copy; {new Date().getFullYear()} Copyright: <a
-                            href="https://kineplus.tech"> Willally </a>
+                            href="https://willally.com"> Willally </a>
                         </MDBContainer>
                     </div>
                 </MDBFooter>
