@@ -78,7 +78,7 @@ class FreelanceMission extends React.Component {
 
         let data = res.map((item, i) => {
             return (
-                <Link to={`/app/missions/${item._id}`}>
+                <Link to={`/app/missions/${item._id}`} className="mission-item">
                     <div className="mission-item">
                         <div className="mission-item-left">
                             <div className="mission-item-owner">{item.houseOwner}</div>

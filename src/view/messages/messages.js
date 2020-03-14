@@ -5,6 +5,8 @@ class Messages extends React.Component {
 
     me = "me";
 
+    boxshadow = null;
+
     messages = [
         {
             message: "Oui bien sûr!",
@@ -27,7 +29,13 @@ class Messages extends React.Component {
     componentDidMount() {
         if (typeof document !== "undefined") {
             // let scroll = document.getElementById("scrollable-list");
+            this.boxshadow = document.getElementById('main-header').style.boxShadow;
+            document.getElementById('main-header').style.setProperty('box-shadow', 'none','important');
         }
+    }
+
+    componentWillUnmount() {
+        document.getElementById('main-header').style.boxShadow = this.boxshadow;
     }
 
     renderConversations = () => {
