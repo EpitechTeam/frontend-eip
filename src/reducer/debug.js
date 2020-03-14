@@ -29,6 +29,11 @@ const debugReducer = ( state = initialState,  action) => {
         window.location.reload()
         break;
 
+        case "SEE_FORM_REGISTER_APPART" :
+        history.push('/create-profile-proprietaire/inscription-de-votre-appartement')
+        window.location.reload()
+        break;
+
         case "SET_ERREUR_DEBUG" :
             state = {
                 ...state,

@@ -97,8 +97,9 @@ export function setPayed(token) {
         return newData.setPayed()
         .then (
             payload => Promise.all([
-                dispatch({ type : "SEE_MISSIONS"}),
-                dispatch({ type : "TURN_ON_PAYED" })
+                //dispatch({ type : "SEE_MISSIONS"}),
+                dispatch({ type : "SEE_FORM_REGISTER_APPART"}),
+                //dispatch({ type : "TURN_ON_PAYED" })
             ]),
             erreur => console.log(erreur)
         )

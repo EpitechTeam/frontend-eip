@@ -23,6 +23,7 @@ import DebugMission from "../../view/debug/debug"
 import MainCheckout from "../../view/proprietaire/creationCompte/main-checkout";
 import ValidEmail from "../../component/validEmail/validEmail";
 import FreelanceMissionPage from "../../view/partenaire/mission/missionPage";
+import RegisterAppartement from "../../view/proprietaire/registerAppartement/registerAppartement";
 
 export const Routes = [
     {
@@ -81,6 +82,11 @@ export const Routes = [
         path: '/create-profile-proprietaire/checkout',
         exact: true,
         component: MainCheckout
+    },
+    {
+        path : '/create-profile-proprietaire/inscription-de-votre-appartement',
+        exact: true,
+        component: RegisterAppartement
     },
     {
         path: '/laisser-vous-guider',
