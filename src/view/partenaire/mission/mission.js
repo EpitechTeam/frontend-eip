@@ -75,27 +75,31 @@ class FreelanceMission extends React.Component {
         let tmp = missions.missions;
         let res = tmp.filter(x => x.status === this.state.selected);
         console.log(res);
-
-        let data = res.map((item, i) => {
-            return (
-                <Link to={`/app/missions/${item._id}`} className="mission-item">
-                    <div className="mission-item">
-                        <div className="mission-item-left">
-                            <div className="mission-item-owner">{item.houseOwner}</div>
-                            <div className="mission-item-pic"><img src={item.img} alt="mission"
-                                                                   className="imageMission"/></div>
+        let data;
+        if (!res.length) {
+            data = "Pas de missions."
+        } else {
+            data = res.map((item, i) => {
+                return (
+                    <Link to={`/app/missions/${item._id}`} key={i} className="mission-item">
+                        <div className="mission-item">
+                            <div className="mission-item-left">
+                                <div className="mission-item-owner">{item.houseOwner}</div>
+                                <div className="mission-item-pic"><img src={item.img} alt="mission"
+                                                                       className="imageMission"/></div>
+                            </div>
+                            <div className="mission-item-right">
+                                <div className="mission-item-name">{item.name}<span
+                                    className="mission-item-date">&nbsp;({item.date})</span></div>
+                                <div className="mission-item-description">{item.object}</div>
+                                <br/>
+                                <p className="dealMission">{item.deal}€</p>
+                            </div>
                         </div>
-                        <div className="mission-item-right">
-                            <div className="mission-item-name">{item.name}<span
-                                className="mission-item-date">&nbsp;({item.date})</span></div>
-                            <div className="mission-item-description">{item.object}</div>
-                            <br/>
-                            <p className="dealMission">{item.deal}€</p>
-                        </div>
-                    </div>
-                </Link>
-            )
-        });
+                    </Link>
+                )
+            });
+        }
 
         return (
             <div className="mission-list">

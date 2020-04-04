@@ -23,6 +23,7 @@ import DebugMission from "../../view/debug/debug"
 import MainCheckout from "../../view/proprietaire/creationCompte/main-checkout";
 import ValidEmail from "../../component/validEmail/validEmail";
 import FreelanceMissionPage from "../../view/partenaire/mission/missionPage";
+import {NosVilles} from "../../view/nosVilles/nosVilles";
 
 export const Routes = [
     {
@@ -35,6 +36,11 @@ export const Routes = [
         path: '/profile',
         exact: true,
         component: Profile,
+    },
+    {
+        path: '/villes',
+        exact: true,
+        component: NosVilles,
     },
     {
         path: '/profile/parameters',

@@ -1,13 +1,14 @@
 import React from 'react';
-import { MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBRow } from "mdbreact";
+import {MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import "./home-content.css";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 const mapStateToProps = (state) => {
     return {
         authenticate: state.authenticate,
         profile: state.profile,
-        home : state.home
+        home: state.home
     }
 };
 
@@ -67,16 +68,18 @@ class HomeContent extends React.Component {
         let data = villes.map((item, i) => {
             return (
                 <MDBCol key={i} lg="3" md="6" className="mb-lg-0 mb-4">
-                    <MDBCard>
-                        <MDBCardImage
-                            src={item.img}
-                            alt={item.name}
-                            top
-                        />
-                        <MDBCardBody className="text-center">
-                            {item.name}
-                        </MDBCardBody>
-                    </MDBCard>
+                    <a href={"/villes"}>
+                        <MDBCard>
+                            <MDBCardImage
+                                src={item.img}
+                                alt={item.name}
+                                top
+                            />
+                            <MDBCardBody className="text-center">
+                                {item.name}
+                            </MDBCardBody>
+                        </MDBCard>
+                    </a>
                 </MDBCol>
             )
         });
