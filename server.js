@@ -20,6 +20,7 @@ import missionReducer from "./src/reducer/missions";
 import profileReducer from "./src/reducer/profile";
 import homeReducer from './src/reducer/home'
 import debugReducer from './src/reducer/debug'
+import documentReducer from './src/reducer/document';
 
 const bodyParser  = require("body-parser")
 const compression = require('compression');
@@ -143,7 +144,8 @@ else {
           missions: missionReducer,
           profile: profileReducer,
           home : homeReducer,
-          debug : debugReducer
+          debug : debugReducer,
+          document : documentReducer
         })
 
         const store = createStore(reducer, applyMiddleware(thunk))

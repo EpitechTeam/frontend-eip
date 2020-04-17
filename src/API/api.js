@@ -76,7 +76,8 @@ class API {
                 phone : response.phone,
                 id : response._id,
                 emailVerified : response.emailVerified,
-                disponible : response.disponible
+                disponible : response.disponible,
+                documents: response.documents
         }
 
         return reduxResponse
@@ -278,7 +279,7 @@ class API {
             window.addEventListener("message", event => {
                 if (event.origin !== process.env.REACT_APP_ADMIN_URL)
                     return;
-                if (event.data == 'token-stored')
+                if (event.data === 'token-stored')
                     window.location.replace(process.env.REACT_APP_ADMIN_URL);
             });
 
@@ -348,6 +349,36 @@ class API {
         let response =  await this.axios.post(process.env.REACT_APP_API_URL + "/getmission", newBody)
 
         return response.data
+    }
+
+    uploadDocument = async (body) => {
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/uploadDocument", body);
+        console.log(response);
+        return response
+    };
+
+    getDocument = async (body) => {
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/getDocument", body);
+        console.log(response);
+        return response
+    };
+
+    deleteDocument = async (body) => {
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/deleteDocument", body);
+        console.log(response);
+        return response
+    };
+
+    uploadPP = async (data) => {
+        console.log(data)
+        let response = await this.axios.post(process.env.REACT_APP_API_URL + "/upload", data)
+        response = response.data
+
+        let body = {
+            img : response.url
+        }
+        response = await this.axios.post(process.env.REACT_APP_API_URL + "/edit", body)
+        return response
     }
 }
 

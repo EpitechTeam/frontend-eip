@@ -7,6 +7,7 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 import homeReducer from './reducer/home';
 import debugReducer from './reducer/debug';
+import documentReducer from './reducer/document';
 
 var store
 
@@ -17,7 +18,8 @@ const reducer = combineReducers({
     authenticate: authenticate,
     missions: missionReducer,
     profile: profileReducer,
-    debug : debugReducer
+    debug : debugReducer,
+    document : documentReducer
 })
 
 store = createStore(reducer, applyMiddleware(thunk))

@@ -18,7 +18,19 @@ const initialProfile = {
     bio: "",
     id : "",
     emailVerified : true,
-    disponible: false
+    disponible: false,
+    documents: {
+        id_card: {
+            file: '',
+            name: 'carte_identitée.pdf',
+            status: '',
+        },
+        sirene: {
+            file: '',
+            name: '',
+            status: '',
+        }
+    }
 }
 
 const initialState = {

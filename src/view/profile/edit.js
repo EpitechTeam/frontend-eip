@@ -4,7 +4,7 @@ import { getProfile, setProfile } from "../../reducer/profile";
 import AlgoliaPlaces from 'algolia-places-react';
 import {connect} from "react-redux";
 import { resetPassword } from '../../reducer/authenticate';
-import LegalDocuments from "./companyVerification/companyVerification";
+import LegalDocuments from './documents/documents';
 
 const mapStateToProps = (state) => {
     return {
@@ -300,7 +300,7 @@ class EditProfile extends React.Component {
                 </MDBTabPane>
                 <MDBTabPane tabId="3" role="tabpanel">
                     <p className="h4 mt-3 text-center mb-4">Documents légaux</p>
-                    <LegalDocuments />
+                    <LegalDocuments/>
                 </MDBTabPane>
                 <MDBTabPane tabId="4" role="tabpanel">
                 <p className="h4 mt-3 text-center mb-4">Mot de passe</p>
